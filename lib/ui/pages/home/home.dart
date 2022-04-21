@@ -13,12 +13,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MRMScaffold(
-      title: Text(
-        "app_name".tr(),
-        style: const TextStyle(
-            fontWeight: FontWeight.bold
-        ),
-      ),
+      title: "app_name".tr(),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -28,6 +23,7 @@ class HomePage extends StatelessWidget {
               maxLines: 7,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.justify,
+              style: Theme.of(context).textTheme.bodyText1,
             )
           ),
           Column(
@@ -55,13 +51,13 @@ class HomePage extends StatelessWidget {
                 children: [
                   TextSpan(
                     text: "attribution".tr(),
-                    style: Theme.of(context).textTheme.bodyMedium
+                    style: Theme.of(context).textTheme.bodyText1
                   ),
                   TextSpan(
                     text: "@gabrielglbh",
-                    style: const TextStyle(
-                      decoration: TextDecoration.underline,
-                      color: Colors.lightBlueAccent
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                        decoration: TextDecoration.underline,
+                        color: Colors.lightBlueAccent
                     ),
                     recognizer: TapGestureRecognizer()..onTap = () async {
                       await Utils.instance.launchUrl(context, "https://github.com/gabrielglbh");

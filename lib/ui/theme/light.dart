@@ -21,13 +21,13 @@ final ThemeData light = ThemeData(
         headline3: TextStyle(color: Colors.black),
         headline4: TextStyle(color: Colors.black),
         headline5: TextStyle(color: Colors.black),
-        headline6: TextStyle(color: Colors.black),
+        headline6: TextStyle(color: Colors.black, fontSize: FontSizes.fontSize24, fontWeight: FontWeight.bold),
         subtitle1: TextStyle(color: Colors.black),
         subtitle2: TextStyle(color: Colors.black),
-        bodyText1: TextStyle(color: Colors.black),
-        bodyText2: TextStyle(color: Colors.black),
+        bodyText1: TextStyle(color: Colors.black54),
+        bodyText2: TextStyle(color: Colors.black54, fontSize: FontSizes.fontSize32),
         caption: TextStyle(color: Colors.black),
-        button: TextStyle(color: Colors.black),
+        button: TextStyle(color: Colors.black, fontSize: FontSizes.fontSize16, fontWeight: FontWeight.bold),
         overline: TextStyle(color: Colors.black)
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
@@ -47,13 +47,13 @@ final ThemeData light = ThemeData(
         contentTextStyle: TextStyle(color: Colors.black)
     ),
     inputDecorationTheme: InputDecorationTheme(
-        hintStyle: TextStyle(color: Colors.grey.shade400),
+        hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: FontSizes.fontSize26),
         border: OutlineInputBorder(
-          borderRadius: const BorderRadius.all(Radius.circular(RRadius.radius24)),
+          borderRadius: const BorderRadius.all(Radius.circular(RRadius.radius8)),
           borderSide: BorderSide(color: Colors.grey.shade400),
         ),
         focusedBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(RRadius.radius24)),
+          borderRadius: BorderRadius.all(Radius.circular(RRadius.radius8)),
           borderSide: BorderSide(color: Colors.black, width: 2.0),
         )
     ),

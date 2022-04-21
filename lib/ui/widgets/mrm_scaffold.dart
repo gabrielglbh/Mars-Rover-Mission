@@ -4,8 +4,8 @@ import 'package:marsmission/core/constants.dart';
 class MRMScaffold extends StatelessWidget {
   /// Body of the scaffold
   final Widget child;
-  /// Appbar title widget
-  final Widget? title;
+  /// Appbar title text
+  final String? title;
   /// Appbar action if any
   final List<Widget>? actions;
   /// Displays a Scaffold with an already general padding applied
@@ -20,7 +20,13 @@ class MRMScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: title,
+        title: FittedBox(
+          fit: BoxFit.fitWidth,
+          child: Text(
+            title ?? "",
+            style: Theme.of(context).textTheme.headline6
+          ),
+        ),
         actions: actions,
       ),
       body: Padding(
