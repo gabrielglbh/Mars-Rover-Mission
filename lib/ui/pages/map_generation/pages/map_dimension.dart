@@ -90,9 +90,9 @@ class _MapDimensionPageState extends State<MapDimensionPage> {
       }
     } catch (err) {
       if (widget.pageType == MapGenerationPages.map) {
-        Utils.instance.createSnackBar(context, "Type in numbers grater than 2.");
+        Utils.instance.createSnackBar(context, "map_gen_map_dimensions_error".tr());
       } else if (widget.pageType == MapGenerationPages.rover) {
-        Utils.instance.createSnackBar(context, "Rover must not be placed in a tile with an obstacle and mut be within boundaries of the map.");
+        Utils.instance.createSnackBar(context, "map_gen_rover_dimensions_error".tr());
       }
       return [];
 

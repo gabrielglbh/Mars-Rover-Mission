@@ -69,8 +69,8 @@ class _MapObstaclesPageState extends State<MapObstaclesPage> {
         throw Exception();
       }
     } catch (err) {
-      Utils.instance.createSnackBar(context, "Type in number grater than 0 and must be "
-          "less or equal to $max, as the rover has to be placed.");
+      Utils.instance.createSnackBar(context, "${"map_gen_obstacles_error_part_1".tr()} "
+          "$max${"map_gen_obstacles_error_part_2"}.tr()");
       return -1;
 
     }
