@@ -10,7 +10,7 @@
   "map_gen_map_data_rover_pos": "Posición del Rover: ",
   "map_gen_map_data_rover_direction": " con dirección ",
   "map_gen_map_dimensions": "Dimensiones del mapa",
-  "map_gen_map_dimensions_description": "Proporcionar el tamaño de un mapa 2D. A continuación se ofrece un ejemplo con un mapa de tamaño 6x6",
+  "map_gen_map_dimensions_description": "Proporcionar el tamaño de un mapa 2D. A continuación se ofrece un ejemplo con un mapa de tamaño 5x5",
   "map_gen_number_obstacles": "Número de obstáculos",
   "map_gen_number_obstacles_description": "Proporcionar el número de obstáculos a colocar en el mapa. A continuación se da un ejemplo con 7 obstáculos en un mapa de 6x6",
   "map_gen_rover_dimensions": "Posición inicial del rover",

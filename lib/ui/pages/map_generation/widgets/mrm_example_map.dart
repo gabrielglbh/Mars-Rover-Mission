@@ -17,7 +17,7 @@ class MRMExampleMap extends StatelessWidget {
             crossAxisCount: 5
         ),
         shrinkWrap: true,
-        padding: const EdgeInsets.symmetric(horizontal: Margins.margin16),
+        padding: const EdgeInsets.all(Margins.margin32),
         physics: const ClampingScrollPhysics(),
         children: type.tiles
       ),
