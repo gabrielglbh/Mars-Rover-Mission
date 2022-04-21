@@ -25,8 +25,13 @@
   "map_gen_map_dimensions_error": "El mapa debe ser igual o mayor que 2 x 2",
   "map_gen_rover_dimensions_error": "El rover no debe estar colocado en una baldosa con un obstáculo y debe estar dentro de los límites del mapa. Prueba con otra posición",
   "map_gen_obstacles_error": "Escribe un número mayor que 0 y debe ser menor o igual al tamaño del mapa, ya que el rover tiene que ser colocado",
+  "map_gen_error": "Por alguna razón la creación del mapa ha fallado. Por favor, genera otro mapa.",
   "back_button_label": "Anterior",
   "cancel_button_label": "Cancelar",
   "next_button_label": "Siguiente",
-  "ok_button_label": "Ok"
+  "ok_button_label": "Ok",
+  "finished_map_button_label": "Comenzar Misión",
+  "rover_action_left": "Izquierda",
+  "rover_action_right": "Derecha",
+  "rover_action_forward": "De frente"
 }

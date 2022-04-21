@@ -22,6 +22,7 @@ class MRMHeader extends StatelessWidget {
           padding: const EdgeInsets.only(top: Margins.margin8),
           child: Text(
               subtitle,
+              textAlign: TextAlign.justify,
               style: Theme.of(context).textTheme.bodyText1
           ),
         ),

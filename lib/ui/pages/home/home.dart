@@ -38,7 +38,9 @@ class HomePage extends StatelessWidget {
                   title: "generate_static_map_button_label".tr(),
                   icon: Icons.build_rounded,
                   color: Colors.blue,
-                  onTap: () => Navigator.of(context).pushNamed(Pages.monitor)
+                  onTap: () {
+                    // TODO: Generate map based on 6x6 static map
+                  }
               )
             ],
           ),

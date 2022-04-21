@@ -25,8 +25,13 @@
   "map_gen_map_dimensions_error": "The map must be equal or greater than 2 x 2.",
   "map_gen_rover_dimensions_error": "Rover must not be placed in a tile with an obstacle and must be within boundaries of the map. Try other position.",
   "map_gen_obstacles_error": "Type in number grater than 0 and must be less or equal to the dimension of the map, as the rover has to be placed.",
+  "map_gen_error": "Somehow the creation of the map has failed. Please, generate another map.",
   "back_button_label": "Previous",
   "cancel_button_label": "Cancel",
   "next_button_label": "Next",
-  "ok_button_label": "Ok"
+  "ok_button_label": "Ok",
+  "finished_map_button_label": "Begin Mission",
+  "rover_action_left": "Left",
+  "rover_action_right": "Right",
+  "rover_action_forward": "Forward"
 }

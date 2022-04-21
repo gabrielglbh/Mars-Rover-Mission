@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:marsmission/core/algorithm/model.dart';
 import 'package:marsmission/core/types/rover_actions.dart';
@@ -49,7 +50,7 @@ class GenMapBloc extends Bloc<GenMapEvent, GenMapState> {
       if (params.validateParameters()) {
         emit(GenMapStateMapFinished());
       } else {
-        emit(GenMapStateFailure("Somehow the creation of the map has failed."));
+        emit(GenMapStateFailure("map_gen_error".tr()));
       }
     });
   }
