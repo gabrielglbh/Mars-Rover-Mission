@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:marsmission/core/types/rover_directions.dart';
 
 enum MapTile {
   grass, obstacle, rover
 }
 
 extension MapTileExt on MapTile {
-  Icon get icon {
+  Icon icon({RoverDirection? direction}) {
     switch (this) {
       case MapTile.grass:
         return const Icon(Icons.park_rounded, color: Colors.white);
       case MapTile.obstacle:
         return const Icon(Icons.settings, color: Colors.white);
       case MapTile.rover:
-        return const Icon(Icons.arrow_circle_right_rounded, color: Colors.white);
+        return Icon(direction?.roverIcon ?? Icons.arrow_circle_right_rounded, color: Colors.white);
     }
   }
 

@@ -43,7 +43,7 @@ class _MRMMapTileState extends State<MRMMapTile> {
         padding: const EdgeInsets.all(Margins.margin4),
         child: FittedBox(
           fit: BoxFit.contain,
-          child: widget.tile.icon,
+          child: widget.tile.icon(),
         )
       ),
     );

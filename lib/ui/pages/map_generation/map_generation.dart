@@ -80,7 +80,12 @@ class MapGenerationPage extends StatelessWidget {
                 bloc: _bloc,
                 pageType: MapGenerationPages.obs,
                 goToPage: _goToPage
-              )
+              ),
+              MapDimensionPage(
+                bloc: _bloc,
+                pageType: MapGenerationPages.rover,
+                goToPage: _goToPage
+              ),
             ],
           ),
         ),

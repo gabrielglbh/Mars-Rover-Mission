@@ -79,7 +79,7 @@ class _MapObstaclesPageState extends State<MapObstaclesPage> {
   _updateMapParams() {
     final val = _validation();
     if (val != -1) {
-      widget.bloc.add(GenMapEventPageChanged(1, params: widget.bloc.params.copyWith(
+      widget.bloc.add(GenMapEventPageChanged(next, params: widget.bloc.params.copyObstacles(
           obstacles: val
       )));
       widget.goToPage(next);

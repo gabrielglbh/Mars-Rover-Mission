@@ -24,6 +24,9 @@ class GenMapBloc extends Bloc<GenMapEvent, GenMapState> {
         direction: event.params?.direction,
         actions: event.params?.actions
       );
+
+      print(params.map);
+
       if (params.validateParameters()) {
         // TODO: Ready to make the rover go
       } else {
