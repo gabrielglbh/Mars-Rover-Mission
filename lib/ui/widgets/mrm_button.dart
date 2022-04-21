@@ -20,6 +20,8 @@ class MRMButton extends StatelessWidget {
   final double horizontal;
   /// Whether the button is disabled or not
   final bool disabled;
+  /// Trailing icon
+  final IconData? trailing;
   const MRMButton({
     Key? key,
     this.width,
@@ -30,7 +32,8 @@ class MRMButton extends StatelessWidget {
     this.titleColor = Colors.white,
     this.icon,
     this.horizontal = 0,
-    this.disabled = false
+    this.disabled = false,
+    this.trailing
   }) : super(key: key);
 
   @override
@@ -74,13 +77,25 @@ class MRMButton extends StatelessWidget {
                       child: Icon(icon, color: Colors.white)
                   ),
                 ),
-                FittedBox(
-                  fit: BoxFit.fitWidth,
-                  child: Text(title, textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.button?.copyWith(
-                          color: titleColor
-                      )),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: Text(title, textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme.of(context).textTheme.button?.copyWith(
+                              color: titleColor
+                          )),
+                    ),
+                    Visibility(
+                      visible: trailing != null,
+                      child: Padding(
+                          padding: const EdgeInsets.only(left: Margins.margin8),
+                          child: Icon(trailing, color: Colors.white)
+                      ),
+                    ),
+                  ],
                 )
               ],
             ),

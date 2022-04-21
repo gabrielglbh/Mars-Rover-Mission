@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marsmission/core/constants.dart';
+import 'package:marsmission/core/types/map_generation_pages.dart';
 import 'package:marsmission/ui/pages/map_generation/bloc/gen_map_bloc.dart';
 import 'package:marsmission/ui/pages/map_generation/pages/map_dimension.dart';
 import 'package:marsmission/ui/widgets/mrm_bullet.dart';
@@ -51,7 +52,7 @@ class MapGenerationPage extends StatelessWidget {
           padding: const EdgeInsets.only(top: Margins.margin8),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(5, (index) {
+            children: List.generate(MapGenerationPages.values.length, (index) {
               if (index == page) return const MRMBullet(active: true);
               return const MRMBullet();
             }),

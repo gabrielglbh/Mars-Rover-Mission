@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:marsmission/core/constants.dart';
+import 'package:marsmission/core/types/map_generation_pages.dart';
 import 'package:marsmission/core/utils.dart';
 import 'package:marsmission/ui/pages/map_generation/bloc/gen_map_bloc.dart';
 import 'package:marsmission/ui/widgets/mrm_button.dart';
@@ -25,6 +26,8 @@ class _MapDimensionPageState extends State<MapDimensionPage> {
   late TextEditingController _y;
   late FocusNode _xFocus;
   late FocusNode _yFocus;
+
+  final next = 1;
 
   @override
   void initState() {
@@ -78,18 +81,17 @@ class _MapDimensionPageState extends State<MapDimensionPage> {
       widget.bloc.add(GenMapEventPageChanged(1, params: widget.bloc.params.copyWith(
           mapX: val[0], mapY: val[1]
       )));
-      widget.goToPage(1);
+      widget.goToPage(next);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final mapHeight = MediaQuery.of(context).size.width - Sizes.mrmInputDefaultHeight;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          "map_gen_map_dimensions".tr(),
+          MapGenerationPages.map.name,
           style: Theme.of(context).textTheme.headline5
         ),
         Expanded(
@@ -129,30 +131,17 @@ class _MapDimensionPageState extends State<MapDimensionPage> {
                   ),
                   shrinkWrap: true,
                   itemCount: 36,
+                  physics: const ClampingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return MRMMapTile(position: index);
                   },
                 ),
               ),
-              /*SizedBox(
-                width: mapHeight,
-                height: mapHeight,
-                child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 6
-                  ),
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: 36,
-                  itemBuilder: (context, index) {
-                    return MRMMapTile(position: index);
-                  },
-                ),
-              ),*/
               MRMButton(
-                title: "next_button_label".tr(),
+                title: MapGenerationPages.values[next].name,
                 height: Sizes.mrmButtonDefaultHeight / 1.5,
                 horizontal: Margins.margin8,
+                trailing: Icons.arrow_forward_rounded,
                 onTap: _updateMapParams
               ),
             ],
