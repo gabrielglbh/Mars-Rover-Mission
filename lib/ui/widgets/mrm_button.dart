@@ -16,15 +16,24 @@ class MRMButton extends StatelessWidget {
   final Color titleColor;
   /// Action to perform when tapping the button
   final Function() onTap;
+  /// Horizontal padding when in Row
+  final double horizontal;
+  /// Whether the button is disabled or not
+  final bool disabled;
+  /// Trailing icon
+  final IconData? trailing;
   const MRMButton({
     Key? key,
     this.width,
     this.height = Sizes.mrmButtonDefaultHeight,
-    this.color,
+    this.color = Colors.blue,
     required this.title,
     required this.onTap,
     this.titleColor = Colors.white,
-    this.icon
+    this.icon,
+    this.horizontal = 0,
+    this.disabled = false,
+    this.trailing
   }) : super(key: key);
 
   @override
@@ -33,11 +42,11 @@ class MRMButton extends StatelessWidget {
       width: width,
       height: height,
       alignment: Alignment.center,
-      margin: const EdgeInsets.symmetric(vertical: Margins.margin8),
+      margin: EdgeInsets.symmetric(vertical: Margins.margin8, horizontal: horizontal),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(RRadius.radius16),
-        color: color,
-        boxShadow: const [
+        color: disabled ? Colors.black26 : color,
+        boxShadow: disabled ? null : const [
           BoxShadow(
             color: Colors.grey,
             blurRadius: 4,
@@ -48,7 +57,7 @@ class MRMButton extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: () => onTap(),
+          onTap: disabled ? null : onTap,
           borderRadius: BorderRadius.circular(RRadius.radius16),
           child: Container(
             width: width,
@@ -68,15 +77,35 @@ class MRMButton extends StatelessWidget {
                       child: Icon(icon, color: Colors.white)
                   ),
                 ),
-                FittedBox(
-                  fit: BoxFit.fitWidth,
-                  child: Text(title, textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        color: titleColor,
-                        fontSize: FontSizes.fontSize16,
-                        fontWeight: FontWeight.bold
-                      )),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Visibility(
+                      visible: trailing != null,
+                      child: Padding(
+                          padding: const EdgeInsets.only(
+                              right: Margins.margin8, left: Margins.margin16
+                          ),
+                          child: Icon(trailing, color: color)
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(title, textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme.of(context).textTheme.button?.copyWith(
+                              color: titleColor
+                          )),
+                    ),
+                    Visibility(
+                      visible: trailing != null,
+                      child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: Margins.margin8, right: Margins.margin16
+                          ),
+                          child: Icon(trailing, color: Colors.white)
+                      ),
+                    ),
+                  ],
                 )
               ],
             ),

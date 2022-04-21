@@ -12,7 +12,7 @@ Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     case Pages.monitor:
       return CupertinoPageRoute(builder: (_) => const MonitorMissionPage());
     case Pages.generation:
-      return CupertinoPageRoute(builder: (_) => const MapGenerationPage());
+      return CupertinoPageRoute(builder: (_) => MapGenerationPage());
   }
   return null;
 }

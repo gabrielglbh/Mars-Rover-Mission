@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marsmission/core/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Utils {
@@ -14,7 +15,12 @@ class Utils {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(
-          SnackBar(content: Text(message), duration: const Duration(seconds: 2))
+          SnackBar(content: Row(
+            children: [
+              const Padding(padding: EdgeInsets.only(right: Margins.margin8), child: Icon(Icons.info_rounded)),
+              Expanded(child: Text(message))
+            ],
+          ), duration: const Duration(seconds: 2))
       );
   }
 
