@@ -5,13 +5,14 @@ import 'package:marsmission/core/types/example_maps.dart';
 import 'package:marsmission/core/types/map_generation_pages.dart';
 import 'package:marsmission/core/utils.dart';
 import 'package:marsmission/ui/pages/map_generation/bloc/gen_map_bloc.dart';
+import 'package:marsmission/ui/pages/map_generation/utils.dart';
 import 'package:marsmission/ui/widgets/map_generation/mrm_example_map.dart';
 import 'package:marsmission/ui/widgets/mrm_button.dart';
 import 'package:marsmission/ui/widgets/mrm_input.dart';
 
 class MapObstaclesPage extends StatefulWidget {
   final GenMapBloc bloc;
-  final MapGenerationPages pageType;
+  final MapGenPages pageType;
   final Function(int) goToPage;
   const MapObstaclesPage({
     Key? key,
@@ -52,35 +53,17 @@ class _MapObstaclesPageState extends State<MapObstaclesPage> {
 
   _focusListener(FocusNode f) {
     if (!f.hasFocus) {
-      _validation();
-    }
-  }
-
-  int _validation() {
-    final p = widget.bloc.params;
-    /// Number of obstacles must be greater than 0
-    /// Number of obstacles must leave space for AT LEAST the rover to be placed
-    final max = ((p.mapX ?? 1) * (p.mapY ?? 1)) - 1;
-    try {
-      final x = int.parse(_x.text);
-      if (x >= 0 && x <= max) {
-        return x;
-      } else {
-        throw Exception();
-      }
-    } catch (err) {
-      Utils.instance.createSnackBar(context, "${"map_gen_obstacles_error_part_1".tr()} "
-          "$max${"map_gen_obstacles_error_part_2"}.tr()");
-      return -1;
-
+      MapGenerationUtils.validationObstacles(widget.bloc.params, _x.text);
     }
   }
 
   _updateMapParams() {
-    final val = _validation();
+    final val = MapGenerationUtils.validationObstacles(widget.bloc.params, _x.text);
     if (val != -1) {
       widget.bloc.add(GenMapEventUpdateObstacles(next, obstacles: val));
       widget.goToPage(next);
+    } else {
+      Utils.instance.createSnackBar(context, "map_gen_obstacles_error".tr());
     }
   }
 
@@ -108,7 +91,7 @@ class _MapObstaclesPageState extends State<MapObstaclesPage> {
               ),
               const MRMExampleMap(type: ExampleType.obstacles),
               MRMButton(
-                  title: MapGenerationPages.values[next].name,
+                  title: MapGenPages.values[next].name,
                   height: Sizes.mrmButtonDefaultHeight / 1.5,
                   horizontal: Margins.margin8,
                   trailing: Icons.arrow_forward_rounded,

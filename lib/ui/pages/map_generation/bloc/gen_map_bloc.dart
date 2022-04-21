@@ -47,9 +47,9 @@ class GenMapBloc extends Bloc<GenMapEvent, GenMapState> {
       /// everytime the user goes forwards or backwards
       params = params.copyRoute(actions: event.actions);
       if (params.validateParameters()) {
-        // TODO: Ready to make the rover go
+        emit(GenMapStateMapFinished());
       } else {
-        emit(GenMapStatePageChanged(event.page));
+        emit(GenMapStateFailure("Somehow the creation of the map has failed."));
       }
     });
   }

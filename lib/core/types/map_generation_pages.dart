@@ -1,36 +1,36 @@
 import 'package:easy_localization/easy_localization.dart';
 
-enum MapGenerationPages {
+enum MapGenPages {
   map, obs, rover, direction, actions
 }
 
-extension MapGenerationPagesExt on MapGenerationPages {
+extension MapGenerationPagesExt on MapGenPages {
   String get name {
     switch (this) {
-      case MapGenerationPages.map:
+      case MapGenPages.map:
         return "map_gen_map_dimensions".tr();
-      case MapGenerationPages.obs:
+      case MapGenPages.obs:
         return "map_gen_number_obstacles".tr();
-      case MapGenerationPages.rover:
+      case MapGenPages.rover:
         return "map_gen_rover_dimensions".tr();
-      case MapGenerationPages.direction:
+      case MapGenPages.direction:
         return "map_gen_rover_direction".tr();
-      case MapGenerationPages.actions:
+      case MapGenPages.actions:
         return "map_gen_rover_actions".tr();
     }
   }
 
   String get description {
     switch (this) {
-      case MapGenerationPages.map:
+      case MapGenPages.map:
         return "map_gen_map_dimensions_description".tr();
-      case MapGenerationPages.obs:
+      case MapGenPages.obs:
         return "map_gen_number_obstacles_description".tr();
-      case MapGenerationPages.rover:
+      case MapGenPages.rover:
         return "map_gen_rover_dimensions_description".tr();
-      case MapGenerationPages.direction:
+      case MapGenPages.direction:
         return "map_gen_rover_direction_description".tr();
-      case MapGenerationPages.actions:
+      case MapGenPages.actions:
         return "map_gen_rover_actions_description".tr();
     }
   }

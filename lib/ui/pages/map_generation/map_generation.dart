@@ -6,6 +6,7 @@ import 'package:marsmission/core/types/map_generation_pages.dart';
 import 'package:marsmission/ui/pages/map_generation/bloc/gen_map_bloc.dart';
 import 'package:marsmission/ui/pages/map_generation/pages/map_dimension.dart';
 import 'package:marsmission/ui/pages/map_generation/pages/map_obstacles.dart';
+import 'package:marsmission/ui/pages/map_generation/pages/map_actions.dart';
 import 'package:marsmission/ui/pages/map_generation/pages/map_rover_direction.dart';
 import 'package:marsmission/ui/pages/map_generation/widgets/info_dialog.dart';
 import 'package:marsmission/ui/widgets/map_generation/mrm_header.dart';
@@ -63,8 +64,8 @@ class MapGenerationPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         MRMHeader(
-          title: MapGenerationPages.values[page].name,
-          subtitle: MapGenerationPages.values[page].description
+          title: MapGenPages.values[page].name,
+          subtitle: MapGenPages.values[page].description
         ),
         _info(context),
         Expanded(
@@ -74,23 +75,27 @@ class MapGenerationPage extends StatelessWidget {
             children: [
               MapDimensionPage(
                 bloc: _bloc,
-                pageType: MapGenerationPages.map,
+                pageType: MapGenPages.map,
                 goToPage: _goToPage
               ),
               MapObstaclesPage(
                 bloc: _bloc,
-                pageType: MapGenerationPages.obs,
+                pageType: MapGenPages.obs,
                 goToPage: _goToPage
               ),
               MapDimensionPage(
                 bloc: _bloc,
-                pageType: MapGenerationPages.rover,
+                pageType: MapGenPages.rover,
                 goToPage: _goToPage
               ),
               RoverDirectionPage(
                 bloc: _bloc,
-                pageType: MapGenerationPages.direction,
+                pageType: MapGenPages.direction,
                 goToPage: _goToPage
+              ),
+              RoverActionsPage(
+                bloc: _bloc,
+                pageType: MapGenPages.actions
               ),
             ],
           ),
@@ -99,7 +104,7 @@ class MapGenerationPage extends StatelessWidget {
           padding: const EdgeInsets.only(top: Margins.margin8),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(MapGenerationPages.values.length, (index) {
+            children: List.generate(MapGenPages.values.length, (index) {
               if (index == page) return const MRMBullet(active: true);
               return const MRMBullet();
             }),

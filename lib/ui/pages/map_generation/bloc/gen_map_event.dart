@@ -52,11 +52,7 @@ class GenMapEventUpdateRoverDirection extends GenMapEvent {
 }
 
 class GenMapEventUpdateActions extends GenMapEvent {
-  final int page;
   final List<RoverAction>? actions;
 
-  const GenMapEventUpdateActions(this.page, {this.actions});
-
-  @override
-  List<Object> get props => [page];
+  const GenMapEventUpdateActions({this.actions});
 }

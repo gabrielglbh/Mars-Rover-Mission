@@ -18,6 +18,8 @@ class GenMapStatePageChanged extends GenMapState {
   List<Object> get props => [page];
 }
 
+class GenMapStateMapFinished extends GenMapState {}
+
 class GenMapStateFailure extends GenMapState {
   final String message;
 

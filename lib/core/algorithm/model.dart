@@ -147,6 +147,8 @@ class MapParams {
       map: map
   );
 
+  /// Validates that all the necessary fields for the algorithm to work
+  /// If true, everything is fine
   bool validateParameters() {
     return mapX != null && mapY != null && obstacles != null &&
         roverX != null && roverY != null && direction != null &&

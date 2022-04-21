@@ -7,7 +7,7 @@ import 'package:marsmission/ui/widgets/mrm_button.dart';
 
 class RoverDirectionPage extends StatefulWidget {
   final GenMapBloc bloc;
-  final MapGenerationPages pageType;
+  final MapGenPages pageType;
   final Function(int) goToPage;
   const RoverDirectionPage({
     Key? key,
@@ -86,7 +86,7 @@ class _RoverDirectionPageState extends State<RoverDirectionPage> {
                 ),
               ),
               MRMButton(
-                  title: MapGenerationPages.values[next].name,
+                  title: MapGenPages.values[next].name,
                   height: Sizes.mrmButtonDefaultHeight / 1.5,
                   horizontal: Margins.margin8,
                   trailing: Icons.arrow_forward_rounded,
