@@ -16,7 +16,7 @@
   "map_gen_rover_dimensions": "Rover Initial Position",
   "map_gen_rover_dimensions_description": "Provide the initial position of the rover. It must not land in an obstacle, as seen in the example below.",
   "map_gen_rover_direction": "Rover Initial Direction",
-  "map_gen_rover_direction_description": "Provide the direction the rover is facing when landing on the map. In the example is facing east (E).",
+  "map_gen_rover_direction_description": "Provide the direction the rover is facing when landing on the map.",
   "map_gen_rover_actions": "Route",
   "map_gen_rover_actions_description": "Provide the route the rover must perform when landing on the built map. It must be a sequence of Forward (F), Right (R) or Left (L).",
   "map_gen_hint_x_map": "X: 6",

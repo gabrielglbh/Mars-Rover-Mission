@@ -103,13 +103,9 @@ class _MapDimensionPageState extends State<MapDimensionPage> {
     final val = _validation();
     if (val.isNotEmpty) {
       if (widget.pageType == MapGenerationPages.map) {
-        widget.bloc.add(GenMapEventPageChanged(next, params: widget.bloc.params.copyMapDimens(
-            mapX: val[0], mapY: val[1]
-        )));
+        widget.bloc.add(GenMapEventUpdateMap(next, x: val[0], y: val[1]));
       } else if (widget.pageType == MapGenerationPages.rover) {
-        widget.bloc.add(GenMapEventPageChanged(next, params: widget.bloc.params.copyRoverPosition(
-            roverX: val[0], roverY: val[1]
-        )));
+        widget.bloc.add(GenMapEventUpdateRoverPosition(next, x: val[0], y: val[1]));
       }
       widget.goToPage(next);
     }
@@ -150,7 +146,8 @@ class _MapDimensionPageState extends State<MapDimensionPage> {
                   ],
                 ),
               ),
-              const MRMExampleMap(type: ExampleType.park),
+              MRMExampleMap(type: widget.pageType == MapGenerationPages.map
+                  ? ExampleType.park : ExampleType.rover ),
               MRMButton(
                 title: MapGenerationPages.values[next].name,
                 height: Sizes.mrmButtonDefaultHeight / 1.5,

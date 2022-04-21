@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:marsmission/core/algorithm/model.dart';
+import 'package:marsmission/core/types/rover_actions.dart';
+import 'package:marsmission/core/types/rover_directions.dart';
 
 part 'gen_map_event.dart';
 part 'gen_map_state.dart';
@@ -12,21 +14,38 @@ class GenMapBloc extends Bloc<GenMapEvent, GenMapState> {
   GenMapBloc() : super(GenMapStateInitial()) {
     on<GenMapEventIdle>((event, emit) => params = MapParams());
 
-    on<GenMapEventPageChanged>((event, emit) {
+    on<GenMapEventUpdateMap>((event, emit) {
       /// Deep copy of every parameter possible, as this is being copied
       /// everytime the user goes forwards or backwards
-      params = params.copyWith(
-        mapX: event.params?.mapX,
-        mapY: event.params?.mapY,
-        obstacles: event.params?.obstacles,
-        roverX: event.params?.roverX,
-        roverY: event.params?.roverY,
-        direction: event.params?.direction,
-        actions: event.params?.actions
-      );
+      params = params.copyMapDimens(mapX: event.x, mapY: event.y);
+      emit(GenMapStatePageChanged(event.page));
+    });
 
-      print(params.map);
+    on<GenMapEventUpdateObstacles>((event, emit) {
+      /// Deep copy of every parameter possible, as this is being copied
+      /// everytime the user goes forwards or backwards
+      params = params.copyObstacles(obstacles: event.obstacles);
+      emit(GenMapStatePageChanged(event.page));
+    });
 
+    on<GenMapEventUpdateRoverPosition>((event, emit) {
+      /// Deep copy of every parameter possible, as this is being copied
+      /// everytime the user goes forwards or backwards
+      params = params.copyRoverPosition(roverX: event.x, roverY: event.y);
+      emit(GenMapStatePageChanged(event.page));
+    });
+
+    on<GenMapEventUpdateRoverDirection>((event, emit) {
+      /// Deep copy of every parameter possible, as this is being copied
+      /// everytime the user goes forwards or backwards
+      params = params.copyRoverDirection(direction: event.direction);
+      emit(GenMapStatePageChanged(event.page));
+    });
+
+    on<GenMapEventUpdateActions>((event, emit) {
+      /// Deep copy of every parameter possible, as this is being copied
+      /// everytime the user goes forwards or backwards
+      params = params.copyRoute(actions: event.actions);
       if (params.validateParameters()) {
         // TODO: Ready to make the rover go
       } else {
