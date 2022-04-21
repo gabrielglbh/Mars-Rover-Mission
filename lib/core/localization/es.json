@@ -7,6 +7,6 @@
   "map_gen_map_dimensions": "Map Dimensions",
   "map_gen_hint_x_map": "X: 6",
   "map_gen_hint_y_map": "Y: 6",
-  "back_button_label": "Back",
+  "back_button_label": "Previous",
   "next_button_label": "Next"
 }

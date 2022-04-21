@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:marsmission/core/constants.dart';
 
@@ -14,8 +16,6 @@ class MRMInput extends StatelessWidget {
   final Function onEditingComplete;
   /// Action to perform when the user taps on the Input Action NEXT or PREVIOUS on the Soft Keyboard
   final Function(String)? onSubmitted;
-  /// [TextInputType] of the Soft Keyboard, defaults to [TextInputType.number]
-  final TextInputType? inputType;
   /// [TextInputAction] of the Soft Keyboard, defaults to [TextInputAction.next]
   final TextInputAction? action;
   /// Font size of the text being inputted by the user, defaults to 26
@@ -30,7 +30,6 @@ class MRMInput extends StatelessWidget {
     this.focusNode,
     required this.onEditingComplete,
     this.onSubmitted,
-    this.inputType = TextInputType.number,
     this.action = TextInputAction.next,
     this.autofocus = false,
     this.fontSize = FontSizes.fontSize26
@@ -57,7 +56,9 @@ class MRMInput extends StatelessWidget {
         style: TextStyle(fontSize: fontSize),
         textAlign: TextAlign.center,
         textInputAction: action,
-        keyboardType: inputType,
+        keyboardType: Platform.isIOS
+            ? const TextInputType.numberWithOptions(signed: true)
+            : TextInputType.number,
         autofocus: autofocus,
         maxLength: 3,
         decoration: InputDecoration(hintText: hint, counterText: ""),

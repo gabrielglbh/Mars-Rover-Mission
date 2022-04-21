@@ -44,27 +44,24 @@ class HomePage extends StatelessWidget {
             ],
           ),
           Expanded(child: Container()),
-          Padding(
-            padding: const EdgeInsets.only(bottom: Margins.margin8),
-            child: RichText(
-              text: TextSpan(
-                children: [
-                  TextSpan(
-                    text: "attribution".tr(),
-                    style: Theme.of(context).textTheme.bodyText1
+          RichText(
+            text: TextSpan(
+              children: [
+                TextSpan(
+                  text: "attribution".tr(),
+                  style: Theme.of(context).textTheme.bodyText1
+                ),
+                TextSpan(
+                  text: "@gabrielglbh",
+                  style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                      decoration: TextDecoration.underline,
+                      color: Colors.lightBlueAccent
                   ),
-                  TextSpan(
-                    text: "@gabrielglbh",
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                        decoration: TextDecoration.underline,
-                        color: Colors.lightBlueAccent
-                    ),
-                    recognizer: TapGestureRecognizer()..onTap = () async {
-                      await Utils.instance.launchUrl(context, "https://github.com/gabrielglbh");
-                    }
-                  )
-                ]
-              ),
+                  recognizer: TapGestureRecognizer()..onTap = () async {
+                    await Utils.instance.launchUrl(context, "https://github.com/gabrielglbh");
+                  }
+                )
+              ]
             ),
           ),
         ],

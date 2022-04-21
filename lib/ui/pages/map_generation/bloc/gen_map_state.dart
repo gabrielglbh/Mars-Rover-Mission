@@ -17,3 +17,12 @@ class GenMapStatePageChanged extends GenMapState {
   @override
   List<Object> get props => [page];
 }
+
+class GenMapStateFailure extends GenMapState {
+  final String message;
+
+  const GenMapStateFailure(this.message);
+
+  @override
+  List<Object> get props => [message];
+}

@@ -19,6 +19,7 @@ class MRMScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: FittedBox(
           fit: BoxFit.fitWidth,
@@ -29,12 +30,24 @@ class MRMScaffold extends StatelessWidget {
         ),
         actions: actions,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: Margins.margin16,
-          horizontal: Margins.margin16
-        ),
-        child: child,
+      body: SafeArea(
+        child: GestureDetector(
+          /// Remove keyboard on touch anywhere else
+          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: Margins.margin16,
+              horizontal: Margins.margin16
+            ),
+            child: Center(
+              child: Column(
+                children: [
+                  Expanded(child: child)
+                ],
+              ),
+            )
+          ),
+        )
       ),
     );
   }

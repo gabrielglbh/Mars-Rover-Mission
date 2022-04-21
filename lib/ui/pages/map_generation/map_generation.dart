@@ -5,7 +5,6 @@ import 'package:marsmission/core/constants.dart';
 import 'package:marsmission/ui/pages/map_generation/bloc/gen_map_bloc.dart';
 import 'package:marsmission/ui/pages/map_generation/pages/map_dimension.dart';
 import 'package:marsmission/ui/widgets/mrm_bullet.dart';
-import 'package:marsmission/ui/widgets/mrm_button.dart';
 import 'package:marsmission/ui/widgets/mrm_scaffold.dart';
 
 class MapGenerationPage extends StatelessWidget {
@@ -13,9 +12,6 @@ class MapGenerationPage extends StatelessWidget {
 
   final _bloc = GenMapBloc();
   final _controller = PageController();
-  final _pageViewWidgets = [
-    const MapDimensionPage()
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +22,9 @@ class MapGenerationPage extends StatelessWidget {
         child: BlocBuilder<GenMapBloc, GenMapState>(
           builder: (context, state) {
             if (state is GenMapStatePageChanged) {
-              return _body(state.page);
+              return _body(context, state.page);
             } else {
-              return _body(0);
+              return _body(context, 0);
             }
           },
         )
@@ -36,7 +32,7 @@ class MapGenerationPage extends StatelessWidget {
     );
   }
 
-  Widget _body(int page) {
+  Widget _body(BuildContext context, int page) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -44,55 +40,22 @@ class MapGenerationPage extends StatelessWidget {
           child: PageView(
             controller: _controller,
             physics: const NeverScrollableScrollPhysics(),
-            onPageChanged: (page) {
-              _bloc.add(GenMapEventPageChanged(page));
-            },
-            children: _pageViewWidgets,
+            children: [
+              MapDimensionPage(bloc: _bloc, goToPage: (page) {
+                _controller.animateToPage(page, duration: Animations.animation300, curve: Curves.easeIn);
+              })
+            ],
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Expanded(
-              child: MRMButton(
-                title: "back_button_label".tr(),
-                height: Sizes.mrmButtonDefaultHeight / 1.5,
-                horizontal: Margins.margin8,
-                disabled: page == 0,
-                onTap: () {
-                  _controller.animateToPage(page - 1,
-                    duration: Animations.animation300,
-                    curve: Curves.easeInOut
-                  );
-                  _bloc.add(GenMapEventPageChanged(_controller.page?.toInt() ?? 0));
-                }
-              )
-            ),
-            Expanded(
-              child: MRMButton(
-                title: "next_button_label".tr(),
-                height: Sizes.mrmButtonDefaultHeight / 1.5,
-                horizontal: Margins.margin8,
-                onTap: () {
-                  _controller.animateToPage(page + 1,
-                    duration: Animations.animation300,
-                    curve: Curves.easeInOut
-                  );
-                  _bloc.add(GenMapEventPageChanged(_controller.page?.toInt() ?? 0));
-                }
-              )
-            )
-          ],
-        ),
         Padding(
-            padding: const EdgeInsets.only(bottom: Margins.margin16, top: Margins.margin8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(_pageViewWidgets.length, (index) {
-                if (index == page) return const MRMBullet(active: true);
-                return const MRMBullet();
-              }),
-            )
+          padding: const EdgeInsets.only(top: Margins.margin8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(5, (index) {
+              if (index == page) return const MRMBullet(active: true);
+              return const MRMBullet();
+            }),
+          )
         )
       ],
     );

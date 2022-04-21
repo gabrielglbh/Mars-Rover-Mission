@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 enum MapTile {
@@ -10,8 +8,7 @@ extension MapTileExt on MapTile {
   Icon get icon {
     switch (this) {
       case MapTile.grass:
-        final icons = [Icons.grass_rounded, Icons.park_rounded];
-        return Icon(icons[Random().nextInt(2)], color: Colors.white);
+        return const Icon(Icons.park_rounded, color: Colors.white);
       case MapTile.obstacle:
         return const Icon(Icons.settings, color: Colors.white);
       case MapTile.rover:
