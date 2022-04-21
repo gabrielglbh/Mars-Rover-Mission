@@ -20,7 +20,7 @@ final ThemeData light = ThemeData(
         headline2: TextStyle(color: Colors.black),
         headline3: TextStyle(color: Colors.black),
         headline4: TextStyle(color: Colors.black),
-        headline5: TextStyle(color: Colors.black),
+        headline5: TextStyle(color: Colors.black, fontSize: FontSizes.fontSize26, fontWeight: FontWeight.bold),
         headline6: TextStyle(color: Colors.black, fontSize: FontSizes.fontSize24, fontWeight: FontWeight.bold),
         subtitle1: TextStyle(color: Colors.black),
         subtitle2: TextStyle(color: Colors.black),

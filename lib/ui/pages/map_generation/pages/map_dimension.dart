@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:marsmission/core/constants.dart';
-import 'package:marsmission/ui/widgets/mrm_button.dart';
 import 'package:marsmission/ui/widgets/mrm_input.dart';
 import 'package:marsmission/ui/widgets/mrm_map_tile.dart';
 
@@ -14,20 +14,20 @@ class MapDimensionPage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          "Map Dimensions",
-          style: Theme.of(context).textTheme.bodyText2
+          "map_gen_map_dimensions".tr(),
+          style: Theme.of(context).textTheme.headline5
         ),
         Expanded(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: Margins.margin16),
+                padding: const EdgeInsets.only(top: Margins.margin32),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    MRMInput(hint: "X: 6", onEditingComplete: () {}),
-                    MRMInput(hint: "Y: 6", onEditingComplete: () {})
+                    MRMInput(hint: "map_gen_hint_x_map".tr(), onEditingComplete: () {}),
+                    MRMInput(hint: "map_gen_hint_y_map".tr(), onEditingComplete: () {})
                   ],
                 ),
               ),
@@ -35,20 +35,16 @@ class MapDimensionPage extends StatelessWidget {
               SizedBox(
                 width: mapHeight,
                 height: mapHeight,
-                child: GridView(
+                child: GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 6
                   ),
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  children: const [
-                    MRMMapTile(), MRMMapTile(), MRMMapTile(), MRMMapTile(), MRMMapTile(), MRMMapTile(),
-                    MRMMapTile(), MRMMapTile(), MRMMapTile(), MRMMapTile(), MRMMapTile(), MRMMapTile(),
-                    MRMMapTile(), MRMMapTile(), MRMMapTile(), MRMMapTile(), MRMMapTile(), MRMMapTile(),
-                    MRMMapTile(), MRMMapTile(), MRMMapTile(), MRMMapTile(), MRMMapTile(), MRMMapTile(),
-                    MRMMapTile(), MRMMapTile(), MRMMapTile(), MRMMapTile(), MRMMapTile(), MRMMapTile(),
-                    MRMMapTile(), MRMMapTile(), MRMMapTile(), MRMMapTile(), MRMMapTile(), MRMMapTile()
-                  ],
+                  itemCount: 36,
+                  itemBuilder: (context, index) {
+                    return MRMMapTile(position: index);
+                  },
                 ),
               ),
               Expanded(child: Container())

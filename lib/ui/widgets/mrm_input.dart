@@ -59,7 +59,7 @@ class MRMInput extends StatelessWidget {
         textInputAction: action,
         keyboardType: inputType,
         autofocus: autofocus,
-        maxLength: 5,
+        maxLength: 3,
         decoration: InputDecoration(hintText: hint, counterText: ""),
         onEditingComplete: () => onEditingComplete(),
         onSubmitted: (val) { if (onSubmitted != null) onSubmitted!(val); }

@@ -14,11 +14,7 @@ class MapGenerationPage extends StatelessWidget {
   final _bloc = GenMapBloc();
   final _controller = PageController();
   final _pageViewWidgets = [
-    const MapDimensionPage(),
-    Center(child: Container(width: 250, height: 250, color: Colors.red)),
-    Center(child: Container(width: 250, height: 250, color: Colors.red)),
-    Center(child: Container(width: 250, height: 250, color: Colors.red)),
-    Center(child: Container(width: 250, height: 250, color: Colors.red))
+    const MapDimensionPage()
   ];
 
   @override
@@ -59,7 +55,7 @@ class MapGenerationPage extends StatelessWidget {
           children: [
             Expanded(
               child: MRMButton(
-                title: "Back",
+                title: "back_button_label".tr(),
                 height: Sizes.mrmButtonDefaultHeight / 1.5,
                 horizontal: Margins.margin8,
                 disabled: page == 0,
@@ -74,7 +70,7 @@ class MapGenerationPage extends StatelessWidget {
             ),
             Expanded(
               child: MRMButton(
-                title: "Next",
+                title: "next_button_label".tr(),
                 height: Sizes.mrmButtonDefaultHeight / 1.5,
                 horizontal: Margins.margin8,
                 onTap: () {

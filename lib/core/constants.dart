@@ -2,6 +2,8 @@ class Margins {
   static const margin4 = 4.0;
   static const margin8 = 8.0;
   static const margin16 = 16.0;
+  static const margin32 = 32.0;
+  static const margin64 = 64.0;
 }
 
 class FontSizes {
