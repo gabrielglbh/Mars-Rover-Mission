@@ -11,6 +11,7 @@
   "map_gen_rover_actions": "Route",
   "map_gen_hint_x_map": "X: 6",
   "map_gen_hint_y_map": "Y: 6",
+  "map_gen_hint_N_map": "N: 7",
   "back_button_label": "Previous",
   "next_button_label": "Next"
 }

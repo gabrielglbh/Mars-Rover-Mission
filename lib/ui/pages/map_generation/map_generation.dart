@@ -5,6 +5,7 @@ import 'package:marsmission/core/constants.dart';
 import 'package:marsmission/core/types/map_generation_pages.dart';
 import 'package:marsmission/ui/pages/map_generation/bloc/gen_map_bloc.dart';
 import 'package:marsmission/ui/pages/map_generation/pages/map_dimension.dart';
+import 'package:marsmission/ui/pages/map_generation/pages/map_obstacles.dart';
 import 'package:marsmission/ui/widgets/mrm_bullet.dart';
 import 'package:marsmission/ui/widgets/mrm_scaffold.dart';
 
@@ -13,6 +14,10 @@ class MapGenerationPage extends StatelessWidget {
 
   final _bloc = GenMapBloc();
   final _controller = PageController();
+
+  _goToPage(int page) {
+    _controller.animateToPage(page, duration: Animations.animation300, curve: Curves.easeIn);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +47,16 @@ class MapGenerationPage extends StatelessWidget {
             controller: _controller,
             physics: const NeverScrollableScrollPhysics(),
             children: [
-              MapDimensionPage(bloc: _bloc, goToPage: (page) {
-                _controller.animateToPage(page, duration: Animations.animation300, curve: Curves.easeIn);
-              })
+              MapDimensionPage(
+                bloc: _bloc,
+                pageType: MapGenerationPages.map,
+                goToPage: _goToPage
+              ),
+              MapObstaclesPage(
+                bloc: _bloc,
+                pageType: MapGenerationPages.obs,
+                goToPage: _goToPage
+              )
             ],
           ),
         ),

@@ -9,11 +9,11 @@ import 'package:marsmission/ui/widgets/map_generation/mrm_example_map.dart';
 import 'package:marsmission/ui/widgets/mrm_button.dart';
 import 'package:marsmission/ui/widgets/mrm_input.dart';
 
-class MapDimensionPage extends StatefulWidget {
+class MapObstaclesPage extends StatefulWidget {
   final GenMapBloc bloc;
   final MapGenerationPages pageType;
   final Function(int) goToPage;
-  const MapDimensionPage({
+  const MapObstaclesPage({
     Key? key,
     required this.bloc,
     required this.pageType,
@@ -21,14 +21,12 @@ class MapDimensionPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<MapDimensionPage> createState() => _MapDimensionPageState();
+  State<MapObstaclesPage> createState() => _MapObstaclesPageState();
 }
 
-class _MapDimensionPageState extends State<MapDimensionPage> {
+class _MapObstaclesPageState extends State<MapObstaclesPage> {
   late TextEditingController _x;
-  late TextEditingController _y;
   late FocusNode _xFocus;
-  late FocusNode _yFocus;
 
   late int next;
 
@@ -37,13 +35,10 @@ class _MapDimensionPageState extends State<MapDimensionPage> {
     next = widget.pageType.index + 1;
 
     _x = TextEditingController();
-    _y = TextEditingController();
     _xFocus = FocusNode();
-    _yFocus = FocusNode();
 
     WidgetsBinding.instance?.addPostFrameCallback((_) {
       _xFocus.addListener(() => _focusListener(_xFocus));
-      _yFocus.addListener(() => _focusListener(_yFocus));
     });
     super.initState();
   }
@@ -51,9 +46,7 @@ class _MapDimensionPageState extends State<MapDimensionPage> {
   @override
   void dispose() {
     _x.dispose();
-    _y.dispose();
     _xFocus.dispose();
-    _yFocus.dispose();
     super.dispose();
   }
 
@@ -63,28 +56,27 @@ class _MapDimensionPageState extends State<MapDimensionPage> {
     }
   }
 
-  List<int> _validation() {
+  int _validation() {
     try {
       final x = int.parse(_x.text);
-      final y = int.parse(_y.text);
       /// Default map must be 2x2
-      if (x >= 2 && y >= 2) {
-        return [x, y];
+      if (x >= 0) {
+        return x;
       } else {
         throw Exception();
       }
     } catch (err) {
-      Utils.instance.createSnackBar(context, "Type in numbers grater than 2.");
-      return [];
+      Utils.instance.createSnackBar(context, "Type in number grater than 0.");
+      return -1;
 
     }
   }
 
   _updateMapParams() {
     final val = _validation();
-    if (val.isNotEmpty) {
+    if (val != -1) {
       widget.bloc.add(GenMapEventPageChanged(1, params: widget.bloc.params.copyWith(
-          mapX: val[0], mapY: val[1]
+          obstacles: val
       )));
       widget.goToPage(next);
     }
@@ -96,8 +88,8 @@ class _MapDimensionPageState extends State<MapDimensionPage> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          MapGenerationPages.map.name,
-          style: Theme.of(context).textTheme.headline5
+            widget.pageType.name,
+            style: Theme.of(context).textTheme.headline5
         ),
         Expanded(
           child: Column(
@@ -105,37 +97,24 @@ class _MapDimensionPageState extends State<MapDimensionPage> {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: Margins.margin32),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    MRMInput(
-                      focusNode: _xFocus,
-                      controller: _x,
-                      hint: "map_gen_hint_x_map".tr(),
-                      onEditingComplete: () => _yFocus.requestFocus()
-                    ),
-                    const Icon(Icons.clear),
-                    MRMInput(
-                      focusNode: _yFocus,
-                      controller: _y,
-                      action: TextInputAction.done,
-                      hint: "map_gen_hint_y_map".tr(),
-                      onEditingComplete: () {
-                        /// Updates the params
-                        _yFocus.unfocus();
-                        _updateMapParams();
-                      }
-                    )
-                  ],
+                child: MRMInput(
+                  focusNode: _xFocus,
+                  controller: _x,
+                  hint: "map_gen_hint_N_map".tr(),
+                  onEditingComplete: () {
+                    /// Updates the params
+                    _xFocus.unfocus();
+                    _updateMapParams();
+                  }
                 ),
               ),
-              const MRMExampleMap(type: ExampleType.park),
+              const MRMExampleMap(type: ExampleType.obstacles),
               MRMButton(
-                title: MapGenerationPages.values[next].name,
-                height: Sizes.mrmButtonDefaultHeight / 1.5,
-                horizontal: Margins.margin8,
-                trailing: Icons.arrow_forward_rounded,
-                onTap: _updateMapParams
+                  title: MapGenerationPages.values[next].name,
+                  height: Sizes.mrmButtonDefaultHeight / 1.5,
+                  horizontal: Margins.margin8,
+                  trailing: Icons.arrow_forward_rounded,
+                  onTap: _updateMapParams
               ),
             ],
           ),
