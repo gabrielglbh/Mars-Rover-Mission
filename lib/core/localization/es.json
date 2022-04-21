@@ -4,6 +4,11 @@
   "generate_random_map_button_label": "Generate Random Map",
   "generate_static_map_button_label": "Test With Static Map",
   "attribution": "Made by ",
+  "map_gen_map_data": "Current Map Data",
+  "map_gen_map_data_map_dimen": "Map: ",
+  "map_gen_map_data_obstacles": "Obstacles: ",
+  "map_gen_map_data_rover_pos": "Rover Position: ",
+  "map_gen_map_data_rover_direction": " facing ",
   "map_gen_map_dimensions": "Map Dimensions",
   "map_gen_map_dimensions_description": "Provide the size of a 2D map. An example is given below with a map of size 6x6.",
   "map_gen_number_obstacles": "Number of Obstacles",
@@ -18,5 +23,7 @@
   "map_gen_hint_y_map": "Y: 6",
   "map_gen_hint_N_map": "N: 7",
   "back_button_label": "Previous",
-  "next_button_label": "Next"
+  "cancel_button_label": "Cancel",
+  "next_button_label": "Next",
+  "ok_button_label": "Ok"
 }

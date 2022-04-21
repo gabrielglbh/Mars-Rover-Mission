@@ -6,7 +6,9 @@ import 'package:marsmission/core/types/map_generation_pages.dart';
 import 'package:marsmission/ui/pages/map_generation/bloc/gen_map_bloc.dart';
 import 'package:marsmission/ui/pages/map_generation/pages/map_dimension.dart';
 import 'package:marsmission/ui/pages/map_generation/pages/map_obstacles.dart';
+import 'package:marsmission/ui/pages/map_generation/widgets/info_dialog.dart';
 import 'package:marsmission/ui/widgets/mrm_bullet.dart';
+import 'package:marsmission/ui/widgets/mrm_button.dart';
 import 'package:marsmission/ui/widgets/mrm_scaffold.dart';
 
 class MapGenerationPage extends StatelessWidget {
@@ -23,14 +25,6 @@ class MapGenerationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MRMScaffold(
       title: "generate_random_map_button_label".tr(),
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.info_outline_rounded),
-          onPressed: () {
-             // TODO: Info displaying current parameters
-          }
-        )
-      ],
       child: BlocProvider<GenMapBloc>(
         create: (_) => _bloc..add(GenMapEventIdle()),
         child: BlocBuilder<GenMapBloc, GenMapState>(
@@ -46,6 +40,22 @@ class MapGenerationPage extends StatelessWidget {
     );
   }
 
+  Widget _info(BuildContext context) {
+    return MRMButton(
+      title: "map_gen_map_data".tr(),
+      height: Sizes.mrmButtonDefaultHeight / 2.5,
+      width: MediaQuery.of(context).size.width / 2,
+      color: Colors.black,
+      horizontal: Margins.margin8,
+      onTap: () async {
+        await showDialog(
+          context: context,
+          builder: (context) => InfoDialog(bloc: _bloc)
+        );
+      }
+    );
+  }
+
   Widget _body(BuildContext context, int page) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -57,11 +67,13 @@ class MapGenerationPage extends StatelessWidget {
             children: [
               MapDimensionPage(
                 bloc: _bloc,
+                info: _info(context),
                 pageType: MapGenerationPages.map,
                 goToPage: _goToPage
               ),
               MapObstaclesPage(
                 bloc: _bloc,
+                info: _info(context),
                 pageType: MapGenerationPages.obs,
                 goToPage: _goToPage
               )

@@ -17,4 +17,17 @@ extension RoverDirectionExt on RoverDirection {
         return Icons.arrow_circle_left_rounded;
     }
   }
+
+  String get parsed {
+    switch (this) {
+      case RoverDirection.N:
+        return "N";
+      case RoverDirection.S:
+        return "S";
+      case RoverDirection.E:
+        return "E";
+      case RoverDirection.W:
+        return "W";
+    }
+  }
 }

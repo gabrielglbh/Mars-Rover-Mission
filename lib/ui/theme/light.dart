@@ -23,11 +23,11 @@ final ThemeData light = ThemeData(
         headline5: TextStyle(color: Colors.black, fontSize: FontSizes.fontSize26, fontWeight: FontWeight.bold),
         headline6: TextStyle(color: Colors.black, fontSize: FontSizes.fontSize24, fontWeight: FontWeight.bold),
         subtitle1: TextStyle(color: Colors.black),
-        subtitle2: TextStyle(color: Colors.black),
+        subtitle2: TextStyle(color: Colors.white, fontSize: FontSizes.fontSize16),
         bodyText1: TextStyle(color: Colors.black54),
         bodyText2: TextStyle(color: Colors.black54, fontSize: FontSizes.fontSize32),
-        caption: TextStyle(color: Colors.black),
-        button: TextStyle(color: Colors.black, fontSize: FontSizes.fontSize16, fontWeight: FontWeight.bold),
+        caption: TextStyle(color: Colors.black, fontSize: FontSizes.fontSize20, fontWeight: FontWeight.bold),
+        button: TextStyle(color: Colors.white, fontSize: FontSizes.fontSize16, fontWeight: FontWeight.bold),
         overline: TextStyle(color: Colors.black)
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(

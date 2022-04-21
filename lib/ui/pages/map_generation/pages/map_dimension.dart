@@ -14,11 +14,13 @@ class MapDimensionPage extends StatefulWidget {
   final GenMapBloc bloc;
   final MapGenerationPages pageType;
   final Function(int) goToPage;
+  final Widget info;
   const MapDimensionPage({
     Key? key,
     required this.bloc,
     required this.pageType,
-    required this.goToPage
+    required this.goToPage,
+    required this.info
   }) : super(key: key);
 
   @override
@@ -100,12 +102,13 @@ class _MapDimensionPageState extends State<MapDimensionPage> {
           title: widget.pageType.name,
           subtitle: widget.pageType.description
         ),
+        widget.info,
         Expanded(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: Margins.margin32),
+                padding: const EdgeInsets.symmetric(vertical: Margins.margin8),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
