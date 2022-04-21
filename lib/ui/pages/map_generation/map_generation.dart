@@ -23,6 +23,14 @@ class MapGenerationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MRMScaffold(
       title: "generate_random_map_button_label".tr(),
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.info_outline_rounded),
+          onPressed: () {
+             // TODO: Info displaying current parameters
+          }
+        )
+      ],
       child: BlocProvider<GenMapBloc>(
         create: (_) => _bloc..add(GenMapEventIdle()),
         child: BlocBuilder<GenMapBloc, GenMapState>(

@@ -6,6 +6,7 @@ import 'package:marsmission/core/types/map_generation_pages.dart';
 import 'package:marsmission/core/utils.dart';
 import 'package:marsmission/ui/pages/map_generation/bloc/gen_map_bloc.dart';
 import 'package:marsmission/ui/widgets/map_generation/mrm_example_map.dart';
+import 'package:marsmission/ui/widgets/map_generation/mrm_header.dart';
 import 'package:marsmission/ui/widgets/mrm_button.dart';
 import 'package:marsmission/ui/widgets/mrm_input.dart';
 
@@ -57,16 +58,20 @@ class _MapObstaclesPageState extends State<MapObstaclesPage> {
   }
 
   int _validation() {
+    final p = widget.bloc.params;
+    /// Number of obstacles must be greater than 0
+    /// Number of obstacles must leave space for AT LEAST the rover to be placed
+    final max = ((p.mapX ?? 1) * (p.mapY ?? 1)) - 1;
     try {
       final x = int.parse(_x.text);
-      /// Default map must be 2x2
-      if (x >= 0) {
+      if (x >= 0 && x <= max) {
         return x;
       } else {
         throw Exception();
       }
     } catch (err) {
-      Utils.instance.createSnackBar(context, "Type in number grater than 0.");
+      Utils.instance.createSnackBar(context, "Type in number grater than 0 and must be "
+          "less or equal to $max, as the rover has to be placed.");
       return -1;
 
     }
@@ -87,9 +92,9 @@ class _MapObstaclesPageState extends State<MapObstaclesPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(
-            widget.pageType.name,
-            style: Theme.of(context).textTheme.headline5
+        MRMHeader(
+          title: widget.pageType.name,
+          subtitle: widget.pageType.description
         ),
         Expanded(
           child: Column(

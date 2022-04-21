@@ -6,6 +6,7 @@ import 'package:marsmission/core/types/map_generation_pages.dart';
 import 'package:marsmission/core/utils.dart';
 import 'package:marsmission/ui/pages/map_generation/bloc/gen_map_bloc.dart';
 import 'package:marsmission/ui/widgets/map_generation/mrm_example_map.dart';
+import 'package:marsmission/ui/widgets/map_generation/mrm_header.dart';
 import 'package:marsmission/ui/widgets/mrm_button.dart';
 import 'package:marsmission/ui/widgets/mrm_input.dart';
 
@@ -95,9 +96,9 @@ class _MapDimensionPageState extends State<MapDimensionPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(
-          MapGenerationPages.map.name,
-          style: Theme.of(context).textTheme.headline5
+        MRMHeader(
+          title: widget.pageType.name,
+          subtitle: widget.pageType.description
         ),
         Expanded(
           child: Column(
