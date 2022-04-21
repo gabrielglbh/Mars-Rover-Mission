@@ -7,6 +7,7 @@ import 'package:marsmission/ui/pages/map_generation/bloc/gen_map_bloc.dart';
 import 'package:marsmission/ui/pages/map_generation/pages/map_dimension.dart';
 import 'package:marsmission/ui/pages/map_generation/pages/map_obstacles.dart';
 import 'package:marsmission/ui/pages/map_generation/widgets/info_dialog.dart';
+import 'package:marsmission/ui/widgets/map_generation/mrm_header.dart';
 import 'package:marsmission/ui/widgets/mrm_bullet.dart';
 import 'package:marsmission/ui/widgets/mrm_button.dart';
 import 'package:marsmission/ui/widgets/mrm_scaffold.dart';
@@ -60,6 +61,11 @@ class MapGenerationPage extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        MRMHeader(
+          title: MapGenerationPages.values[page].name,
+          subtitle: MapGenerationPages.values[page].description
+        ),
+        _info(context),
         Expanded(
           child: PageView(
             controller: _controller,
@@ -67,13 +73,11 @@ class MapGenerationPage extends StatelessWidget {
             children: [
               MapDimensionPage(
                 bloc: _bloc,
-                info: _info(context),
                 pageType: MapGenerationPages.map,
                 goToPage: _goToPage
               ),
               MapObstaclesPage(
                 bloc: _bloc,
-                info: _info(context),
                 pageType: MapGenerationPages.obs,
                 goToPage: _goToPage
               )

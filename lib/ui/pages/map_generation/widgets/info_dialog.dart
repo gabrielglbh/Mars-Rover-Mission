@@ -32,7 +32,7 @@ class InfoDialog extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodyText1
                 ),
                 TextSpan(
-                    text: "x",
+                    text: " x ",
                     style: Theme.of(context).textTheme.bodyText1
                 ),
                 TextSpan(
@@ -72,7 +72,7 @@ class InfoDialog extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodyText1
                 ),
                 TextSpan(
-                    text: "x",
+                    text: " x ",
                     style: Theme.of(context).textTheme.bodyText1?.copyWith(
                         fontWeight: FontWeight.bold
                     )

@@ -80,8 +80,7 @@ class MRMButton extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    FittedBox(
-                      fit: BoxFit.fitWidth,
+                    Expanded(
                       child: Text(title, textAlign: TextAlign.center,
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.button?.copyWith(
@@ -91,7 +90,9 @@ class MRMButton extends StatelessWidget {
                     Visibility(
                       visible: trailing != null,
                       child: Padding(
-                          padding: const EdgeInsets.only(left: Margins.margin8),
+                          padding: const EdgeInsets.only(
+                              left: Margins.margin8, right: Margins.margin16
+                          ),
                           child: Icon(trailing, color: Colors.white)
                       ),
                     ),

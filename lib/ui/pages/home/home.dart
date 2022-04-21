@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:marsmission/core/constants.dart';
 import 'package:marsmission/core/routing/pages.dart';
 import 'package:marsmission/core/utils.dart';
 import 'package:marsmission/ui/widgets/mrm_button.dart';
