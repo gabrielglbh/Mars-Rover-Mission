@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:marsmission/core/constants.dart';
-import 'package:marsmission/core/types/example_maps.dart';
+import 'package:marsmission/ui/widgets/mrm_map_tile.dart';
 
-class MRMExampleMap extends StatelessWidget {
-  final ExampleType type;
-  const MRMExampleMap({
+class MRMMap extends StatelessWidget {
+  final List<MRMMapTile> list;
+  const MRMMap({
     Key? key,
-    required this.type
+    required this.list
   }) : super(key: key);
 
   @override
@@ -14,12 +14,12 @@ class MRMExampleMap extends StatelessWidget {
     return Expanded(
       child: GridView(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 5
+            crossAxisCount: Misc.testMapSize
         ),
         shrinkWrap: true,
         padding: const EdgeInsets.all(Margins.margin32),
         physics: const ClampingScrollPhysics(),
-        children: type.tiles
+        children: list
       ),
     );
   }

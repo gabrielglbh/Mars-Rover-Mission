@@ -11,7 +11,7 @@ import 'package:marsmission/ui/pages/map_generation/pages/map_obstacles.dart';
 import 'package:marsmission/ui/pages/map_generation/pages/map_actions.dart';
 import 'package:marsmission/ui/pages/map_generation/pages/map_rover_direction.dart';
 import 'package:marsmission/ui/pages/map_generation/widgets/info_dialog.dart';
-import 'package:marsmission/ui/pages/map_generation/widgets/mrm_header.dart';
+import 'package:marsmission/ui/widgets/mrm_header.dart';
 import 'package:marsmission/ui/widgets/mrm_bullet.dart';
 import 'package:marsmission/ui/widgets/mrm_button.dart';
 import 'package:marsmission/ui/widgets/mrm_scaffold.dart';

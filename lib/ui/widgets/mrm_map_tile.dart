@@ -6,10 +6,12 @@ class MRMMapTile extends StatefulWidget {
   final MapTile tile;
   /// Position in the grid to animate the tile in
   final int position;
+  final Function()? onTap;
   const MRMMapTile({
     Key? key,
     this.tile = MapTile.grass,
-    this.position = 1
+    this.position = 1,
+    this.onTap
   }) : super(key: key);
 
   @override
@@ -32,19 +34,22 @@ class _MRMMapTileState extends State<MRMMapTile> {
     return AnimatedScale(
       duration: Duration(milliseconds: 25 * widget.position),
       scale: scale,
-      child: Container(
-        width: MediaQuery.of(context).size.width / 6,
-        height: MediaQuery.of(context).size.width / 6,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(RRadius.radius16),
-            color: widget.tile.color
+      child: GestureDetector(
+        onTap: widget.onTap,
+        child: Container(
+          width: MediaQuery.of(context).size.width / 6,
+          height: MediaQuery.of(context).size.width / 6,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(RRadius.radius16),
+              color: widget.tile.color
+          ),
+          margin: const EdgeInsets.all(Margins.margin4),
+          padding: const EdgeInsets.all(Margins.margin4),
+          child: FittedBox(
+            fit: BoxFit.contain,
+            child: widget.tile.icon(),
+          )
         ),
-        margin: const EdgeInsets.all(Margins.margin4),
-        padding: const EdgeInsets.all(Margins.margin4),
-        child: FittedBox(
-          fit: BoxFit.contain,
-          child: widget.tile.icon(),
-        )
       ),
     );
   }

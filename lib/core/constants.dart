@@ -1,4 +1,5 @@
 class Margins {
+  static const margin2 = 2.0;
   static const margin4 = 4.0;
   static const margin8 = 8.0;
   static const margin16 = 16.0;
@@ -30,4 +31,8 @@ class Sizes {
 
 class Animations {
   static const animation300 = Duration(milliseconds: 300);
+}
+
+class Misc {
+  static const testMapSize = 5;
 }

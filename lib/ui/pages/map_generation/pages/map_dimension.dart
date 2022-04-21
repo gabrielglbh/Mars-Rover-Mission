@@ -6,7 +6,7 @@ import 'package:marsmission/core/types/map_generation_pages.dart';
 import 'package:marsmission/core/utils.dart';
 import 'package:marsmission/ui/pages/map_generation/bloc/gen_map_bloc.dart';
 import 'package:marsmission/ui/pages/map_generation/utils.dart';
-import 'package:marsmission/ui/pages/map_generation/widgets/mrm_example_map.dart';
+import 'package:marsmission/ui/widgets/mrm_map.dart';
 import 'package:marsmission/ui/widgets/mrm_button.dart';
 import 'package:marsmission/ui/widgets/mrm_input.dart';
 
@@ -117,8 +117,9 @@ class _MapDimensionPageState extends State<MapDimensionPage> {
                   ],
                 ),
               ),
-              MRMExampleMap(type: widget.pageType == MapGenPages.map
-                  ? ExampleType.park : ExampleType.rover ),
+              MRMMap(list: widget.pageType == MapGenPages.map
+                  ? ExampleType.park.tiles : ExampleType.rover.tiles
+              ),
               MRMButton(
                 title: MapGenPages.values[next].name,
                 height: Sizes.mrmButtonDefaultHeight / 1.5,

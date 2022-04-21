@@ -47,7 +47,7 @@ class _RoverDirectionPageState extends State<RoverDirectionPage> {
           width: size, height: size,
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
-            color: Colors.blue,
+            color: Colors.black,
           ),
           alignment: Alignment.center,
           child: Text(direction.parsed, style: Theme.of(context).textTheme.button?.copyWith(
