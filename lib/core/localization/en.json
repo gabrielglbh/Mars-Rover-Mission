@@ -1,0 +1,7 @@
+{
+  "app_name": "Mars Rover Mission",
+  "app_description": "You’re part of the team that explores Mars by sending remotely controlled vehicles to the surface of the planet. You will be sending commands from earth to the rover in Mars in order to complete the mission!",
+  "generate_random_map_button_label": "Generate Random Map",
+  "generate_static_map_button_label": "Test With Static Map",
+  "attribution": "Made by "
+}
