@@ -18,7 +18,8 @@ class MRMMap extends StatelessWidget {
         ),
         shrinkWrap: true,
         padding: const EdgeInsets.all(Margins.margin32),
-        physics: const ClampingScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
+          //const ClampingScrollPhysics(),
         children: list
       ),
     );

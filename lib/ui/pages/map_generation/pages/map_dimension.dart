@@ -85,51 +85,45 @@ class _MapDimensionPageState extends State<MapDimensionPage> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Expanded(
-          child: Column(
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: Margins.margin8),
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: Margins.margin8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    MRMInput(
-                      focusNode: _xFocus,
-                      controller: _x,
-                      hint: "map_gen_hint_x_map".tr(),
-                      onEditingComplete: () => _yFocus.requestFocus()
-                    ),
-                    const Icon(Icons.clear),
-                    MRMInput(
-                      focusNode: _yFocus,
-                      controller: _y,
-                      action: TextInputAction.done,
-                      hint: "map_gen_hint_y_map".tr(),
-                      onEditingComplete: () {
-                        /// Updates the params
-                        _yFocus.unfocus();
-                        _updateMapParams();
-                      }
-                    )
-                  ],
-                ),
+              MRMInput(
+                  focusNode: _xFocus,
+                  controller: _x,
+                  hint: "map_gen_hint_x_map".tr(),
+                  onEditingComplete: () => _yFocus.requestFocus()
               ),
-              MRMMap(list: widget.pageType == MapGenPages.map
-                  ? ExampleType.park.tiles : ExampleType.rover.tiles
-              ),
-              MRMButton(
-                title: MapGenPages.values[next].name,
-                height: Sizes.mrmButtonDefaultHeight / 1.5,
-                horizontal: Margins.margin8,
-                trailing: Icons.arrow_forward_rounded,
-                onTap: _updateMapParams
-              ),
+              const Icon(Icons.clear),
+              MRMInput(
+                  focusNode: _yFocus,
+                  controller: _y,
+                  action: TextInputAction.done,
+                  hint: "map_gen_hint_y_map".tr(),
+                  onEditingComplete: () {
+                    /// Updates the params
+                    _yFocus.unfocus();
+                    _updateMapParams();
+                  }
+              )
             ],
           ),
-        )
+        ),
+        MRMMap(list: widget.pageType == MapGenPages.map
+            ? ExampleType.park.tiles : ExampleType.rover.tiles
+        ),
+        MRMButton(
+            title: MapGenPages.values[next].name,
+            height: Sizes.mrmButtonDefaultHeight / 1.5,
+            horizontal: Margins.margin8,
+            trailing: Icons.arrow_forward_rounded,
+            onTap: _updateMapParams
+        ),
       ],
     );
   }

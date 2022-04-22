@@ -19,7 +19,7 @@ class MapCustomization extends StatefulWidget {
 class _MapCustomizationState extends State<MapCustomization> {
   MapTile _selectedTile = MapTile.obstacle;
 
-  late List<MRMMapTile> map;
+  List<MRMMapTile> map = [];
 
   @override
   void initState() {

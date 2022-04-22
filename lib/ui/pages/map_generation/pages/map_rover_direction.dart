@@ -61,40 +61,34 @@ class _RoverDirectionPageState extends State<RoverDirectionPage> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: Margins.margin8),
-                  child: Column(
+          child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: Margins.margin8),
+              child: Column(
+                children: [
+                  Expanded(child: _button(RoverDirection.N)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Expanded(child: _button(RoverDirection.N)),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          _button(RoverDirection.W),
-                          _button(RoverDirection.E),
-                        ],
-                      ),
-                      Expanded(child: _button(RoverDirection.S)),
+                      _button(RoverDirection.W),
+                      _button(RoverDirection.E),
                     ],
-                  )
-                ),
-              ),
-              MRMButton(
-                  title: MapGenPages.values[next].name,
-                  height: Sizes.mrmButtonDefaultHeight / 1.5,
-                  horizontal: Margins.margin8,
-                  trailing: Icons.arrow_forward_rounded,
-                  onTap: _updateMapParams
-              ),
-            ],
+                  ),
+                  Expanded(child: _button(RoverDirection.S)),
+                ],
+              )
           ),
-        )
+        ),
+        MRMButton(
+            title: MapGenPages.values[next].name,
+            height: Sizes.mrmButtonDefaultHeight / 1.5,
+            horizontal: Margins.margin8,
+            trailing: Icons.arrow_forward_rounded,
+            onTap: _updateMapParams
+        ),
       ],
     );
   }
