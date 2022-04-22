@@ -214,8 +214,16 @@ class MapParams {
 
   /// Validates that all the necessary fields for the algorithm to work
   /// If true, everything is fine
-  bool validateParameters() {
+  bool validateGeneratedParameters() {
     return mapX != null && mapY != null && obstacles != null &&
         roverX != null && roverY != null && actions != null;
+  }
+
+  /// Validates that all the necessary fields for the algorithm to work
+  ///
+  /// Returns a string with the error, if any. If it is empty, validation is correct.
+  String validateTestParameters() {
+    // TODO:
+    return "";
   }
 }

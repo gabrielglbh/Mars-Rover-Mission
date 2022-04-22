@@ -1,26 +1,29 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marsmission/core/constants.dart';
-import 'package:marsmission/core/types/map_generation_pages.dart';
 import 'package:marsmission/core/types/rover_actions.dart';
+import 'package:marsmission/ui/pages/map_customization/bloc/map_cus_bloc.dart';
 import 'package:marsmission/ui/pages/map_generation/bloc/gen_map_bloc.dart';
 import 'package:marsmission/ui/pages/map_generation/widgets/mrm_rounded_button.dart';
 import 'package:marsmission/ui/widgets/mrm_button.dart';
 
 class RoverActionsPage extends StatefulWidget {
-  final GenMapBloc bloc;
-  final MapGenPages pageType;
+  final Bloc bloc;
   const RoverActionsPage({
     Key? key,
-    required this.bloc,
-    required this.pageType
+    required this.bloc
   }) : super(key: key);
 
   @override
   State<RoverActionsPage> createState() => _RoverActionsPageState();
 }
 
-class _RoverActionsPageState extends State<RoverActionsPage> {
+class _RoverActionsPageState extends State<RoverActionsPage> with AutomaticKeepAliveClientMixin {
+  /// Added AutomaticKeepAliveClientMixin for keeping page view state on map_customization
+  @override
+  bool get wantKeepAlive => true;
+
   final List<RoverAction> _actions = [];
 
   Widget _button(RoverAction action) {
@@ -73,7 +76,11 @@ class _RoverActionsPageState extends State<RoverActionsPage> {
             height: Sizes.mrmButtonDefaultHeight / 1.5,
             horizontal: Margins.margin8,
             onTap: () {
-              widget.bloc.add(GenMapEventUpdateActions(actions: _actions));
+              if (widget.bloc is GenMapBloc) {
+                widget.bloc.add(GenMapEventUpdateActions(actions: _actions));
+              } else if (widget.bloc is MapCusBloc) {
+                widget.bloc.add(MapCusEventUpdateActions(actions: _actions));
+              }
             }
         ),
       ],

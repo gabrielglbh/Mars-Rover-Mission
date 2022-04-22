@@ -8,7 +8,7 @@ import 'package:marsmission/core/utils.dart';
 import 'package:marsmission/ui/pages/map_generation/bloc/gen_map_bloc.dart';
 import 'package:marsmission/ui/pages/map_generation/pages/map_dimension.dart';
 import 'package:marsmission/ui/pages/map_generation/pages/map_obstacles.dart';
-import 'package:marsmission/ui/pages/map_generation/pages/map_actions.dart';
+import 'package:marsmission/ui/widgets/map_actions.dart';
 import 'package:marsmission/ui/pages/map_generation/pages/map_rover_direction.dart';
 import 'package:marsmission/ui/pages/map_generation/widgets/info_dialog.dart';
 import 'package:marsmission/ui/widgets/mrm_header.dart';
@@ -112,8 +112,7 @@ class MapGenerationPage extends StatelessWidget {
                 goToPage: _goToPage
               ),
               RoverActionsPage(
-                bloc: _bloc,
-                pageType: MapGenPages.actions
+                bloc: _bloc
               ),
             ],
           ),
