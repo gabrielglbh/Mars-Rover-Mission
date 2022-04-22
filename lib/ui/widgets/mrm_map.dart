@@ -4,9 +4,11 @@ import 'package:marsmission/ui/widgets/mrm_map_tile.dart';
 
 class MRMMap extends StatelessWidget {
   final List<MRMMapTile> list;
+  final double margin;
   const MRMMap({
     Key? key,
-    required this.list
+    required this.list,
+    this.margin = Margins.margin32
   }) : super(key: key);
 
   @override
@@ -17,7 +19,7 @@ class MRMMap extends StatelessWidget {
             crossAxisCount: Misc.testMapSize
         ),
         shrinkWrap: true,
-        padding: const EdgeInsets.all(Margins.margin32),
+        padding: EdgeInsets.all(margin),
         physics: const NeverScrollableScrollPhysics(),
           //const ClampingScrollPhysics(),
         children: list

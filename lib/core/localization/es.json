@@ -33,5 +33,8 @@
   "finished_map_button_label": "Comenzar Misión",
   "rover_action_left": "Izquierda",
   "rover_action_right": "Derecha",
-  "rover_action_forward": "De frente"
+  "rover_action_forward": "De frente",
+  "map_cus_label": "Personaliza el Mapa",
+  "map_cus_title": "Mapa Estático",
+  "map_cus_description": "Toca y cambia las celdas de este mapa de 5x5 para probarlo. Selecciona un tipo de celda y colócalo en el mapa."
 }

@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:marsmission/core/constants.dart';
 import 'package:marsmission/core/types/map_tiles.dart';
+import 'package:marsmission/core/types/rover_directions.dart';
 
 class MRMMapTile extends StatefulWidget {
   final MapTile tile;
   /// Position in the grid to animate the tile in
   final int position;
+  /// Expects the facing direction of the rover to be displayed in the map tile
+  final RoverDirection? direction;
   final Function()? onTap;
   const MRMMapTile({
     Key? key,
     this.tile = MapTile.grass,
     this.position = 1,
+    this.direction,
     this.onTap
   }) : super(key: key);
 
@@ -47,7 +51,7 @@ class _MRMMapTileState extends State<MRMMapTile> {
           padding: const EdgeInsets.all(Margins.margin4),
           child: FittedBox(
             fit: BoxFit.contain,
-            child: widget.tile.icon(),
+            child: widget.tile.icon(direction: widget.direction),
           )
         ),
       ),

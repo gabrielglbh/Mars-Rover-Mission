@@ -33,5 +33,8 @@
   "finished_map_button_label": "Begin Mission",
   "rover_action_left": "Left",
   "rover_action_right": "Right",
-  "rover_action_forward": "Forward"
+  "rover_action_forward": "Forward",
+  "map_cus_label": "Customize Test Map",
+  "map_cus_title": "Static Map",
+  "map_cus_description": "Tap and change tiles on this 5x5 map to test it. Select a tile from below and place it on the map."
 }

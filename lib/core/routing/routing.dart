@@ -15,7 +15,7 @@ Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     case Pages.generation:
       return CupertinoPageRoute(builder: (_) => MapGenerationPage());
     case Pages.customization:
-      return CupertinoPageRoute(builder: (_) => const MapCustomization());
+      return CupertinoPageRoute(builder: (_) => MapCustomization());
   }
   return null;
 }

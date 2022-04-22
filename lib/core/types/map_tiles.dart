@@ -13,7 +13,7 @@ extension MapTileExt on MapTile {
       case MapTile.obstacle:
         return const Icon(Icons.settings, color: Colors.white);
       case MapTile.rover:
-        return Icon(direction?.roverIcon ?? Icons.arrow_circle_right_rounded, color: Colors.white);
+        return Icon(direction?.roverIcon ?? Icons.arrow_circle_right_outlined, color: Colors.white);
     }
   }
 

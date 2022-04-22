@@ -86,7 +86,7 @@ class InfoDialog extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodyText1
                 ),
                 TextSpan(
-                    text: bloc.params.direction?.parsed ?? "...",
+                    text: bloc.params.direction.parsed,
                     style: Theme.of(context).textTheme.bodyText1
                 ),
               ]
