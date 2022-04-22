@@ -53,7 +53,9 @@ class _RoverActionsPageState extends State<RoverActionsPage> with AutomaticKeepA
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       padding: const EdgeInsets.all(Margins.margin8),
-                      margin: const EdgeInsets.only(bottom: Margins.margin16),
+                      margin: const EdgeInsets.only(bottom: Margins.margin16,
+                        left: Margins.margin8, right: Margins.margin8
+                      ),
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.blue, width: 2),
                         borderRadius: BorderRadius.circular(RRadius.radius16),

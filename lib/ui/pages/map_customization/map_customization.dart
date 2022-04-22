@@ -9,7 +9,6 @@ import 'package:marsmission/ui/pages/map_customization/bloc/map_cus_bloc.dart';
 import 'package:marsmission/ui/pages/map_customization/pages/interactive_map.dart';
 import 'package:marsmission/ui/widgets/map_actions.dart';
 import 'package:marsmission/ui/widgets/mrm_bullet.dart';
-import 'package:marsmission/ui/widgets/mrm_button.dart';
 import 'package:marsmission/ui/widgets/mrm_header.dart';
 import 'package:marsmission/ui/widgets/mrm_map_tile.dart';
 import 'package:marsmission/ui/widgets/mrm_scaffold.dart';
@@ -65,27 +64,6 @@ class MapCustomization extends StatelessWidget {
                             }
                           }
                           return _body(state, map);
-                        } else if (state is MapCusStateFailure) {
-                          return Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Icon(Icons.info_rounded),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: Margins.margin8),
-                                  child: Text(state.message, style: Theme.of(context).textTheme.bodyText1),
-                                ),
-                                MRMButton(
-                                  title: "try_again_label".tr(),
-                                  height: Sizes.mrmButtonDefaultHeight / 2,
-                                  width: MediaQuery.of(context).size.width / 2,
-                                  onTap: () {
-                                    _bloc.add(const MapCusEventGoToPage(0));
-                                  }
-                                )
-                              ],
-                            ),
-                          );
                         } else {
                           return Container();
                         }

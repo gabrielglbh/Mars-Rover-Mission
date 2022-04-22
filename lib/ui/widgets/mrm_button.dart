@@ -86,7 +86,7 @@ class MRMButton extends StatelessWidget {
                           padding: const EdgeInsets.only(
                               right: Margins.margin8, left: Margins.margin16
                           ),
-                          child: Icon(trailing, color: color)
+                          child: Icon(trailing, color: Colors.transparent)
                       ),
                     ),
                     Expanded(

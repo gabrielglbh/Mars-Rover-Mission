@@ -19,6 +19,7 @@ class RRadius {
   static const radius8 = 8.0;
   static const radius16 = 16.0;
   static const radius24 = 24.0;
+  static const radius64 = 64.0;
 }
 
 class Sizes {
@@ -34,5 +35,6 @@ class Animations {
 }
 
 class Misc {
-  static const testMapSize = 5;
+  static const exampleMapSize = 5;
+  static const testMapSize = 7;
 }

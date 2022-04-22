@@ -39,8 +39,14 @@ class MRMInteractiveMap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        MRMMap(list: map, margin: Margins.margin16),
+        Expanded(
+          child: Container(
+            alignment: Alignment.center,
+            child: MRMMap(list: map, margin: Margins.margin4, mapSize: Misc.testMapSize)
+          ),
+        ),
         Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: List.generate(MapTile.values.length, (index) {
