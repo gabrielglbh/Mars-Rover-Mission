@@ -50,6 +50,7 @@ class MapCusBloc extends Bloc<MapCusEvent, MapCusState> {
         emit(MapCusStateMapFinished());
       } else {
         emit(MapCusStateFailure(err));
+        emit(MapCusStateUpdatedMap(params.map, params.direction, selected));
       }
     });
   }

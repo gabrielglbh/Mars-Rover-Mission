@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marsmission/core/constants.dart';
 
 class MRMRoundedButton extends StatelessWidget {
   final Function() onTap;
@@ -22,14 +23,23 @@ class MRMRoundedButton extends StatelessWidget {
     return Container(
       width: size,
       height: size,
+      alignment: Alignment.center,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: color,
       ),
-      alignment: Alignment.center,
-      child: IconButton(
-        onPressed: onTap,
-        icon: Icon(icon, color: Colors.white)
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(RRadius.radius64),
+          child: Container(
+              width: size,
+              height: size,
+              alignment: Alignment.center,
+              child: Icon(icon, color: Colors.white)
+          ),
+        ),
       ),
     );
   }

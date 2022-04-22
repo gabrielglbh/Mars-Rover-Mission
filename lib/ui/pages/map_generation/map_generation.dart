@@ -12,7 +12,6 @@ import 'package:marsmission/ui/widgets/map_actions.dart';
 import 'package:marsmission/ui/pages/map_generation/pages/map_rover_direction.dart';
 import 'package:marsmission/ui/pages/map_generation/widgets/info_dialog.dart';
 import 'package:marsmission/ui/widgets/mrm_header.dart';
-import 'package:marsmission/ui/widgets/mrm_bullet.dart';
 import 'package:marsmission/ui/widgets/mrm_button.dart';
 import 'package:marsmission/ui/widgets/mrm_scaffold.dart';
 
@@ -117,16 +116,6 @@ class MapGenerationPage extends StatelessWidget {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: Margins.margin8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(MapGenPages.values.length, (index) {
-              if (index == page) return const MRMBullet(active: true);
-              return const MRMBullet();
-            }),
-          )
-        )
       ],
     );
   }

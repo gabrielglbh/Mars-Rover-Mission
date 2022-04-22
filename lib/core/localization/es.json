@@ -3,7 +3,7 @@
   "app_description": "Formas parte del equipo que explora Marte enviando vehículos controlados a distancia a la superficie de cierto planeta. ¡Enviarás comandos desde la tierra al rover en Marte para completar la misión!",
   "generate_random_map_button_label": "Generar mapa aleatorio",
   "generate_static_map_button_label": "Probar con mapa estático",
-  "attribution": "Hecho por ",
+  "attribution": "Desarrollado por ",
   "map_gen_map_data": "Datos del mapa actual",
   "map_gen_map_data_map_dimen": "Mapa: ",
   "map_gen_map_data_obstacles": "Obstáculos: ",
