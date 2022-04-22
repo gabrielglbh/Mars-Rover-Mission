@@ -12,7 +12,7 @@ class MapParams {
   int? roverX;
   int? roverY;
   RoverDirection direction;
-  List<RoverAction>? actions;
+  List<RoverAction> actions;
   List<List<MapTile>> map;
 
   MapParams({
@@ -22,7 +22,7 @@ class MapParams {
     this.roverX,
     this.roverY,
     this.direction = RoverDirection.E,
-    this.actions,
+    this.actions = const [],
     this.map = const []
   });
 
@@ -113,7 +113,7 @@ class MapParams {
     );
   }
 
-  MapParams copyRoute({
+  MapParams copyActions({
     List<RoverAction>? actions
   }) {
     return MapParams(
@@ -216,14 +216,16 @@ class MapParams {
   /// If true, everything is fine
   bool validateGeneratedParameters() {
     return mapX != null && mapY != null && obstacles != null &&
-        roverX != null && roverY != null && actions != null;
+        roverX != null && roverY != null;
   }
 
   /// Validates that all the necessary fields for the algorithm to work
   ///
   /// Returns a string with the error, if any. If it is empty, validation is correct.
   String validateTestParameters() {
-    // TODO:
+    if (roverX == null && roverY == null) {
+      return "There is no rover placed in the map.";
+    }
     return "";
   }
 }

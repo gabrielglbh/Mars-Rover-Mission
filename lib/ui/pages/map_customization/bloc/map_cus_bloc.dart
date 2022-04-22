@@ -44,7 +44,7 @@ class MapCusBloc extends Bloc<MapCusEvent, MapCusState> {
     on<MapCusEventUpdateActions>((event, emit) {
       /// Deep copy of every parameter possible, as this is being copied
       /// everytime the user goes forwards or backwards
-      params = params.copyRoute(actions: event.actions);
+      params = params.copyActions(actions: event.actions);
       final String err = params.validateTestParameters();
       if (err.isEmpty) {
         emit(MapCusStateMapFinished());
