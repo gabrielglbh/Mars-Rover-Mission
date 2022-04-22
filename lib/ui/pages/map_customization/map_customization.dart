@@ -17,20 +17,18 @@ class MapCustomization extends StatelessWidget {
   final _bloc = MapCusBloc();
 
   Widget _button(MapCusStateUpdatedMap state, MapTile tile) {
-    return AnimatedContainer(
+    return AnimatedOpacity(
+      opacity: state.selected == tile ? 1 : 0.4,
       duration: Animations.animation300,
-      padding: const EdgeInsets.all(Margins.margin2),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(RRadius.radius16),
-          border: Border.all(width: 2, color: state.selected == tile
-              ? Colors.black : Colors.white)
-      ),
-      child: MRMMapTile(
-          tile: tile,
-          direction: state.dir,
-          onTap: () {
-            _bloc.add(MapCusEventSetSelectedTile(tile));
-          }
+      child: Padding(
+        padding: const EdgeInsets.all(Margins.margin2),
+        child: MRMMapTile(
+            tile: tile,
+            direction: state.dir,
+            onTap: () {
+              _bloc.add(MapCusEventSetSelectedTile(tile));
+            }
+        ),
       ),
     );
   }
