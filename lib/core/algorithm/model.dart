@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:marsmission/core/types/map_tiles.dart';
 import 'package:marsmission/core/types/rover_actions.dart';
 import 'package:marsmission/core/types/rover_directions.dart';
@@ -224,7 +225,7 @@ class MapParams {
   /// Returns a string with the error, if any. If it is empty, validation is correct.
   String validateTestParameters() {
     if (roverX == null && roverY == null) {
-      return "There is no rover placed in the map.";
+      return "map_cus_error".tr();
     }
     return "";
   }
