@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:marsmission/core/routing/pages.dart';
 import 'package:marsmission/ui/pages/home/home.dart';
+import 'package:marsmission/ui/pages/map_customization/map_customization.dart';
 import 'package:marsmission/ui/pages/map_generation/map_generation.dart';
 import 'package:marsmission/ui/pages/monitor_mission/monitor_mission.dart';
 
@@ -13,6 +14,8 @@ Route<dynamic>? onGenerateRoute(RouteSettings settings) {
       return CupertinoPageRoute(builder: (_) => const MonitorMissionPage());
     case Pages.generation:
       return CupertinoPageRoute(builder: (_) => MapGenerationPage());
+    case Pages.customization:
+      return CupertinoPageRoute(builder: (_) => MapCustomization());
   }
   return null;
 }

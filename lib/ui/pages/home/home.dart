@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:marsmission/core/routing/pages.dart';
+import 'package:marsmission/core/types/map_tiles.dart';
 import 'package:marsmission/core/utils.dart';
 import 'package:marsmission/ui/widgets/mrm_button.dart';
 import 'package:marsmission/ui/widgets/mrm_scaffold.dart';
@@ -30,7 +31,7 @@ class HomePage extends StatelessWidget {
             children: [
               MRMButton(
                   title: "generate_random_map_button_label".tr(),
-                  icon: Icons.grass_rounded,
+                  icon: MapTile.grass.icon().icon,
                   color: Colors.green,
                   onTap: () => Navigator.of(context).pushNamed(Pages.generation)
               ),
@@ -38,9 +39,7 @@ class HomePage extends StatelessWidget {
                   title: "generate_static_map_button_label".tr(),
                   icon: Icons.build_rounded,
                   color: Colors.blue,
-                  onTap: () {
-                    // TODO: Generate map based on 6x6 static map
-                  }
+                  onTap: () => Navigator.of(context).pushNamed(Pages.customization)
               )
             ],
           ),

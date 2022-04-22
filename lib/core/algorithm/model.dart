@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:marsmission/core/types/map_tiles.dart';
 import 'package:marsmission/core/types/rover_actions.dart';
 import 'package:marsmission/core/types/rover_directions.dart';
@@ -11,8 +12,8 @@ class MapParams {
   int? obstacles;
   int? roverX;
   int? roverY;
-  RoverDirection? direction;
-  List<RoverAction>? actions;
+  RoverDirection direction;
+  List<RoverAction> actions;
   List<List<MapTile>> map;
 
   MapParams({
@@ -21,8 +22,8 @@ class MapParams {
     this.obstacles,
     this.roverX,
     this.roverY,
-    this.direction,
-    this.actions,
+    this.direction = RoverDirection.E,
+    this.actions = const [],
     this.map = const []
   });
 
@@ -113,7 +114,7 @@ class MapParams {
     );
   }
 
-  MapParams copyRoute({
+  MapParams copyActions({
     List<RoverAction>? actions
   }) {
     return MapParams(
@@ -128,30 +129,104 @@ class MapParams {
     );
   }
 
-  MapParams copyWith({
-    int? mapX,
-    int? mapY,
-    int? obstacles,
-    int? roverX,
-    int? roverY,
-    RoverDirection? direction,
-    List<RoverAction>? actions
-  }) => MapParams(
-      mapX: mapX ?? this.mapX,
-      mapY: mapY ?? this.mapY,
-      obstacles: obstacles ?? this.obstacles,
-      roverX: roverX ?? this.roverX,
-      roverY: roverY ?? this.roverY,
-      direction: direction ?? this.direction,
-      actions: actions ?? this.actions,
-      map: map
-  );
+  /// Gets a [tile] and place it in the map, updating it, depending on the
+  /// [x] and [y] coordinates.
+  MapParams copyWithReplacedTile(int x, int y, MapTile tile) {
+    int _x = x;
+    int _y = y;
+
+    int _obs = obstacles ?? 0;
+    RoverDirection _dir = direction;
+    int? _rX = roverX;
+    int? _rY = roverY;
+
+    switch (tile) {
+      case MapTile.grass:
+        /// If there is the rover or an obstacle there, update coordinates to null
+        /// or obstacles to correct number
+        if (map[_x][_y] == MapTile.rover) {
+          _rX = null;
+          _rY = null;
+        }
+        if (map[_x][_y] == MapTile.obstacle) _obs -= 1;
+        map[_x][_y] = MapTile.grass;
+        break;
+      case MapTile.obstacle:
+        /// Adding the obstacle in any place
+        _obs += 1;
+        /// If there is the rover there, update coordinates to null
+        if (map[_x][_y] == MapTile.rover) {
+          _rX = null;
+          _rY = null;
+        }
+        map[_x][_y] = MapTile.obstacle;
+        break;
+      case MapTile.rover:
+        /// If there is a rover, change the direction of the rover
+        if (map[_x][_y] == MapTile.rover) {
+          switch (_dir) {
+            case RoverDirection.N:
+              _dir = RoverDirection.E;
+              break;
+            case RoverDirection.S:
+              _dir = RoverDirection.W;
+              break;
+            case RoverDirection.E:
+              _dir = RoverDirection.S;
+              break;
+            case RoverDirection.W:
+              _dir = RoverDirection.N;
+              break;
+          }
+        } else {
+          /// Check if the map has a rover already. Then remove that rover by grass
+          /// and place the rover in x and y.
+          ///
+          /// Add a label to stop the loop when finding the rover
+          loop:
+          for (int i = 0; i < map.length; i++) {
+            for (int j = 0; j < map[i].length; j++) {
+              if (map[i][j] == MapTile.rover) {
+                map[i][j] = MapTile.grass;
+                break loop;
+              }
+            }
+          }
+          /// If there is an obstacle, remove it and update params
+          if (map[_x][_y] == MapTile.obstacle) _obs -= 1;
+          map[_x][_y] = MapTile.rover;
+          _rX = _x;
+          _rY = _y;
+        }
+        break;
+    }
+
+    return MapParams(
+        mapX: mapX,
+        mapY: mapY,
+        obstacles: _obs,
+        roverX: _rX,
+        roverY: _rY,
+        direction: _dir,
+        actions: actions,
+        map: map
+    );
+  }
 
   /// Validates that all the necessary fields for the algorithm to work
   /// If true, everything is fine
-  bool validateParameters() {
+  bool validateGeneratedParameters() {
     return mapX != null && mapY != null && obstacles != null &&
-        roverX != null && roverY != null && direction != null &&
-        actions != null;
+        roverX != null && roverY != null;
+  }
+
+  /// Validates that all the necessary fields for the algorithm to work
+  ///
+  /// Returns a string with the error, if any. If it is empty, validation is correct.
+  String validateTestParameters() {
+    if (roverX == null && roverY == null) {
+      return "map_cus_error".tr();
+    }
+    return "";
   }
 }

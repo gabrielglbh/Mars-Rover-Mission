@@ -8,13 +8,13 @@ extension RoverDirectionExt on RoverDirection {
   IconData get roverIcon {
     switch (this) {
       case RoverDirection.N:
-        return Icons.arrow_circle_up_rounded;
+        return Icons.arrow_circle_up_outlined;
       case RoverDirection.S:
-        return Icons.arrow_circle_down_rounded;
+        return Icons.arrow_circle_down_outlined;
       case RoverDirection.E:
-        return Icons.arrow_circle_right_rounded;
+        return Icons.arrow_circle_right_outlined;
       case RoverDirection.W:
-        return Icons.arrow_circle_left_rounded;
+        return Icons.arrow_circle_left_outlined;
     }
   }
 

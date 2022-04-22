@@ -6,7 +6,7 @@ import 'package:marsmission/core/types/map_generation_pages.dart';
 import 'package:marsmission/core/utils.dart';
 import 'package:marsmission/ui/pages/map_generation/bloc/gen_map_bloc.dart';
 import 'package:marsmission/ui/pages/map_generation/utils.dart';
-import 'package:marsmission/ui/pages/map_generation/widgets/mrm_example_map.dart';
+import 'package:marsmission/ui/widgets/mrm_map.dart';
 import 'package:marsmission/ui/widgets/mrm_button.dart';
 import 'package:marsmission/ui/widgets/mrm_input.dart';
 
@@ -70,36 +70,30 @@ class _MapObstaclesPageState extends State<MapObstaclesPage> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: Margins.margin8),
-                child: MRMInput(
-                  focusNode: _xFocus,
-                  controller: _x,
-                  hint: "map_gen_hint_N_map".tr(),
-                  onEditingComplete: () {
-                    /// Updates the params
-                    _xFocus.unfocus();
-                    _updateMapParams();
-                  }
-                ),
-              ),
-              const MRMExampleMap(type: ExampleType.obstacles),
-              MRMButton(
-                  title: MapGenPages.values[next].name,
-                  height: Sizes.mrmButtonDefaultHeight / 1.5,
-                  horizontal: Margins.margin8,
-                  trailing: Icons.arrow_forward_rounded,
-                  onTap: _updateMapParams
-              ),
-            ],
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: Margins.margin8),
+          child: MRMInput(
+              focusNode: _xFocus,
+              controller: _x,
+              hint: "map_gen_hint_N_map".tr(),
+              onEditingComplete: () {
+                /// Updates the params
+                _xFocus.unfocus();
+                _updateMapParams();
+              }
           ),
-        )
+        ),
+        MRMMap(list: ExampleType.obstacles.tiles),
+        MRMButton(
+            title: MapGenPages.values[next].name,
+            height: Sizes.mrmButtonDefaultHeight / 1.5,
+            horizontal: Margins.margin8,
+            trailing: Icons.arrow_forward_rounded,
+            onTap: _updateMapParams
+        ),
       ],
     );
   }

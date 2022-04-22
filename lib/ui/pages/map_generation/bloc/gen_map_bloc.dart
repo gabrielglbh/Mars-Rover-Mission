@@ -46,8 +46,8 @@ class GenMapBloc extends Bloc<GenMapEvent, GenMapState> {
     on<GenMapEventUpdateActions>((event, emit) {
       /// Deep copy of every parameter possible, as this is being copied
       /// everytime the user goes forwards or backwards
-      params = params.copyRoute(actions: event.actions);
-      if (params.validateParameters()) {
+      params = params.copyActions(actions: event.actions);
+      if (params.validateGeneratedParameters()) {
         emit(GenMapStateMapFinished());
       } else {
         emit(GenMapStateFailure("map_gen_error".tr()));
