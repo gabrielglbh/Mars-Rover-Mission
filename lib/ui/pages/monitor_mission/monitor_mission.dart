@@ -167,15 +167,15 @@ class MonitorMissionPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: Margins.margin16),
           text: "monitor_map_exceeding".tr(),
         ),
-        Visibility(
-          visible: showButton,
-          child: MRMButton(
-            title: !hasFinished
-                ? "monitor_start_button_label".tr()
-                : isGeneratedMap
-                ? "randomize_obs_button_label".tr()
-                : "retry_button_label".tr(),
-            onTap: () {
+        MRMButton(
+          title: !hasFinished
+              ? "monitor_start_button_label".tr()
+              : isGeneratedMap
+              ? "randomize_obs_button_label".tr()
+              : "retry_button_label".tr(),
+          disabled: !showButton,
+          onTap: () {
+            try {
               /// On retry, reset the rover position and direction and try again the algorithm
               if (hasFinished) {
                 args.params
@@ -191,8 +191,11 @@ class MonitorMissionPage extends StatelessWidget {
                   _bloc.add(MonitorEventStartSimulation(args.params));
                 }
               }
+            } catch (err) {
+              /// copyObstacles may produce Stack Overflow
+              Utils.instance.createSnackBar(context, err.toString());
             }
-          ),
+          }
         )
       ],
     );
