@@ -19,19 +19,32 @@ class MRMInteractiveMap extends StatelessWidget {
     required this.direction
   }) : super(key: key);
 
-  Widget _button(MapTile tile) {
-    return AnimatedOpacity(
-      opacity: selected == tile ? 1 : 0.4,
-      duration: Animations.animation300,
-      child: Padding(
-        padding: const EdgeInsets.all(Margins.margin2),
-        child: MRMMapTile(
-            tile: tile,
-            direction: direction,
-            onTap: () {
-              bloc.add(MapCusEventSetSelectedTile(tile));
-            }
-        ),
+  Widget _button(BuildContext context, MapTile tile) {
+    return Expanded(
+      child: Column(
+        children: [
+          AnimatedOpacity(
+            opacity: selected == tile ? 1 : 0.4,
+            duration: Animations.animation300,
+            child: Padding(
+              padding: const EdgeInsets.all(Margins.margin2),
+              child: MRMMapTile(
+                  tile: tile,
+                  direction: direction,
+                  onTap: () {
+                    bloc.add(MapCusEventSetSelectedTile(tile));
+                  }
+              ),
+            ),
+          ),
+          FittedBox(
+            fit: BoxFit.contain,
+            child: Text(
+              tile.name,
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
+          )
+        ],
       ),
     );
   }
@@ -55,7 +68,7 @@ class MRMInteractiveMap extends StatelessWidget {
         Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: List.generate(MapTile.values.length, (index) {
-              return _button(MapTile.values[index]);
+              return _button(context, MapTile.values[index]);
             })
         ),
       ],

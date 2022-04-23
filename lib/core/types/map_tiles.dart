@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:marsmission/core/types/rover_directions.dart';
 
@@ -25,6 +26,17 @@ extension MapTileExt on MapTile {
         return Colors.indigoAccent;
       case MapTile.rover:
         return Colors.pinkAccent;
+    }
+  }
+
+  String get name {
+    switch (this) {
+      case MapTile.grass:
+        return "map_tile_grass".tr();
+      case MapTile.obstacle:
+        return "map_tile_obstacle".tr();
+      case MapTile.rover:
+        return "map_tile_rover".tr();
     }
   }
 }

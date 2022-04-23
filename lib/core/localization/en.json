@@ -41,5 +41,8 @@
   "map_cus_error": "There is no rover placed in the map.",
   "monitor_start_button_label": "Start",
   "monitor_title": "Monitor Mission",
-  "monitor_actions_label": "Actions:"
+  "monitor_actions_label": "Actions:",
+  "map_tile_grass": "Terrain",
+  "map_tile_obstacle": "Obstacle",
+  "map_tile_rover": "Rover"
 }
