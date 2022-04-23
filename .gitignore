@@ -10,6 +10,8 @@
 .history
 .svn/
 symbols/
+windows/
+web/
 
 # IntelliJ related
 *.iml
