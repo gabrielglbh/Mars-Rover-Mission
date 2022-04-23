@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marsmission/core/algorithm/model.dart';
 import 'package:marsmission/core/algorithm/state.dart' as s;
 import 'package:marsmission/core/constants.dart';
 import 'package:marsmission/core/routing/arguments.dart';
@@ -26,6 +27,7 @@ class MonitorMissionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final MapParams initialParams = args.params;
     return MRMScaffold(
       title: "monitor_title".tr(),
       child: BlocProvider<MonitorBloc>(
@@ -84,13 +86,19 @@ class MonitorMissionPage extends StatelessWidget {
               child: BlocBuilder<MonitorBloc, MonitorState>(
                 builder: (context, state) {
                   if (state is MonitorStateUpdateMap) {
-                    return _map(context, state.map, state.currentPath, state.direction, showButton: false);
+                    return _map(context, initialParams, state.map,
+                        state.currentPath, state.direction, showButton: false
+                    );
                   }
                   else if (state is MonitorStateFinished) {
-                    return _map(context, state.map, state.currentPath, state.direction, hasFinished: true);
+                    return _map(context, initialParams, state.map,
+                        state.currentPath, state.direction, hasFinished: true
+                    );
                   }
                   else if (state is MonitorStateInitial) {
-                    return _map(context, args.params.map, [], args.params.direction);
+                    return _map(context, initialParams, args.params.map,
+                        [], args.params.direction
+                    );
                   }
                   else {
                     return Container();
@@ -135,6 +143,7 @@ class MonitorMissionPage extends StatelessWidget {
 
   Widget _map(
       BuildContext context,
+      MapParams initialParams,
       List<List<MapTile>> map,
       List<s.State> states,
       RoverDirection dir,
@@ -157,19 +166,23 @@ class MonitorMissionPage extends StatelessWidget {
         Visibility(
           visible: showButton,
           child: MRMButton(
-            title: !hasFinished ? "monitor_start_button_label".tr() : "retry_button_label".tr(),
+            title: !hasFinished
+                ? "monitor_start_button_label".tr()
+                : isGeneratedMap
+                ? "Randomize Obstacles and Try Again"
+                : "retry_button_label".tr(),
             height: Sizes.mrmButtonDefaultHeight / 1.5,
             onTap: () {
-              /// If want to retry on generated, go to the generation pages
-              /// and enter again the parameters, with the params already settled
+              /// On retry, reset the rover position and direction and try again the algorithm
               if (hasFinished) {
+                args.params
+                    .copyRoverPosition(roverX: initialParams.roverX, roverY: initialParams.roverY)
+                    .copyRoverDirection(direction: initialParams.direction);
                 if (isGeneratedMap) {
-                  // TODO: Obstacles random and again - text
-                } else {
-                  if (!_bloc.algorithmHasBegan) {
-                    _bloc.add(MonitorEventStartSimulation(args.params));
-                  }
+                  /// On generated, with copyObstacles, we randomize the obstacles each time
+                  args.params.copyObstacles(obstacles: args.params.obstacles);
                 }
+                _bloc.add(MonitorEventStartSimulation(args.params));
               } else {
                 if (!_bloc.algorithmHasBegan) {
                   _bloc.add(MonitorEventStartSimulation(args.params));
