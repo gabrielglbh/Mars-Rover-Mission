@@ -46,7 +46,7 @@ class _MarsRoverMissionState extends State<MarsRoverMission> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "app_name".tr(),
+      title: "Mars Rover Mission",
       locale: context.locale,
       supportedLocales: context.supportedLocales,
       localizationsDelegates: context.localizationDelegates,

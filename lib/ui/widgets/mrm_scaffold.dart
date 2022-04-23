@@ -29,9 +29,11 @@ class MRMScaffold extends StatelessWidget {
         appBar: AppBar(
           title: MRMText(
             text: title ?? " ",
-              fit: BoxFit.fitWidth,
+            fit: BoxFit.fitWidth,
+            textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.headline6
           ),
+          centerTitle: true,
           actions: actions,
         ),
         body: SafeArea(
