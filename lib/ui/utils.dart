@@ -41,12 +41,13 @@ class Utils {
     return list.join(" ").replaceAll(pattern, replacement);
   }
 
-  /// Generates a list of [MRMMapTile] based of a matrix of [MapTile].
+  /// Transforms the x and y positions of a matrix into a index in a list
+  int transformIndexes(int matLength, int x, int y) => x * matLength + y;
+
+  /// Generates a list of [MRMMapTile] based of a matrix of [MapTile] for display purposes.
   ///
   /// The direction of the rover, [dir], can be declared along with an optional
   /// [onTap] method for listening to the tap on a certain tile on the caller.
-  ///
-  ///
   List<MRMMapTile> generateMapFromMatrix(List<List<MapTile>> m, {
     RoverDirection dir = RoverDirection.E, Function(int, int)? onTap
   }) {
@@ -54,9 +55,7 @@ class Utils {
 
     for (int x = 0; x < m.length; x++) {
       for (int y = 0; y < m[x].length; y++) {
-        /// Transform the index from matrix to list only
-        /// for display purposes
-        final pos = x * m.length + y;
+        final pos = transformIndexes(m.length, x, y);
         map.add(MRMMapTile(
           tile: m[x][y],
           direction: dir,

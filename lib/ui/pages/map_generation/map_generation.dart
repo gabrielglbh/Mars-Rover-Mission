@@ -2,8 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marsmission/core/constants.dart';
+import 'package:marsmission/core/routing/arguments.dart';
 import 'package:marsmission/core/routing/pages.dart';
 import 'package:marsmission/core/types/map_generation_pages.dart';
+import 'package:marsmission/core/types/modes.dart';
 import 'package:marsmission/ui/utils.dart';
 import 'package:marsmission/ui/pages/map_generation/bloc/gen_map_bloc.dart';
 import 'package:marsmission/ui/pages/map_generation/pages/map_dimension.dart';
@@ -37,7 +39,9 @@ class MapGenerationPage extends StatelessWidget {
               Utils.instance.createSnackBar(context, state.message);
               Navigator.of(context).pop();
             } else if (state is GenMapStateMapFinished) {
-              Navigator.of(context).pushReplacementNamed(Pages.monitor, arguments: state.params);
+              Navigator.of(context).pushReplacementNamed(Pages.monitor,
+                arguments: MonitorPageArgs(params: state.params, mode: Mode.generate)
+              );
             }
           },
           child: BlocBuilder<GenMapBloc, GenMapState>(

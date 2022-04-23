@@ -15,11 +15,12 @@ class MonitorStateUpdateMap extends MonitorState {
   final List<List<MapTile>> map;
   final RoverDirection direction;
   final List<RoverAction> currentActions;
+  final List<State> currentPath;
 
-  const MonitorStateUpdateMap(this.map, this.direction, this.currentActions);
+  const MonitorStateUpdateMap(this.map, this.direction, this.currentActions, this.currentPath);
 
   @override
-  List<Object> get props => [map, direction, currentActions];
+  List<Object> get props => [map, direction, currentActions, currentPath];
 }
 
 class MonitorStateFinished extends MonitorState {
@@ -27,9 +28,11 @@ class MonitorStateFinished extends MonitorState {
   final List<List<MapTile>> map;
   final RoverDirection direction;
   final List<RoverAction> currentActions;
+  final List<State> currentPath;
 
-  const MonitorStateFinished(this.finalState, this.map, this.direction, this.currentActions);
+  const MonitorStateFinished(this.finalState, this.map, this.direction,
+      this.currentActions, this.currentPath);
 
   @override
-  List<Object> get props => [finalState, map, direction, currentActions];
+  List<Object> get props => [finalState, map, direction, currentActions, currentPath];
 }

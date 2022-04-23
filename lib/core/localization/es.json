@@ -12,7 +12,7 @@
   "map_gen_map_dimensions": "Dimensiones del mapa",
   "map_gen_map_dimensions_description": "Proporcionar el tamaño de un mapa 2D. A continuación se ofrece un ejemplo con un mapa de tamaño 5x5",
   "map_gen_number_obstacles": "Número de obstáculos",
-  "map_gen_number_obstacles_description": "Proporcionar el número de obstáculos a colocar en el mapa aleatoriamente. A continuación se da un ejemplo con 7 obstáculos en un mapa de 6x6",
+  "map_gen_number_obstacles_description": "Proporcionar el número de obstáculos a colocar en el mapa aleatoriamente. A continuación se da un ejemplo con 7 obstáculos en un mapa de 5x5",
   "map_gen_rover_dimensions": "Posición inicial del rover",
   "map_gen_rover_dimensions_description": "Proporciona la posición inicial del rover. No debe aterrizar en un obstáculo, como se ve en el ejemplo siguiente",
   "map_gen_rover_direction": "Dirección inicial del rover",
@@ -48,5 +48,6 @@
   "retry_button_label": "Reintentar",
   "monitor_finished_good": "¡El rover a completado la misión satisfactoriamente!",
   "monitor_finished_bad_1": "El rover ha encontrado un obstáculo en la posición",
-  "monitor_finished_bad_2": "El rover ha parado todas sus acciones y se ha parado en la última posición visitada."
+  "monitor_finished_bad_2": "El rover ha parado todas sus acciones y se ha parado en la última posición visitada.",
+  "monitor_map_exceeding": "El mapa es demasiado grande para visualizarlo. La misión se intentará completar pero el mapa no se verá, se verán las coordenadas y el estado del rover."
 }

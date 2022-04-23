@@ -55,19 +55,19 @@ class MonitorBloc extends Bloc<MonitorEvent, MonitorState> {
             /// Upon continuation, update the params and notify UI
             p = res;
             performedActions.add(p.actions[a]);
-            emit(MonitorStateUpdateMap(p.map, p.direction, performedActions));
+            emit(MonitorStateUpdateMap(p.map, p.direction, performedActions, path));
           } else if (res is State) {
             /// Finished and exit for loop
             _foundObstacle = true;
             algorithmHasBegan = false;
-            emit(MonitorStateFinished(res, p.map, p.direction, performedActions));
+            emit(MonitorStateFinished(res, p.map, p.direction, performedActions, path));
           }
         });
       }
       /// Rover has successfully completed the mission
       if (!_foundObstacle) {
         algorithmHasBegan = false;
-        emit(MonitorStateFinished(state, p.map, p.direction, performedActions));
+        emit(MonitorStateFinished(state, p.map, p.direction, performedActions, path));
       }
     });
   }

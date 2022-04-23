@@ -12,7 +12,7 @@
   "map_gen_map_dimensions": "Map Dimensions",
   "map_gen_map_dimensions_description": "Provide the size of a 2D map. An example is given below with a map of size 5x5.",
   "map_gen_number_obstacles": "Number of Obstacles",
-  "map_gen_number_obstacles_description": "Provide the number of obstacles to place randomly in the map. an example is given below with 7 obstacles in a 6x6 map.",
+  "map_gen_number_obstacles_description": "Provide the number of obstacles to place randomly in the map. an example is given below with 7 obstacles in a 5x5 map.",
   "map_gen_rover_dimensions": "Rover Initial Position",
   "map_gen_rover_dimensions_description": "Provide the initial position of the rover. It must not land in an obstacle, as seen in the example below.",
   "map_gen_rover_direction": "Rover Initial Direction",
@@ -48,5 +48,6 @@
   "retry_button_label": "Retry",
   "monitor_finished_good": "The rover has successfully completed the mission!",
   "monitor_finished_bad_1": "The rover has encountered an obstacle in position",
-  "monitor_finished_bad_2": "Rover actions has been stopped on the last visited position."
+  "monitor_finished_bad_2": "Rover actions has been stopped on the last visited position.",
+  "monitor_map_exceeding": "Map exceeds size to display it. The route will be performed but the map will not be seen, the rover's coordinates and state will be visualized instead."
 }

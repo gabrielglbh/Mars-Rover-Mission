@@ -2,8 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marsmission/core/constants.dart';
+import 'package:marsmission/core/routing/arguments.dart';
 import 'package:marsmission/core/routing/pages.dart';
 import 'package:marsmission/core/types/map_tiles.dart';
+import 'package:marsmission/core/types/modes.dart';
 import 'package:marsmission/ui/utils.dart';
 import 'package:marsmission/ui/pages/map_customization/bloc/map_cus_bloc.dart';
 import 'package:marsmission/ui/pages/map_customization/pages/interactive_map.dart';
@@ -25,11 +27,12 @@ class MapCustomization extends StatelessWidget {
       child: BlocProvider<MapCusBloc>(
         create: (_) => _bloc..add(MapCusEventInitial()),
         child: BlocListener<MapCusBloc, MapCusState>(
-          listener: (context, state) {
+          listener: (context, state) async {
             if (state is MapCusStateFailure) {
               Utils.instance.createSnackBar(context, state.message);
             } else if (state is MapCusStateMapFinished) {
-              Navigator.of(context).pushReplacementNamed(Pages.monitor, arguments: state.params);
+              await Navigator.of(context).pushNamed(Pages.monitor,
+                  arguments: MonitorPageArgs(params: state.params, mode: Mode.test));
             }
           },
           child: Column(
