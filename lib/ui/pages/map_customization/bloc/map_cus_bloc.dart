@@ -47,7 +47,7 @@ class MapCusBloc extends Bloc<MapCusEvent, MapCusState> {
       params = params.copyActions(actions: event.actions);
       final String err = params.validateTestParameters();
       if (err.isEmpty) {
-        emit(MapCusStateMapFinished());
+        emit(MapCusStateMapFinished(params));
       } else {
         emit(MapCusStateFailure(err));
         emit(MapCusStateUpdatedMap(params.map, params.direction, selected));

@@ -37,7 +37,7 @@ class MapGenerationPage extends StatelessWidget {
               Utils.instance.createSnackBar(context, state.message);
               Navigator.of(context).pop();
             } else if (state is GenMapStateMapFinished) {
-              Navigator.of(context).pushReplacementNamed(Pages.monitor);
+              Navigator.of(context).pushReplacementNamed(Pages.monitor, arguments: state.params);
             }
           },
           child: BlocBuilder<GenMapBloc, GenMapState>(

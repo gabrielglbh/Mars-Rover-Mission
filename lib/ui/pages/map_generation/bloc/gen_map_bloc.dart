@@ -48,7 +48,7 @@ class GenMapBloc extends Bloc<GenMapEvent, GenMapState> {
       /// everytime the user goes forwards or backwards
       params = params.copyActions(actions: event.actions);
       if (params.validateGeneratedParameters()) {
-        emit(GenMapStateMapFinished());
+        emit(GenMapStateMapFinished(params));
       } else {
         emit(GenMapStateFailure("map_gen_error".tr()));
       }

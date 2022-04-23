@@ -29,7 +29,7 @@ class MapCustomization extends StatelessWidget {
             if (state is MapCusStateFailure) {
               Utils.instance.createSnackBar(context, state.message);
             } else if (state is MapCusStateMapFinished) {
-              Navigator.of(context).pushReplacementNamed(Pages.monitor);
+              Navigator.of(context).pushReplacementNamed(Pages.monitor, arguments: state.params);
             }
           },
           child: Column(
