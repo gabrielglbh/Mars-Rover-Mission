@@ -11,7 +11,7 @@ extension MapTileExt on MapTile {
       case MapTile.grass:
         return const Icon(Icons.park_rounded, color: Colors.white);
       case MapTile.obstacle:
-        return const Icon(Icons.settings, color: Colors.white);
+        return const Icon(Icons.air_rounded, color: Colors.white);
       case MapTile.rover:
         return Icon(direction?.roverIcon ?? Icons.arrow_circle_right_outlined, color: Colors.white);
     }
@@ -22,9 +22,9 @@ extension MapTileExt on MapTile {
       case MapTile.grass:
         return Colors.green;
       case MapTile.obstacle:
-        return Colors.brown;
+        return Colors.indigoAccent;
       case MapTile.rover:
-        return Colors.grey;
+        return Colors.pinkAccent;
     }
   }
 }
