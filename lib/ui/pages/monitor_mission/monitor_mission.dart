@@ -192,7 +192,7 @@ class MonitorMissionPage extends StatelessWidget {
                 }
               }
             } catch (err) {
-              /// copyObstacles may produce Stack Overflow
+              /// TODO: copyObstacles may produce Stack Overflow
               Utils.instance.createSnackBar(context, err.toString());
             }
           }

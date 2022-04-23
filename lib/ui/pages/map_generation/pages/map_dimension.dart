@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:marsmission/core/constants.dart';
 import 'package:marsmission/core/types/example_maps.dart';
 import 'package:marsmission/core/types/map_generation_pages.dart';
+import 'package:marsmission/ui/pages/map_generation/widgets/navigation_buttons.dart';
 import 'package:marsmission/ui/utils.dart';
 import 'package:marsmission/ui/pages/map_generation/bloc/gen_map_bloc.dart';
 import 'package:marsmission/ui/pages/map_generation/utils.dart';
 import 'package:marsmission/ui/widgets/mrm_map.dart';
-import 'package:marsmission/ui/widgets/mrm_button.dart';
 import 'package:marsmission/ui/widgets/mrm_input.dart';
 
 class MapDimensionPage extends StatefulWidget {
@@ -25,7 +25,7 @@ class MapDimensionPage extends StatefulWidget {
   State<MapDimensionPage> createState() => _MapDimensionPageState();
 }
 
-class _MapDimensionPageState extends State<MapDimensionPage> {
+class _MapDimensionPageState extends State<MapDimensionPage> with AutomaticKeepAliveClientMixin {
   late TextEditingController _x;
   late TextEditingController _y;
   late FocusNode _xFocus;
@@ -84,6 +84,7 @@ class _MapDimensionPageState extends State<MapDimensionPage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -117,13 +118,16 @@ class _MapDimensionPageState extends State<MapDimensionPage> {
         MRMMap(list: widget.pageType == MapGenPages.map
             ? ExampleType.park.tiles : ExampleType.rover.tiles
         ),
-        MRMButton(
-            title: MapGenPages.values[next].name,
-            horizontal: Margins.margin8,
-            trailing: Icons.arrow_forward_rounded,
-            onTap: _updateMapParams
-        ),
+        MapGenNavigationButtons(
+          forwardTitle: MapGenPages.values[next].name,
+          showBackButton: widget.pageType != MapGenPages.map,
+          onBack: () => widget.goToPage(widget.pageType.index - 1),
+          onForward: _updateMapParams
+        )
       ],
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

@@ -2,21 +2,26 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marsmission/core/constants.dart';
+import 'package:marsmission/core/types/map_generation_pages.dart';
 import 'package:marsmission/core/types/rover_actions.dart';
+import 'package:marsmission/ui/pages/map_generation/widgets/navigation_buttons.dart';
 import 'package:marsmission/ui/utils.dart';
 import 'package:marsmission/ui/pages/map_customization/bloc/map_cus_bloc.dart';
 import 'package:marsmission/ui/pages/map_generation/bloc/gen_map_bloc.dart';
 import 'package:marsmission/ui/widgets/mrm_rounded_button.dart';
 import 'package:marsmission/ui/widgets/mrm_border_container.dart';
-import 'package:marsmission/ui/widgets/mrm_button.dart';
 
 import 'mrm_text.dart';
 
 class RoverActionsPage extends StatefulWidget {
   final Bloc bloc;
+  final MapGenPages? pageType;
+  final Function(int)? goToPage;
   const RoverActionsPage({
     Key? key,
-    required this.bloc
+    required this.bloc,
+    this.pageType,
+    this.goToPage
   }) : super(key: key);
 
   @override
@@ -24,10 +29,6 @@ class RoverActionsPage extends StatefulWidget {
 }
 
 class _RoverActionsPageState extends State<RoverActionsPage> with AutomaticKeepAliveClientMixin {
-  /// Added AutomaticKeepAliveClientMixin for keeping page view state on map_customization
-  @override
-  bool get wantKeepAlive => true;
-
   final List<RoverAction> _actions = [];
 
   Widget _button(RoverAction action) {
@@ -76,18 +77,26 @@ class _RoverActionsPageState extends State<RoverActionsPage> with AutomaticKeepA
               )
           ),
         ),
-        MRMButton(
-            title: "finished_map_button_label".tr(),
-            horizontal: Margins.margin8,
-            onTap: () {
-              if (widget.bloc is GenMapBloc) {
-                widget.bloc.add(GenMapEventUpdateActions(actions: _actions));
-              } else if (widget.bloc is MapCusBloc) {
-                widget.bloc.add(MapCusEventUpdateActions(actions: _actions));
-              }
+        MapGenNavigationButtons(
+          forwardTitle: "finished_map_button_label".tr(),
+          showBackButton: widget.bloc is GenMapBloc,
+          onBack: () {
+            if (widget.goToPage != null && widget.pageType != null) {
+              widget.goToPage!(widget.pageType!.index - 1);
             }
-        ),
+          },
+          onForward: () {
+            if (widget.bloc is GenMapBloc) {
+              widget.bloc.add(GenMapEventUpdateActions(actions: _actions));
+            } else if (widget.bloc is MapCusBloc) {
+              widget.bloc.add(MapCusEventUpdateActions(actions: _actions));
+            }
+          }
+        )
       ],
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

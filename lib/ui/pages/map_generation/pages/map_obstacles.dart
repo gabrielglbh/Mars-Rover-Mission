@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:marsmission/core/constants.dart';
 import 'package:marsmission/core/types/example_maps.dart';
 import 'package:marsmission/core/types/map_generation_pages.dart';
+import 'package:marsmission/ui/pages/map_generation/widgets/navigation_buttons.dart';
 import 'package:marsmission/ui/utils.dart';
 import 'package:marsmission/ui/pages/map_generation/bloc/gen_map_bloc.dart';
 import 'package:marsmission/ui/pages/map_generation/utils.dart';
 import 'package:marsmission/ui/widgets/mrm_map.dart';
-import 'package:marsmission/ui/widgets/mrm_button.dart';
 import 'package:marsmission/ui/widgets/mrm_input.dart';
 
 class MapObstaclesPage extends StatefulWidget {
@@ -25,7 +25,7 @@ class MapObstaclesPage extends StatefulWidget {
   State<MapObstaclesPage> createState() => _MapObstaclesPageState();
 }
 
-class _MapObstaclesPageState extends State<MapObstaclesPage> {
+class _MapObstaclesPageState extends State<MapObstaclesPage> with AutomaticKeepAliveClientMixin {
   late TextEditingController _x;
   late FocusNode _xFocus;
 
@@ -69,6 +69,7 @@ class _MapObstaclesPageState extends State<MapObstaclesPage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -87,13 +88,15 @@ class _MapObstaclesPageState extends State<MapObstaclesPage> {
           ),
         ),
         MRMMap(list: ExampleType.obstacles.tiles),
-        MRMButton(
-            title: MapGenPages.values[next].name,
-            horizontal: Margins.margin8,
-            trailing: Icons.arrow_forward_rounded,
-            onTap: _updateMapParams
-        ),
+        MapGenNavigationButtons(
+          forwardTitle: MapGenPages.values[next].name,
+          onBack: () => widget.goToPage(widget.pageType.index - 1),
+          onForward: _updateMapParams
+        )
       ],
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

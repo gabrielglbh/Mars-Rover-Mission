@@ -93,7 +93,7 @@ class MRMButton extends StatelessWidget {
                     ),
                     Expanded(
                       child: MRMText(
-                          text: title, textAlign: TextAlign.center,
+                          text: title, textAlign: TextAlign.center, maxLines: 2,
                           style: Theme.of(context).textTheme.button?.copyWith(
                               color: titleColor
                           )),

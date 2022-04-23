@@ -3,7 +3,7 @@ import 'package:marsmission/core/constants.dart';
 import 'package:marsmission/core/types/map_generation_pages.dart';
 import 'package:marsmission/core/types/rover_directions.dart';
 import 'package:marsmission/ui/pages/map_generation/bloc/gen_map_bloc.dart';
-import 'package:marsmission/ui/widgets/mrm_button.dart';
+import 'package:marsmission/ui/pages/map_generation/widgets/navigation_buttons.dart';
 import 'package:marsmission/ui/widgets/mrm_rounded_button.dart';
 import 'package:marsmission/ui/widgets/mrm_text.dart';
 
@@ -22,7 +22,7 @@ class RoverDirectionPage extends StatefulWidget {
   State<RoverDirectionPage> createState() => _RoverDirectionPageState();
 }
 
-class _RoverDirectionPageState extends State<RoverDirectionPage> {
+class _RoverDirectionPageState extends State<RoverDirectionPage> with AutomaticKeepAliveClientMixin {
   RoverDirection _direction = RoverDirection.E;
 
   late int next;
@@ -53,35 +53,38 @@ class _RoverDirectionPageState extends State<RoverDirectionPage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Expanded(
           child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: Margins.margin8),
-              child: Column(
-                children: [
-                  Expanded(child: _button(RoverDirection.N)),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      _button(RoverDirection.W),
-                      _button(RoverDirection.E),
-                    ],
-                  ),
-                  Expanded(child: _button(RoverDirection.S)),
-                ],
-              )
+            padding: const EdgeInsets.symmetric(vertical: Margins.margin8),
+            child: Column(
+              children: [
+                Expanded(child: _button(RoverDirection.N)),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _button(RoverDirection.W),
+                    _button(RoverDirection.E),
+                  ],
+                ),
+                Expanded(child: _button(RoverDirection.S)),
+              ],
+            )
           ),
         ),
-        MRMButton(
-            title: MapGenPages.values[next].name,
-            horizontal: Margins.margin8,
-            trailing: Icons.arrow_forward_rounded,
-            onTap: _updateMapParams
-        ),
+        MapGenNavigationButtons(
+          forwardTitle: MapGenPages.values[next].name,
+          onBack: () => widget.goToPage(widget.pageType.index - 1),
+          onForward: _updateMapParams
+        )
       ],
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

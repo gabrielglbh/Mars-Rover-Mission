@@ -10,6 +10,8 @@ class MRMBullet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final activeColor = Theme.of(context).brightness == Brightness.light
+        ? Colors.black : Colors.white;
     return AnimatedContainer(
       duration: Animations.animation300,
       width: Sizes.mrmBulletSize,
@@ -17,7 +19,7 @@ class MRMBullet extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: Margins.margin4),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: active ? Colors.black : Colors.black12
+        color: active ? activeColor : Colors.black12
       ),
     );
   }
