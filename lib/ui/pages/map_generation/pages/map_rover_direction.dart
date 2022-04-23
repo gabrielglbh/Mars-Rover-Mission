@@ -4,6 +4,7 @@ import 'package:marsmission/core/types/map_generation_pages.dart';
 import 'package:marsmission/core/types/rover_directions.dart';
 import 'package:marsmission/ui/pages/map_generation/bloc/gen_map_bloc.dart';
 import 'package:marsmission/ui/widgets/mrm_button.dart';
+import 'package:marsmission/ui/widgets/mrm_rounded_button.dart';
 import 'package:marsmission/ui/widgets/mrm_text.dart';
 
 class RoverDirectionPage extends StatefulWidget {
@@ -38,24 +39,15 @@ class _RoverDirectionPageState extends State<RoverDirectionPage> {
   }
 
   Widget _button(RoverDirection direction) {
-    final size = MediaQuery.of(context).size.width / 5;
     return AnimatedOpacity(
       duration: Animations.animation300,
       opacity: direction == _direction ? 1 : 0.5,
-      child: GestureDetector(
+      child: MRMRoundedButton(
         onTap: () => setState(() => _direction = direction),
-        child: Container(
-          width: size, height: size,
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.black,
-          ),
-          alignment: Alignment.center,
-          child: MRMText(text: direction.parsed, style: Theme.of(context).textTheme.button?.copyWith(
+        child: MRMText(text: direction.parsed, style: Theme.of(context).textTheme.button?.copyWith(
             fontSize: FontSizes.fontSize32
-          ))
-        ),
-      ),
+        )),
+      )
     );
   }
 

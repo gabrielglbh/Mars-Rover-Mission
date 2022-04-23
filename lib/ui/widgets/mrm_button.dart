@@ -47,11 +47,12 @@ class MRMButton extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(RRadius.radius16),
         color: disabled ? Colors.black26 : color,
-        boxShadow: disabled ? null : const [
+        boxShadow: disabled ? null : [
           BoxShadow(
-            color: Colors.grey,
+            color: Theme.of(context).brightness == Brightness.light
+                ? Colors.grey : Colors.black26,
             blurRadius: 4,
-            offset: Offset(0, 4)
+            offset: const Offset(0, 4)
           )
         ]
       ),

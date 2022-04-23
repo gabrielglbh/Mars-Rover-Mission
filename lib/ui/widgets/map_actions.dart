@@ -6,7 +6,7 @@ import 'package:marsmission/core/types/rover_actions.dart';
 import 'package:marsmission/ui/utils.dart';
 import 'package:marsmission/ui/pages/map_customization/bloc/map_cus_bloc.dart';
 import 'package:marsmission/ui/pages/map_generation/bloc/gen_map_bloc.dart';
-import 'package:marsmission/ui/pages/map_generation/widgets/mrm_rounded_button.dart';
+import 'package:marsmission/ui/widgets/mrm_rounded_button.dart';
 import 'package:marsmission/ui/widgets/mrm_border_container.dart';
 import 'package:marsmission/ui/widgets/mrm_button.dart';
 
@@ -34,8 +34,8 @@ class _RoverActionsPageState extends State<RoverActionsPage> with AutomaticKeepA
     return Expanded(
       child: MRMRoundedButton(
         ratio: 6,
-        color: Colors.black,
-        icon: action.icon,
+        child: Icon(action.icon, color: Theme.of(context).brightness == Brightness.light
+            ? Colors.white : Colors.black),
         onTap: () => setState(() => _actions.add(action))
       ),
     );

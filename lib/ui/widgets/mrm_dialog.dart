@@ -20,7 +20,7 @@ class MRMDialog extends StatelessWidget {
     Key? key,
     required this.title,
     required this.content,
-    this.negativeButton = true,
+    this.negativeButton = false,
     required this.positiveButtonText,
     required this.onPositive,
     this.popDialog = true
@@ -36,7 +36,9 @@ class MRMDialog extends StatelessWidget {
         Visibility(
           visible: negativeButton,
           child: ElevatedButton(
-              child: MRMText(text: "cancel_button_label".tr(), style: Theme.of(context).textTheme.subtitle2),
+              child: MRMText(text: "cancel_button_label".tr(), style: Theme.of(context).textTheme.subtitle2?.copyWith(
+                color: Colors.white
+              )),
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.grey),
                 shape: MaterialStateProperty.all<OutlinedBorder>(
@@ -46,7 +48,9 @@ class MRMDialog extends StatelessWidget {
           ),
         ),
         ElevatedButton(
-            child: MRMText(text: positiveButtonText, style: Theme.of(context).textTheme.subtitle2),
+            child: MRMText(text: positiveButtonText, style: Theme.of(context).textTheme.subtitle2?.copyWith(
+                color: Colors.white
+            )),
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
               shape: MaterialStateProperty.all<OutlinedBorder>(

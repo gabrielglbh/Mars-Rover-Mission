@@ -29,12 +29,6 @@ final ThemeData light = ThemeData(
         button: TextStyle(color: Colors.white, fontSize: FontSizes.fontSize16, fontWeight: FontWeight.bold),
         overline: TextStyle(color: Colors.black)
     ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ButtonStyle(
-        shape: MaterialStateProperty.all<OutlinedBorder>(
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(RRadius.radius16))),
-      ),
-    ),
     dialogTheme: const DialogTheme(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(RRadius.radius16))),
     ),

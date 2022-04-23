@@ -4,22 +4,22 @@ import 'package:marsmission/core/constants.dart';
 class MRMRoundedButton extends StatelessWidget {
   final Function() onTap;
   /// Child to paint within the center of the button
-  final IconData icon;
+  final Widget child;
   /// Ratio to get the size of the button (device's width / ratio). Defaults to 5.
   final double ratio;
-  /// Color of the button. Defaults to blue
-  final Color color;
   const MRMRoundedButton({
     Key? key,
     required this.onTap,
-    required this.icon,
-    this.ratio = 5,
-    this.color = Colors.black
+    required this.child,
+    this.ratio = 5
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size.width / ratio;
+    final color = Theme.of(context).brightness == Brightness.light
+        ? Colors.black : Colors.white;
+
     return Container(
       width: size,
       height: size,
@@ -37,7 +37,7 @@ class MRMRoundedButton extends StatelessWidget {
               width: size,
               height: size,
               alignment: Alignment.center,
-              child: Icon(icon, color: Colors.white)
+              child: child
           ),
         ),
       ),
