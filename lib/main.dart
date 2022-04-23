@@ -1,11 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:marsmission/core/managers/storage_manager.dart';
 import 'package:marsmission/core/routing/pages.dart';
 import 'package:marsmission/core/routing/routing.dart';
-import 'package:marsmission/ui/theme/light.dart';
+import 'package:marsmission/core/managers/theme_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await StorageManager.getInstance();
   await EasyLocalization.ensureInitialized();
   runApp(const SetUpApp());
 }
@@ -27,8 +29,19 @@ class SetUpApp extends StatelessWidget {
   }
 }
 
-class MarsRoverMission extends StatelessWidget {
+class MarsRoverMission extends StatefulWidget {
   const MarsRoverMission({Key? key}) : super(key: key);
+
+  @override
+  State<MarsRoverMission> createState() => _MarsRoverMissionState();
+}
+
+class _MarsRoverMissionState extends State<MarsRoverMission> {
+  @override
+  void initState() {
+    ThemeManager.instance.addListenerTo(() => setState(() {}));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +51,9 @@ class MarsRoverMission extends StatelessWidget {
       supportedLocales: context.supportedLocales,
       localizationsDelegates: context.localizationDelegates,
       debugShowCheckedModeBanner: false,
-      theme: light,
+      theme: ThemeManager.instance.currentLightThemeData,
+      darkTheme: ThemeManager.instance.currentDarkThemeData,
+      themeMode: ThemeManager.instance.themeMode,
       initialRoute: Pages.home,
       onGenerateRoute: onGenerateRoute,
     );

@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:marsmission/core/constants.dart';
+part of '../../core/managers/theme_manager.dart';
 
 final ThemeData light = ThemeData(
     brightness: Brightness.light,
