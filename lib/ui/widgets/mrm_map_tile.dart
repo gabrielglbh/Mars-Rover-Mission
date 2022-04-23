@@ -47,8 +47,10 @@ class _MRMMapTileState extends State<MRMMapTile> {
               borderRadius: BorderRadius.circular(RRadius.radius16),
               color: widget.tile.color
           ),
-          margin: const EdgeInsets.all(Margins.margin4),
-          padding: const EdgeInsets.all(Margins.margin4),
+          margin: const EdgeInsets.all(Margins.margin2),
+          padding: EdgeInsets.all(
+            widget.tile == MapTile.rover ? Margins.margin4 : Margins.margin8 + Margins.margin4
+          ),
           child: FittedBox(
             fit: BoxFit.contain,
             child: widget.tile.icon(direction: widget.direction),

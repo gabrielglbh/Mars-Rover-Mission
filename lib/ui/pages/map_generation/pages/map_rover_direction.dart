@@ -4,6 +4,7 @@ import 'package:marsmission/core/types/map_generation_pages.dart';
 import 'package:marsmission/core/types/rover_directions.dart';
 import 'package:marsmission/ui/pages/map_generation/bloc/gen_map_bloc.dart';
 import 'package:marsmission/ui/widgets/mrm_button.dart';
+import 'package:marsmission/ui/widgets/mrm_text.dart';
 
 class RoverDirectionPage extends StatefulWidget {
   final GenMapBloc bloc;
@@ -50,7 +51,7 @@ class _RoverDirectionPageState extends State<RoverDirectionPage> {
             color: Colors.black,
           ),
           alignment: Alignment.center,
-          child: Text(direction.parsed, style: Theme.of(context).textTheme.button?.copyWith(
+          child: MRMText(text: direction.parsed, style: Theme.of(context).textTheme.button?.copyWith(
             fontSize: FontSizes.fontSize32
           ))
         ),
@@ -84,7 +85,6 @@ class _RoverDirectionPageState extends State<RoverDirectionPage> {
         ),
         MRMButton(
             title: MapGenPages.values[next].name,
-            height: Sizes.mrmButtonDefaultHeight / 1.5,
             horizontal: Margins.margin8,
             trailing: Icons.arrow_forward_rounded,
             onTap: _updateMapParams

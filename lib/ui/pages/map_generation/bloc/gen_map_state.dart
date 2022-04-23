@@ -18,7 +18,14 @@ class GenMapStatePageChanged extends GenMapState {
   List<Object> get props => [page];
 }
 
-class GenMapStateMapFinished extends GenMapState {}
+class GenMapStateMapFinished extends GenMapState {
+  final MapParams params;
+
+  const GenMapStateMapFinished(this.params);
+
+  @override
+  List<Object> get props => [params];
+}
 
 class GenMapStateFailure extends GenMapState {
   final String message;

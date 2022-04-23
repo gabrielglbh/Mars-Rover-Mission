@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:marsmission/core/constants.dart';
+import 'package:marsmission/ui/widgets/mrm_text.dart';
 
 class MRMDialog extends StatelessWidget {
   /// Title of the dialog
@@ -35,7 +36,7 @@ class MRMDialog extends StatelessWidget {
         Visibility(
           visible: negativeButton,
           child: ElevatedButton(
-              child: Text("cancel_button_label".tr(), style: Theme.of(context).textTheme.subtitle2),
+              child: MRMText(text: "cancel_button_label".tr(), style: Theme.of(context).textTheme.subtitle2),
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.grey),
                 shape: MaterialStateProperty.all<OutlinedBorder>(
@@ -45,7 +46,7 @@ class MRMDialog extends StatelessWidget {
           ),
         ),
         ElevatedButton(
-            child: Text(positiveButtonText, style: Theme.of(context).textTheme.subtitle2),
+            child: MRMText(text: positiveButtonText, style: Theme.of(context).textTheme.subtitle2),
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
               shape: MaterialStateProperty.all<OutlinedBorder>(

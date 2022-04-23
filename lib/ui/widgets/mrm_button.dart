@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marsmission/core/constants.dart';
+import 'package:marsmission/ui/widgets/mrm_text.dart';
 
 class MRMButton extends StatelessWidget {
   /// Width of the button
@@ -25,7 +26,7 @@ class MRMButton extends StatelessWidget {
   const MRMButton({
     Key? key,
     this.width,
-    this.height = Sizes.mrmButtonDefaultHeight,
+    this.height = Sizes.mrmButtonDefaultHeight / 1.5,
     this.color = Colors.blue,
     required this.title,
     required this.onTap,
@@ -90,8 +91,8 @@ class MRMButton extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: Text(title, textAlign: TextAlign.center,
-                          overflow: TextOverflow.ellipsis,
+                      child: MRMText(
+                          text: title, textAlign: TextAlign.center,
                           style: Theme.of(context).textTheme.button?.copyWith(
                               color: titleColor
                           )),

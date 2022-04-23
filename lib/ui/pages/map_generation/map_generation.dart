@@ -2,15 +2,17 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marsmission/core/constants.dart';
+import 'package:marsmission/core/routing/arguments.dart';
 import 'package:marsmission/core/routing/pages.dart';
 import 'package:marsmission/core/types/map_generation_pages.dart';
-import 'package:marsmission/core/utils.dart';
+import 'package:marsmission/core/types/modes.dart';
+import 'package:marsmission/ui/utils.dart';
 import 'package:marsmission/ui/pages/map_generation/bloc/gen_map_bloc.dart';
 import 'package:marsmission/ui/pages/map_generation/pages/map_dimension.dart';
 import 'package:marsmission/ui/pages/map_generation/pages/map_obstacles.dart';
 import 'package:marsmission/ui/widgets/map_actions.dart';
 import 'package:marsmission/ui/pages/map_generation/pages/map_rover_direction.dart';
-import 'package:marsmission/ui/pages/map_generation/widgets/info_dialog.dart';
+import 'package:marsmission/ui/widgets/mrm_info_dialog.dart';
 import 'package:marsmission/ui/widgets/mrm_header.dart';
 import 'package:marsmission/ui/widgets/mrm_button.dart';
 import 'package:marsmission/ui/widgets/mrm_scaffold.dart';
@@ -37,7 +39,9 @@ class MapGenerationPage extends StatelessWidget {
               Utils.instance.createSnackBar(context, state.message);
               Navigator.of(context).pop();
             } else if (state is GenMapStateMapFinished) {
-              Navigator.of(context).pushReplacementNamed(Pages.monitor);
+              Navigator.of(context).pushReplacementNamed(Pages.monitor,
+                arguments: MonitorPageArgs(params: state.params, mode: Mode.generate)
+              );
             }
           },
           child: BlocBuilder<GenMapBloc, GenMapState>(
@@ -67,12 +71,7 @@ class MapGenerationPage extends StatelessWidget {
       width: MediaQuery.of(context).size.width / 2,
       color: Colors.black,
       horizontal: Margins.margin8,
-      onTap: () async {
-        await showDialog(
-          context: context,
-          builder: (context) => InfoDialog(bloc: _bloc)
-        );
-      }
+      onTap: () => MRMInfoDialog.show(context, _bloc.params)
     );
   }
 

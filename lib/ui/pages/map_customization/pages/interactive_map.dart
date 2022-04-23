@@ -5,6 +5,7 @@ import 'package:marsmission/core/types/rover_directions.dart';
 import 'package:marsmission/ui/pages/map_customization/bloc/map_cus_bloc.dart';
 import 'package:marsmission/ui/widgets/mrm_map.dart';
 import 'package:marsmission/ui/widgets/mrm_map_tile.dart';
+import 'package:marsmission/ui/widgets/mrm_text.dart';
 
 class MRMInteractiveMap extends StatelessWidget {
   final MapCusBloc bloc;
@@ -19,19 +20,29 @@ class MRMInteractiveMap extends StatelessWidget {
     required this.direction
   }) : super(key: key);
 
-  Widget _button(MapTile tile) {
-    return AnimatedOpacity(
-      opacity: selected == tile ? 1 : 0.4,
-      duration: Animations.animation300,
-      child: Padding(
-        padding: const EdgeInsets.all(Margins.margin2),
-        child: MRMMapTile(
-            tile: tile,
-            direction: direction,
-            onTap: () {
-              bloc.add(MapCusEventSetSelectedTile(tile));
-            }
-        ),
+  Widget _button(BuildContext context, MapTile tile) {
+    return Expanded(
+      child: Column(
+        children: [
+          AnimatedOpacity(
+            opacity: selected == tile ? 1 : 0.4,
+            duration: Animations.animation300,
+            child: Padding(
+              padding: const EdgeInsets.all(Margins.margin2),
+              child: MRMMapTile(
+                  tile: tile,
+                  direction: direction,
+                  onTap: () {
+                    bloc.add(MapCusEventSetSelectedTile(tile));
+                  }
+              ),
+            ),
+          ),
+          MRMText(
+            fit: BoxFit.contain,
+            text: tile.name,
+          )
+        ],
       ),
     );
   }
@@ -44,13 +55,18 @@ class MRMInteractiveMap extends StatelessWidget {
         Expanded(
           child: Container(
             alignment: Alignment.center,
-            child: MRMMap(list: map, margin: Margins.margin4, mapSize: Misc.testMapSize)
+            child: MRMMap(
+              list: map,
+              isExpanded: false,
+              margin: Margins.margin4,
+              mapSize: Misc.testMapSize
+            )
           ),
         ),
         Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: List.generate(MapTile.values.length, (index) {
-              return _button(MapTile.values[index]);
+              return _button(context, MapTile.values[index]);
             })
         ),
       ],

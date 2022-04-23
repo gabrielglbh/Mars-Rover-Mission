@@ -2,9 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marsmission/core/constants.dart';
+import 'package:marsmission/core/routing/arguments.dart';
 import 'package:marsmission/core/routing/pages.dart';
 import 'package:marsmission/core/types/map_tiles.dart';
-import 'package:marsmission/core/utils.dart';
+import 'package:marsmission/core/types/modes.dart';
+import 'package:marsmission/ui/utils.dart';
 import 'package:marsmission/ui/pages/map_customization/bloc/map_cus_bloc.dart';
 import 'package:marsmission/ui/pages/map_customization/pages/interactive_map.dart';
 import 'package:marsmission/ui/widgets/map_actions.dart';
@@ -25,11 +27,12 @@ class MapCustomization extends StatelessWidget {
       child: BlocProvider<MapCusBloc>(
         create: (_) => _bloc..add(MapCusEventInitial()),
         child: BlocListener<MapCusBloc, MapCusState>(
-          listener: (context, state) {
+          listener: (context, state) async {
             if (state is MapCusStateFailure) {
               Utils.instance.createSnackBar(context, state.message);
             } else if (state is MapCusStateMapFinished) {
-              Navigator.of(context).pushReplacementNamed(Pages.monitor);
+              await Navigator.of(context).pushNamed(Pages.monitor,
+                  arguments: MonitorPageArgs(params: state.params, mode: Mode.test));
             }
           },
           child: Column(
@@ -37,40 +40,19 @@ class MapCustomization extends StatelessWidget {
             children: [
               MRMHeader(title: "map_cus_title".tr(),
                   subtitle: "map_cus_description".tr()),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    BlocBuilder<MapCusBloc, MapCusState>(
-                      builder: (context, state) {
-                        if (state is MapCusStateUpdatedMap) {
-                          /// Populate list with matrix from bloc
-                          final List<List<MapTile>> m = state.map;
-                          final List<MRMMapTile> map = [];
-
-                          for (int x = 0; x < m.length; x++) {
-                            for (int y = 0; y < m[x].length; y++) {
-                              /// Transform the index from matrix to list only
-                              /// for display purposes
-                              final pos = x * m.length + y;
-                              map.add(MRMMapTile(
-                                tile: m[x][y],
-                                direction: state.dir,
-                                position: pos + 1,
-                                onTap: () {
-                                  _bloc.add(MapCusEventSetTile(x, y, state.selected));
-                                },
-                              ));
-                            }
-                          }
-                          return _body(state, map);
-                        } else {
-                          return Container();
-                        }
-                      },
-                    ),
-                  ],
-                ),
+              BlocBuilder<MapCusBloc, MapCusState>(
+                builder: (context, state) {
+                  if (state is MapCusStateUpdatedMap) {
+                    /// Populate list with matrix from bloc
+                    final List<List<MapTile>> m = state.map;
+                    final map = Utils.instance.generateMapFromMatrix(m, dir: state.dir, onTap: (x, y) {
+                      _bloc.add(MapCusEventSetTile(x, y, state.selected));
+                    });
+                    return _body(state, map);
+                  } else {
+                    return Container();
+                  }
+                },
               )
             ],
           ),

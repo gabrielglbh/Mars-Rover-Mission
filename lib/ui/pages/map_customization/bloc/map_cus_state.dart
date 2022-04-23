@@ -19,7 +19,14 @@ class MapCusStateUpdatedMap extends MapCusState {
   const MapCusStateUpdatedMap(this.map, this.dir, this.selected);
 }
 
-class MapCusStateMapFinished extends MapCusState {}
+class MapCusStateMapFinished extends MapCusState {
+  final MapParams params;
+
+  const MapCusStateMapFinished(this.params);
+
+  @override
+  List<Object> get props => [params];
+}
 
 class MapCusStateFailure extends MapCusState {
   final String message;
