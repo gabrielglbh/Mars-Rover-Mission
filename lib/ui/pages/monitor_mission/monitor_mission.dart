@@ -46,12 +46,11 @@ class MonitorMissionPage extends StatelessWidget {
                         builder: (context, state) {
                           if (state is MonitorStateUpdateMap) {
                             return _actionLog(context, state.currentActions);
-                          } else if (state is MonitorStateInitial) {
-                            return _actionLog(context, params.actions);
                           } else if (state is MonitorStateFinished) {
-                            // TODO: Finished navigation
-                            return Container();
-                          } else {
+                            return _actionLog(context, state.currentActions);
+                          }else if (state is MonitorStateInitial) {
+                            return _actionLog(context, params.actions);
+                          }  else {
                             return Container();
                           }
                         },
@@ -61,19 +60,28 @@ class MonitorMissionPage extends StatelessWidget {
                 ),
               ],
             ),
-            Expanded(child: Container()),
+            Expanded(
+              child: BlocBuilder<MonitorBloc, MonitorState>(
+                builder: (context, state) {
+                  if (state is MonitorStateFinished) {
+                    return _resultText(context, state);
+                  } else {
+                    return Container();
+                  }
+                },
+              ),
+            ),
             Expanded(
               flex: 3,
               child: BlocBuilder<MonitorBloc, MonitorState>(
                 builder: (context, state) {
                   if (state is MonitorStateUpdateMap) {
-                    return _map(state.map, state.direction, false);
-                  } else if (state is MonitorStateInitial) {
-                    return _map(params.map, params.direction, true);
+                    return _map(state.map, state.direction, showButton: false);
                   } else if (state is MonitorStateFinished) {
-                    // TODO: Finished navigation
-                    return Container();
-                  } else {
+                    return _map(state.map, state.direction, hasFinished: true);
+                  } else if (state is MonitorStateInitial) {
+                    return _map(params.map, params.direction);
+                  }  else {
                     return Container();
                   }
                 },
@@ -82,6 +90,29 @@ class MonitorMissionPage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _resultText(BuildContext context, MonitorStateFinished state) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: Margins.margin8),
+          child: Icon(!state.finalState.encounteredObstacle
+              ? Icons.check_circle_outline_rounded : Icons.error_outline_rounded),
+        ),
+        Text(
+          !state.finalState.encounteredObstacle
+              ? "monitor_finished_good".tr()
+              : "${"monitor_finished_bad_1".tr()} "
+                "${state.finalState.x}, ${state.finalState.y}. "
+                "${"monitor_finished_bad_2".tr()}",
+          textAlign: TextAlign.justify,
+          style: Theme.of(context).textTheme.bodyText1,
+          maxLines: 3,
+        )
+      ],
     );
   }
 
@@ -96,7 +127,9 @@ class MonitorMissionPage extends StatelessWidget {
     );
   }
 
-  Widget _map(List<List<MapTile>> map, RoverDirection dir, bool showButton) {
+  Widget _map(List<List<MapTile>> map, RoverDirection dir, {
+    bool showButton = true, bool hasFinished = false
+  }) {
     return Column(
       children: [
         MRMMap(
@@ -107,7 +140,7 @@ class MonitorMissionPage extends StatelessWidget {
         Visibility(
           visible: showButton,
           child: MRMButton(
-            title: "monitor_start_button_label".tr(),
+            title: !hasFinished ? "monitor_start_button_label".tr() : "retry_button_label".tr(),
             height: Sizes.mrmButtonDefaultHeight / 2,
             onTap: () {
               if (!_bloc.algorithmHasBegan) _bloc.add(MonitorEventStartSimulation(params));

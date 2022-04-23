@@ -44,5 +44,9 @@
   "monitor_actions_label": "Acciones:",
   "map_tile_grass": "Terreno",
   "map_tile_obstacle": "Obstáculo",
-  "map_tile_rover": "Rover"
+  "map_tile_rover": "Rover",
+  "retry_button_label": "Reintentar",
+  "monitor_finished_good": "¡El rover a completado la misión satisfactoriamente!",
+  "monitor_finished_bad_1": "El rover ha encontrado un obstáculo en la posición",
+  "monitor_finished_bad_2": "El rover ha parado todas sus acciones y se ha parado en la última posición visitada."
 }

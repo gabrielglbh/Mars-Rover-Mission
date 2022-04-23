@@ -24,6 +24,10 @@ class MonitorBloc extends Bloc<MonitorEvent, MonitorState> {
     on<MonitorEventIdle>((event, emit) => algorithm = Algorithm());
 
     on<MonitorEventStartSimulation>((event, emit) async {
+      /// For the path, I have considered that the action to rotate the rover
+      /// to the proper direction is neglectable and non relevant for the addition
+      /// to the path, as the path will not be altered in any way without those
+      /// sub-actions.
       final List<State> path = [];
       final List<RoverAction> performedActions = [];
       algorithmHasBegan = true;
@@ -54,10 +58,16 @@ class MonitorBloc extends Bloc<MonitorEvent, MonitorState> {
             emit(MonitorStateUpdateMap(p.map, p.direction, performedActions));
           } else if (res is State) {
             /// Finished and exit for loop
-            emit(MonitorStateFinished(res));
             _foundObstacle = true;
+            algorithmHasBegan = false;
+            emit(MonitorStateFinished(res, p.map, p.direction, performedActions));
           }
         });
+      }
+      /// Rover has successfully completed the mission
+      if (!_foundObstacle) {
+        algorithmHasBegan = false;
+        emit(MonitorStateFinished(state, p.map, p.direction, performedActions));
       }
     });
   }
