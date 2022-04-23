@@ -44,7 +44,10 @@ class MonitorMissionPage extends StatelessWidget {
                       child: Text(
                         Utils.instance.sliceWithout(params.actions, "RoverAction.", ""),
                         textAlign: TextAlign.justify,
-                        style: Theme.of(context).textTheme.bodyText1,
+                        style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                          fontSize: FontSizes.fontSize26
+                        ),
+                        maxLines: 1,
                       )
                     ),
                   ),

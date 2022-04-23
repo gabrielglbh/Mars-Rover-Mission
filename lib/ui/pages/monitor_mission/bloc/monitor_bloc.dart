@@ -16,6 +16,10 @@ class MonitorBloc extends Bloc<MonitorEvent, MonitorState> {
   bool algorithmHasBegan = false;
   final List<State> _path = [];
 
+  /// Control variable to allow the action loop to stop after the rover
+  /// encountered an obstacle
+  bool _foundObstacle = false;
+
   MonitorBloc() : super(MonitorStateInitial()) {
     on<MonitorEventIdle>((event, emit) => algorithm = Algorithm());
 
@@ -29,7 +33,8 @@ class MonitorBloc extends Bloc<MonitorEvent, MonitorState> {
 
       /// Go through the list of actions
       for (int a = 0; a < event.params.actions.length; a++) {
-        await Future.delayed(const Duration(seconds: 1), () {
+        if (_foundObstacle) break;
+        await Future.delayed(const Duration(milliseconds: 500), () {
           emit(MonitorStateLoading());
           final res = algorithm.performActionOnTestMap(
               p, p.map, p.actions[a], state,
@@ -47,7 +52,7 @@ class MonitorBloc extends Bloc<MonitorEvent, MonitorState> {
           } else if (res is State) {
             /// Finished and exit for loop
             emit(MonitorStateFinished(res));
-            // TODO: Stop looping
+            _foundObstacle = true;
           }
         });
       }
