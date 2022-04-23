@@ -11,6 +11,7 @@ import 'package:marsmission/core/types/rover_actions.dart';
 import 'package:marsmission/core/types/rover_directions.dart';
 import 'package:marsmission/ui/pages/monitor_mission/bloc/monitor_bloc.dart';
 import 'package:marsmission/ui/utils.dart';
+import 'package:marsmission/ui/widgets/mrm_info_dialog.dart';
 import 'package:marsmission/ui/widgets/mrm_button.dart';
 import 'package:marsmission/ui/widgets/mrm_map.dart';
 import 'package:marsmission/ui/widgets/mrm_scaffold.dart';
@@ -36,11 +37,10 @@ class MonitorMissionPage extends StatelessWidget {
           children: [
             Row(
               children: [
-                Text("monitor_actions_label".tr(), style: Theme.of(context).textTheme.caption),
                 Expanded(
                   child: Container(
                     padding: const EdgeInsets.all(Margins.margin4),
-                    margin: const EdgeInsets.only(left: Margins.margin8),
+                    margin: const EdgeInsets.only(right: Margins.margin16),
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.blue, width: 2),
                       borderRadius: BorderRadius.circular(RRadius.radius8),
@@ -66,6 +66,10 @@ class MonitorMissionPage extends StatelessWidget {
                     ),
                   ),
                 ),
+                IconButton(
+                  icon: const Icon(Icons.info_outline_rounded),
+                  onPressed: () => MRMInfoDialog.show(context, initialParams),
+                )
               ],
             ),
             Expanded(
@@ -86,17 +90,17 @@ class MonitorMissionPage extends StatelessWidget {
               child: BlocBuilder<MonitorBloc, MonitorState>(
                 builder: (context, state) {
                   if (state is MonitorStateUpdateMap) {
-                    return _map(context, initialParams, state.map,
+                    return _content(context, initialParams, state.map,
                         state.currentPath, state.direction, showButton: false
                     );
                   }
                   else if (state is MonitorStateFinished) {
-                    return _map(context, initialParams, state.map,
+                    return _content(context, initialParams, state.map,
                         state.currentPath, state.direction, hasFinished: true
                     );
                   }
                   else if (state is MonitorStateInitial) {
-                    return _map(context, initialParams, args.params.map,
+                    return _content(context, initialParams, args.params.map,
                         [], args.params.direction
                     );
                   }
@@ -117,7 +121,9 @@ class MonitorMissionPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Icon(!state.finalState.encounteredObstacle
-            ? Icons.check_circle_outline_rounded : Icons.error_outline_rounded),
+            ? Icons.check_circle_outline_rounded : Icons.error_outline_rounded,
+          color: Colors.red
+        ),
         MRMText(
           padding: const EdgeInsets.only(top: Margins.margin8),
           text: !state.finalState.encounteredObstacle
@@ -141,7 +147,7 @@ class MonitorMissionPage extends StatelessWidget {
     );
   }
 
-  Widget _map(
+  Widget _content(
       BuildContext context,
       MapParams initialParams,
       List<List<MapTile>> map,
@@ -169,7 +175,7 @@ class MonitorMissionPage extends StatelessWidget {
             title: !hasFinished
                 ? "monitor_start_button_label".tr()
                 : isGeneratedMap
-                ? "Randomize Obstacles and Try Again"
+                ? "randomize_obs_button_label".tr()
                 : "retry_button_label".tr(),
             height: Sizes.mrmButtonDefaultHeight / 1.5,
             onTap: () {

@@ -12,7 +12,7 @@ import 'package:marsmission/ui/pages/map_generation/pages/map_dimension.dart';
 import 'package:marsmission/ui/pages/map_generation/pages/map_obstacles.dart';
 import 'package:marsmission/ui/widgets/map_actions.dart';
 import 'package:marsmission/ui/pages/map_generation/pages/map_rover_direction.dart';
-import 'package:marsmission/ui/pages/map_generation/widgets/info_dialog.dart';
+import 'package:marsmission/ui/widgets/mrm_info_dialog.dart';
 import 'package:marsmission/ui/widgets/mrm_header.dart';
 import 'package:marsmission/ui/widgets/mrm_button.dart';
 import 'package:marsmission/ui/widgets/mrm_scaffold.dart';
@@ -71,12 +71,7 @@ class MapGenerationPage extends StatelessWidget {
       width: MediaQuery.of(context).size.width / 2,
       color: Colors.black,
       horizontal: Margins.margin8,
-      onTap: () async {
-        await showDialog(
-          context: context,
-          builder: (context) => InfoDialog(bloc: _bloc)
-        );
-      }
+      onTap: () => MRMInfoDialog.show(context, _bloc.params)
     );
   }
 

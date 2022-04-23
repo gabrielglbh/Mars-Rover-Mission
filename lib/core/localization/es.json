@@ -49,5 +49,6 @@
   "monitor_finished_good": "¡El rover a completado la misión satisfactoriamente!",
   "monitor_finished_bad_1": "El rover ha encontrado un obstáculo en la posición",
   "monitor_finished_bad_2": "El rover ha parado todas sus acciones y se ha parado en la última posición visitada.",
-  "monitor_map_exceeding": "El mapa es demasiado grande para visualizarlo. La misión se intentará completar pero el mapa no se verá, se verán las coordenadas y el estado del rover."
+  "monitor_map_exceeding": "El mapa es demasiado grande para visualizarlo. La misión se intentará completar pero el mapa no se verá, se verán las coordenadas y el estado del rover.",
+  "randomize_obs_button_label": "Randomizar obstáculos y Reintentar"
 }

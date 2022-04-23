@@ -69,6 +69,8 @@ class MonitorBloc extends Bloc<MonitorEvent, MonitorState> {
         algorithmHasBegan = false;
         emit(MonitorStateFinished(state, p.map, p.direction, performedActions, path));
       }
+      /// Reset control variable
+      _foundObstacle = false;
     });
   }
 }

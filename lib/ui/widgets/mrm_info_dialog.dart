@@ -1,15 +1,22 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:marsmission/core/algorithm/model.dart';
 import 'package:marsmission/core/types/rover_directions.dart';
-import 'package:marsmission/ui/pages/map_generation/bloc/gen_map_bloc.dart';
 import 'package:marsmission/ui/widgets/mrm_dialog.dart';
 
-class InfoDialog extends StatelessWidget {
-  final GenMapBloc bloc;
-  const InfoDialog({
+class MRMInfoDialog extends StatelessWidget {
+  final MapParams params;
+  const MRMInfoDialog({
     Key? key,
-    required this.bloc
+    required this.params
   }) : super(key: key);
+
+  static Future<void> show(BuildContext context, MapParams params) async {
+    await showDialog(
+      context: context,
+      builder: (context) => MRMInfoDialog(params: params)
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +35,7 @@ class InfoDialog extends StatelessWidget {
                     )
                 ),
                 TextSpan(
-                    text: (bloc.params.mapX ?? 0).toString(),
+                    text: (params.mapX ?? 0).toString(),
                     style: Theme.of(context).textTheme.bodyText1
                 ),
                 TextSpan(
@@ -36,7 +43,7 @@ class InfoDialog extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodyText1
                 ),
                 TextSpan(
-                    text: (bloc.params.mapY ?? 0).toString(),
+                    text: (params.mapY ?? 0).toString(),
                     style: Theme.of(context).textTheme.bodyText1
                 ),
               ]
@@ -52,7 +59,7 @@ class InfoDialog extends StatelessWidget {
                     )
                 ),
                 TextSpan(
-                    text: (bloc.params.obstacles ?? 0).toString(),
+                    text: (params.obstacles ?? 0).toString(),
                     style: Theme.of(context).textTheme.bodyText1
                 ),
               ]
@@ -68,7 +75,7 @@ class InfoDialog extends StatelessWidget {
                     )
                 ),
                 TextSpan(
-                    text: (bloc.params.roverX ?? 0).toString(),
+                    text: (params.roverY ?? 0).toString(),
                     style: Theme.of(context).textTheme.bodyText1
                 ),
                 TextSpan(
@@ -78,7 +85,7 @@ class InfoDialog extends StatelessWidget {
                     )
                 ),
                 TextSpan(
-                    text: (bloc.params.roverY ?? 0).toString(),
+                    text: (params.roverX ?? 0).toString(),
                     style: Theme.of(context).textTheme.bodyText1
                 ),
                 TextSpan(
@@ -86,7 +93,7 @@ class InfoDialog extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodyText1
                 ),
                 TextSpan(
-                    text: bloc.params.direction.parsed,
+                    text: params.direction.parsed,
                     style: Theme.of(context).textTheme.bodyText1
                 ),
               ]

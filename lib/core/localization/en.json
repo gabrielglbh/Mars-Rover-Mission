@@ -49,5 +49,6 @@
   "monitor_finished_good": "The rover has successfully completed the mission!",
   "monitor_finished_bad_1": "The rover has encountered an obstacle in position",
   "monitor_finished_bad_2": "Rover actions has been stopped on the last visited position.",
-  "monitor_map_exceeding": "Map exceeds size to display it. The route will be performed but the map will not be seen, the rover's coordinates and state will be visualized instead."
+  "monitor_map_exceeding": "Map exceeds size to display it. The route will be performed but the map will not be seen, the rover's coordinates and state will be visualized instead.",
+  "randomize_obs_button_label": "Randomize Obstacles and Try Again"
 }
