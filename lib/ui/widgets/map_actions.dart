@@ -78,7 +78,6 @@ class _RoverActionsPageState extends State<RoverActionsPage> with AutomaticKeepA
         ),
         MRMButton(
             title: "finished_map_button_label".tr(),
-            height: Sizes.mrmButtonDefaultHeight / 1.5,
             horizontal: Margins.margin8,
             onTap: () {
               if (widget.bloc is GenMapBloc) {

@@ -25,7 +25,7 @@ class MRMButton extends StatelessWidget {
   const MRMButton({
     Key? key,
     this.width,
-    this.height = Sizes.mrmButtonDefaultHeight,
+    this.height = Sizes.mrmButtonDefaultHeight / 1.5,
     this.color = Colors.blue,
     required this.title,
     required this.onTap,

@@ -36,6 +36,7 @@ class MonitorMissionPage extends StatelessWidget {
         create: (_) => _bloc..add(MonitorEventIdle()),
         child: Column(
           children: [
+            /// Header
             Row(
               children: [
                 Expanded(
@@ -68,6 +69,7 @@ class MonitorMissionPage extends StatelessWidget {
                 )
               ],
             ),
+            /// Disclaimer when finishing
             Expanded(
               child: BlocBuilder<MonitorBloc, MonitorState>(
                 builder: (context, state) {
@@ -80,6 +82,7 @@ class MonitorMissionPage extends StatelessWidget {
                 },
               ),
             ),
+            /// Map - Path and buttons
             Expanded(
               flex: 5,
               child: BlocBuilder<MonitorBloc, MonitorState>(
@@ -172,7 +175,6 @@ class MonitorMissionPage extends StatelessWidget {
                 : isGeneratedMap
                 ? "randomize_obs_button_label".tr()
                 : "retry_button_label".tr(),
-            height: Sizes.mrmButtonDefaultHeight / 1.5,
             onTap: () {
               /// On retry, reset the rover position and direction and try again the algorithm
               if (hasFinished) {

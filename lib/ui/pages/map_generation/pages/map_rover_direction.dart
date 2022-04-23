@@ -84,7 +84,6 @@ class _RoverDirectionPageState extends State<RoverDirectionPage> {
         ),
         MRMButton(
             title: MapGenPages.values[next].name,
-            height: Sizes.mrmButtonDefaultHeight / 1.5,
             horizontal: Margins.margin8,
             trailing: Icons.arrow_forward_rounded,
             onTap: _updateMapParams
