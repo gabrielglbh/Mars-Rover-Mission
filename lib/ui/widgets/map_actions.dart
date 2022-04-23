@@ -7,7 +7,10 @@ import 'package:marsmission/ui/utils.dart';
 import 'package:marsmission/ui/pages/map_customization/bloc/map_cus_bloc.dart';
 import 'package:marsmission/ui/pages/map_generation/bloc/gen_map_bloc.dart';
 import 'package:marsmission/ui/pages/map_generation/widgets/mrm_rounded_button.dart';
+import 'package:marsmission/ui/widgets/mrm_border_container.dart';
 import 'package:marsmission/ui/widgets/mrm_button.dart';
+
+import 'mrm_text.dart';
 
 class RoverActionsPage extends StatefulWidget {
   final Bloc bloc;
@@ -51,20 +54,18 @@ class _RoverActionsPageState extends State<RoverActionsPage> with AutomaticKeepA
               child: Column(
                 children: [
                   Expanded(
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      padding: const EdgeInsets.all(Margins.margin8),
+                    child: MRMBorderContainer(
+                      child: MRMText(
+                        text: Utils.instance.sliceWithout(_actions, "RoverAction.", ""),
+                        style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                          fontSize: FontSizes.fontSize24
+                        ),
+                        textAlign: TextAlign.justify
+                      ),
                       margin: const EdgeInsets.only(bottom: Margins.margin16,
-                        left: Margins.margin8, right: Margins.margin8
+                          left: Margins.margin8, right: Margins.margin8
                       ),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.blue, width: 2),
-                        borderRadius: BorderRadius.circular(RRadius.radius16),
-                      ),
-                      child: Text(Utils.instance.sliceWithout(_actions, "RoverAction.", ""),
-                          textAlign: TextAlign.justify
-                      ),
-                    ),
+                    )
                   ),
                   Row(
                       children: List.generate(RoverAction.values.length, (index) {

@@ -11,6 +11,7 @@ import 'package:marsmission/core/types/rover_actions.dart';
 import 'package:marsmission/core/types/rover_directions.dart';
 import 'package:marsmission/ui/pages/monitor_mission/bloc/monitor_bloc.dart';
 import 'package:marsmission/ui/utils.dart';
+import 'package:marsmission/ui/widgets/mrm_border_container.dart';
 import 'package:marsmission/ui/widgets/mrm_info_dialog.dart';
 import 'package:marsmission/ui/widgets/mrm_button.dart';
 import 'package:marsmission/ui/widgets/mrm_map.dart';
@@ -38,13 +39,8 @@ class MonitorMissionPage extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.all(Margins.margin4),
+                  child: MRMBorderContainer(
                     margin: const EdgeInsets.only(right: Margins.margin16),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.blue, width: 2),
-                      borderRadius: BorderRadius.circular(RRadius.radius8),
-                    ),
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: BlocBuilder<MonitorBloc, MonitorState>(
@@ -73,7 +69,6 @@ class MonitorMissionPage extends StatelessWidget {
               ],
             ),
             Expanded(
-              flex: 1,
               child: BlocBuilder<MonitorBloc, MonitorState>(
                 builder: (context, state) {
                   if (state is MonitorStateFinished) {
@@ -166,7 +161,7 @@ class MonitorMissionPage extends StatelessWidget {
         ),
         if (isGeneratedMap) _path(states),
         if (isGeneratedMap) MRMText(
-          padding: const EdgeInsets.symmetric(vertical: Margins.margin4),
+          padding: const EdgeInsets.symmetric(vertical: Margins.margin16),
           text: "monitor_map_exceeding".tr(),
         ),
         Visibility(
@@ -203,23 +198,25 @@ class MonitorMissionPage extends StatelessWidget {
 
   Widget _path(List<s.State> states) {
     return Expanded(
-      child: ListView.builder(
-        itemCount: states.length,
-        itemBuilder: (context, i) {
-          return Row(
-            children: [
-              MRMText(text: "${i.toString()}:"),
-              Expanded(
-                child: MRMText(
-                  padding: const EdgeInsets.only(left: Margins.margin8),
-                  text: "${"map_gen_map_data_rover_pos".tr()} ${states[i].y}, "
-                      "${states[i].x} ${"map_gen_map_data_rover_direction".tr()} "
-                      "${states[i].direction.parsed}."
-                ),
-              )
-            ],
-          );
-        },
+      child: MRMBorderContainer(
+        child: ListView.builder(
+          itemCount: states.length,
+          itemBuilder: (context, i) {
+            return Row(
+              children: [
+                MRMText(text: "${i.toString()}:"),
+                Expanded(
+                  child: MRMText(
+                      padding: const EdgeInsets.only(left: Margins.margin8),
+                      text: "${"map_gen_map_data_rover_pos".tr()} ${states[i].y}, "
+                          "${states[i].x} ${"map_gen_map_data_rover_direction".tr()} "
+                          "${states[i].direction.parsed}."
+                  ),
+                )
+              ],
+            );
+          },
+        )
       ),
     );
   }
