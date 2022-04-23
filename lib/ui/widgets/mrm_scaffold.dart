@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marsmission/core/constants.dart';
+import 'package:marsmission/ui/widgets/mrm_text.dart';
 
 class MRMScaffold extends StatelessWidget {
   /// Body of the scaffold
@@ -26,12 +27,10 @@ class MRMScaffold extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: FittedBox(
-            fit: BoxFit.fitWidth,
-            child: Text(
-              title ?? " ",
-              style: Theme.of(context).textTheme.headline6
-            ),
+          title: MRMText(
+            text: title ?? " ",
+              fit: BoxFit.fitWidth,
+            style: Theme.of(context).textTheme.headline6
           ),
           actions: actions,
         ),

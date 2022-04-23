@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marsmission/core/constants.dart';
+import 'package:marsmission/ui/widgets/mrm_text.dart';
 
 class MRMHeader extends StatelessWidget {
   final String title;
@@ -14,17 +15,13 @@ class MRMHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(
-            title,
+        MRMText(
+            text: title,
             style: Theme.of(context).textTheme.headline5
         ),
-        Padding(
+        MRMText(
           padding: const EdgeInsets.only(top: Margins.margin8),
-          child: Text(
-              subtitle,
-              textAlign: TextAlign.justify,
-              style: Theme.of(context).textTheme.bodyText1
-          ),
+          text: subtitle
         ),
       ],
     );

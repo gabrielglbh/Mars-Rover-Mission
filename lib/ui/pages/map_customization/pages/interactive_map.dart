@@ -5,6 +5,7 @@ import 'package:marsmission/core/types/rover_directions.dart';
 import 'package:marsmission/ui/pages/map_customization/bloc/map_cus_bloc.dart';
 import 'package:marsmission/ui/widgets/mrm_map.dart';
 import 'package:marsmission/ui/widgets/mrm_map_tile.dart';
+import 'package:marsmission/ui/widgets/mrm_text.dart';
 
 class MRMInteractiveMap extends StatelessWidget {
   final MapCusBloc bloc;
@@ -37,12 +38,9 @@ class MRMInteractiveMap extends StatelessWidget {
               ),
             ),
           ),
-          FittedBox(
+          MRMText(
             fit: BoxFit.contain,
-            child: Text(
-              tile.name,
-              style: Theme.of(context).textTheme.bodyText1,
-            ),
+            text: tile.name,
           )
         ],
       ),

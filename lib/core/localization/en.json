@@ -37,7 +37,7 @@
   "rover_action_forward": "Forward",
   "map_cus_label": "Customize Test Map",
   "map_cus_title": "Static Map",
-  "map_cus_description": "Tap and change tiles on this 7x7 map to test it. Select a tile from below and place it on the map.",
+  "map_cus_description": "Tap and change tiles on this 7x7 map to test it. Select a tile from below and place it on the map. To change the rover's direction, tap on the rover in the map various times.",
   "map_cus_error": "There is no rover placed in the map.",
   "monitor_start_button_label": "Start",
   "monitor_title": "Monitor Mission",

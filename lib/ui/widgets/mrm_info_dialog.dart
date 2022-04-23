@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:marsmission/core/algorithm/model.dart';
 import 'package:marsmission/core/types/rover_directions.dart';
 import 'package:marsmission/ui/widgets/mrm_dialog.dart';
+import 'package:marsmission/ui/widgets/mrm_text.dart';
 
 class MRMInfoDialog extends StatelessWidget {
   final MapParams params;
@@ -21,7 +22,7 @@ class MRMInfoDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MRMDialog(
-      title: Text("map_gen_map_data".tr(), style: Theme.of(context).textTheme.caption),
+      title: MRMText(text: "map_gen_map_data".tr(), style: Theme.of(context).textTheme.caption),
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

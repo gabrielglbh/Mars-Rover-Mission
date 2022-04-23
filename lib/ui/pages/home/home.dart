@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:marsmission/core/types/modes.dart';
 import 'package:marsmission/ui/utils.dart';
 import 'package:marsmission/ui/widgets/mrm_scaffold.dart';
+import 'package:marsmission/ui/widgets/mrm_text.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -16,12 +17,9 @@ class HomePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
-            child: Text(
-              "app_description".tr(),
-              maxLines: 7,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.justify,
-              style: Theme.of(context).textTheme.bodyText1,
+            child: MRMText(
+              text: "app_description".tr(),
+              maxLines: 7
             )
           ),
           Column(
