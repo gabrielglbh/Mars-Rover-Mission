@@ -37,7 +37,7 @@
   "rover_action_forward": "De frente",
   "map_cus_label": "Personaliza el Mapa",
   "map_cus_title": "Mapa Estático",
-  "map_cus_description": "Toca y cambia las celdas de este mapa de 5x5 para probarlo. Selecciona un tipo de celda y colócalo en el mapa.",
+  "map_cus_description": "Toca y cambia las celdas de este mapa de 7x7 para probarlo. Selecciona un tipo de celda y colócalo en el mapa.",
   "map_cus_error": "El rover no está colocado en el mapa.",
   "monitor_start_button_label": "Empezar",
   "monitor_title": "Monitorizar Misión",

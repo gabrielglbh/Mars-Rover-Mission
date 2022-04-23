@@ -4,6 +4,7 @@ import 'package:marsmission/core/algorithm/algorithm.dart';
 import 'package:marsmission/core/algorithm/model.dart';
 import 'package:marsmission/core/algorithm/state.dart';
 import 'package:marsmission/core/types/map_tiles.dart';
+import 'package:marsmission/core/types/rover_actions.dart';
 import 'package:marsmission/core/types/rover_directions.dart';
 
 part 'monitor_event.dart';
@@ -14,7 +15,6 @@ class MonitorBloc extends Bloc<MonitorEvent, MonitorState> {
   /// Control variable for avoiding various instances of the algorithm running
   /// at the same time
   bool algorithmHasBegan = false;
-  final List<State> _path = [];
 
   /// Control variable to allow the action loop to stop after the rover
   /// encountered an obstacle
@@ -24,12 +24,14 @@ class MonitorBloc extends Bloc<MonitorEvent, MonitorState> {
     on<MonitorEventIdle>((event, emit) => algorithm = Algorithm());
 
     on<MonitorEventStartSimulation>((event, emit) async {
+      final List<State> path = [];
+      final List<RoverAction> performedActions = [];
       algorithmHasBegan = true;
       MapParams p = event.params;
 
       /// Initial state
       var state = State(p.roverX ?? 0, p.roverY ?? 0, p.direction, false);
-      _path.add(state);
+      path.add(state);
 
       /// Go through the list of actions
       for (int a = 0; a < event.params.actions.length; a++) {
@@ -41,14 +43,15 @@ class MonitorBloc extends Bloc<MonitorEvent, MonitorState> {
               onContinue: (newState) {
                 /// Update new state and add State to path
                 state = newState;
-                _path.add(state);
+                path.add(state);
               }
           );
 
           if (res is MapParams) {
             /// Upon continuation, update the params and notify UI
             p = res;
-            emit(MonitorStateUpdateMap(p.map, p.direction));
+            performedActions.add(p.actions[a]);
+            emit(MonitorStateUpdateMap(p.map, p.direction, performedActions));
           } else if (res is State) {
             /// Finished and exit for loop
             emit(MonitorStateFinished(res));

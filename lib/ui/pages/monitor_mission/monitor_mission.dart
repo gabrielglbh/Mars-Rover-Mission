@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marsmission/core/algorithm/model.dart';
 import 'package:marsmission/core/constants.dart';
 import 'package:marsmission/core/types/map_tiles.dart';
+import 'package:marsmission/core/types/rover_actions.dart';
 import 'package:marsmission/core/types/rover_directions.dart';
 import 'package:marsmission/ui/pages/monitor_mission/bloc/monitor_bloc.dart';
 import 'package:marsmission/ui/utils.dart';
@@ -41,13 +42,19 @@ class MonitorMissionPage extends StatelessWidget {
                     ),
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
-                      child: Text(
-                        Utils.instance.sliceWithout(params.actions, "RoverAction.", ""),
-                        textAlign: TextAlign.justify,
-                        style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                          fontSize: FontSizes.fontSize26
-                        ),
-                        maxLines: 1,
+                      child: BlocBuilder<MonitorBloc, MonitorState>(
+                        builder: (context, state) {
+                          if (state is MonitorStateUpdateMap) {
+                            return _actionLog(context, state.currentActions);
+                          } else if (state is MonitorStateInitial) {
+                            return _actionLog(context, params.actions);
+                          } else if (state is MonitorStateFinished) {
+                            // TODO: Finished navigation
+                            return Container();
+                          } else {
+                            return Container();
+                          }
+                        },
                       )
                     ),
                   ),
@@ -75,6 +82,17 @@ class MonitorMissionPage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _actionLog(BuildContext context, List<RoverAction> actions) {
+    return Text(
+      Utils.instance.sliceWithout(actions, "RoverAction.", ""),
+      textAlign: TextAlign.justify,
+      style: Theme.of(context).textTheme.bodyText1?.copyWith(
+          fontSize: FontSizes.fontSize26
+      ),
+      maxLines: 1,
     );
   }
 
