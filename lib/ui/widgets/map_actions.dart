@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marsmission/core/constants.dart';
 import 'package:marsmission/core/types/rover_actions.dart';
+import 'package:marsmission/ui/utils.dart';
 import 'package:marsmission/ui/pages/map_customization/bloc/map_cus_bloc.dart';
 import 'package:marsmission/ui/pages/map_generation/bloc/gen_map_bloc.dart';
 import 'package:marsmission/ui/pages/map_generation/widgets/mrm_rounded_button.dart';
@@ -60,7 +61,7 @@ class _RoverActionsPageState extends State<RoverActionsPage> with AutomaticKeepA
                         border: Border.all(color: Colors.blue, width: 2),
                         borderRadius: BorderRadius.circular(RRadius.radius16),
                       ),
-                      child: Text(_actions.join(" ").replaceAll("RoverAction.", ""),
+                      child: Text(Utils.instance.sliceWithout(_actions, "RoverAction.", ""),
                           textAlign: TextAlign.justify
                       ),
                     ),

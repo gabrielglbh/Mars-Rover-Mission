@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:marsmission/core/constants.dart';
 import 'package:marsmission/core/types/example_maps.dart';
 import 'package:marsmission/core/types/map_generation_pages.dart';
-import 'package:marsmission/core/utils.dart';
+import 'package:marsmission/ui/utils.dart';
 import 'package:marsmission/ui/pages/map_generation/bloc/gen_map_bloc.dart';
 import 'package:marsmission/ui/pages/map_generation/utils.dart';
 import 'package:marsmission/ui/widgets/mrm_map.dart';

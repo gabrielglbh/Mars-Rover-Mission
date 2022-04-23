@@ -44,7 +44,12 @@ class MRMInteractiveMap extends StatelessWidget {
         Expanded(
           child: Container(
             alignment: Alignment.center,
-            child: MRMMap(list: map, margin: Margins.margin4, mapSize: Misc.testMapSize)
+            child: MRMMap(
+              list: map,
+              isExpanded: false,
+              margin: Margins.margin4,
+              mapSize: Misc.testMapSize
+            )
           ),
         ),
         Row(

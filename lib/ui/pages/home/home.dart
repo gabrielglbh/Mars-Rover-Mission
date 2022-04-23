@@ -3,7 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:marsmission/core/routing/pages.dart';
 import 'package:marsmission/core/types/map_tiles.dart';
-import 'package:marsmission/core/utils.dart';
+import 'package:marsmission/ui/utils.dart';
 import 'package:marsmission/ui/widgets/mrm_button.dart';
 import 'package:marsmission/ui/widgets/mrm_scaffold.dart';
 

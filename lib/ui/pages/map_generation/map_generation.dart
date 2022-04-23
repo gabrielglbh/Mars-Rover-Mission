@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marsmission/core/constants.dart';
 import 'package:marsmission/core/routing/pages.dart';
 import 'package:marsmission/core/types/map_generation_pages.dart';
-import 'package:marsmission/core/utils.dart';
+import 'package:marsmission/ui/utils.dart';
 import 'package:marsmission/ui/pages/map_generation/bloc/gen_map_bloc.dart';
 import 'package:marsmission/ui/pages/map_generation/pages/map_dimension.dart';
 import 'package:marsmission/ui/pages/map_generation/pages/map_obstacles.dart';

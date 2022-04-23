@@ -12,7 +12,7 @@
   "map_gen_map_dimensions": "Map Dimensions",
   "map_gen_map_dimensions_description": "Provide the size of a 2D map. An example is given below with a map of size 5x5.",
   "map_gen_number_obstacles": "Number of Obstacles",
-  "map_gen_number_obstacles_description": "Provide the number of obstacles to place in the map. an example is given below with 7 obstacles in a 6x6 map.",
+  "map_gen_number_obstacles_description": "Provide the number of obstacles to place randomly in the map. an example is given below with 7 obstacles in a 6x6 map.",
   "map_gen_rover_dimensions": "Rover Initial Position",
   "map_gen_rover_dimensions_description": "Provide the initial position of the rover. It must not land in an obstacle, as seen in the example below.",
   "map_gen_rover_direction": "Rover Initial Direction",
