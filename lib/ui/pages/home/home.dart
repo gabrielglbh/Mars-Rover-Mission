@@ -1,8 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flag/flag.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:marsmission/core/constants.dart';
+import 'package:marsmission/core/managers/storage_manager.dart';
 import 'package:marsmission/core/managers/theme_manager.dart';
 import 'package:marsmission/core/types/modes.dart';
+import 'package:marsmission/main.dart';
 import 'package:marsmission/ui/utils.dart';
 import 'package:marsmission/ui/widgets/mrm_scaffold.dart';
 import 'package:marsmission/ui/widgets/mrm_text.dart';
@@ -53,6 +57,10 @@ class _HomePageState extends State<HomePage> {
             })
           ),
           Expanded(child: Container()),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: Margins.margin32),
+            child: _languages(),
+          ),
           RichText(
             text: TextSpan(
               children: [
@@ -75,6 +83,28 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       )
+    );
+  }
+
+  Widget _languages() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        GestureDetector(
+          child: Flag.fromCode(FlagsCode.ES, width: Sizes.flagSize, height: Sizes.flagSize),
+          onTap: () {
+            MarsRoverMission.setLocale(context, const Locale('es'));
+            StorageManager.saveStringData(StorageManager.language, 'es');
+          },
+        ),
+        GestureDetector(
+          child: Flag.fromCode(FlagsCode.US, width: Sizes.flagSize, height: Sizes.flagSize),
+          onTap: () {
+            MarsRoverMission.setLocale(context, const Locale('en'));
+            StorageManager.saveStringData(StorageManager.language, 'en');
+          },
+        ),
+      ],
     );
   }
 }
