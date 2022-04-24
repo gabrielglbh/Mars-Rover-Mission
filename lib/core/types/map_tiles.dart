@@ -12,7 +12,7 @@ extension MapTileExt on MapTile {
       case MapTile.grass:
         return const Icon(Icons.park_rounded, color: Colors.white);
       case MapTile.obstacle:
-        return const Icon(Icons.air_rounded, color: Colors.white);
+        return const Icon(Icons.waves_rounded, color: Colors.white);
       case MapTile.rover:
         return Icon(direction?.roverIcon ?? Icons.arrow_circle_right_outlined, color: Colors.white);
     }
