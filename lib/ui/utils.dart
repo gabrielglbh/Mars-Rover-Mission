@@ -28,9 +28,9 @@ class Utils {
   }
 
   Future<void> launchUrl(BuildContext context, String url) async {
-    if (await canLaunch(url)) {
+    try {
       await launch(url);
-    } else {
+    } catch (err) {
       createSnackBar(context, "Could not launch url.");
     }
   }

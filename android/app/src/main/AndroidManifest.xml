@@ -2,6 +2,13 @@
     package="com.example.marsmission">
     
    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+    </queries>
     
    <application
         android:label="Mars Rover Mission"
