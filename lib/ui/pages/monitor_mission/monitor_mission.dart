@@ -175,25 +175,25 @@ class MonitorMissionPage extends StatelessWidget {
               : "retry_button_label".tr(),
           disabled: !showButton,
           onTap: () {
-            try {
-              /// On retry, reset the rover position and direction and try again the algorithm
-              if (hasFinished) {
+            /// On retry, reset the rover position and direction and try again the algorithm
+            if (hasFinished) {
+              /// Order matters as copyMapDimens resets the whole map
+              if (isGeneratedMap) {
+                /// On generated, with copyObstacles, we randomize the obstacles each time
                 args.params
-                    .copyRoverPosition(roverX: initialParams.roverX, roverY: initialParams.roverY)
-                    .copyRoverDirection(direction: initialParams.direction);
-                if (isGeneratedMap) {
-                  /// On generated, with copyObstacles, we randomize the obstacles each time
-                  args.params.copyObstacles(obstacles: args.params.obstacles);
-                }
-                _bloc.add(MonitorEventStartSimulation(args.params));
-              } else {
-                if (!_bloc.algorithmHasBegan) {
-                  _bloc.add(MonitorEventStartSimulation(args.params));
-                }
+                    .copyMapDimens(mapX: initialParams.mapX, mapY: initialParams.mapY)
+                    .copyObstacles(obstacles: args.params.obstacles);
               }
-            } catch (err) {
-              /// TODO: copyObstacles may produce Stack Overflow
-              Utils.instance.createSnackBar(context, err.toString());
+              args.params
+                  /// Replace the latest rover tile with grass to properly reset
+                  .copyWithReplacedTile(args.params.roverX ?? 0, args.params.roverY ?? 0, MapTile.grass)
+                  .copyRoverPosition(roverX: initialParams.roverX, roverY: initialParams.roverY)
+                  .copyRoverDirection(direction: initialParams.direction);
+              _bloc.add(MonitorEventStartSimulation(args.params));
+            } else {
+              if (!_bloc.algorithmHasBegan) {
+                _bloc.add(MonitorEventStartSimulation(args.params));
+              }
             }
           }
         )
