@@ -39,7 +39,7 @@
   "rover_action_forward": "Forward",
   "map_cus_label": "Customize Map",
   "map_cus_title": "7 x 7 Map",
-  "map_cus_description": "Select a cell type and place it on the map by clicking on it. To change the direction of the rover, tap the rover several times on the map. For actions, the rover will execute them in order and taking into account their direction.",
+  "map_cus_description": "Select a cell type and place it on the map by clicking on it. To change the direction of the rover, tap the rover several times on the map.\n\nFor actions, the rover will execute them in order and taking into account their direction.",
   "map_cus_error": "The rover is not placed on the map.",
   "monitor_start_button_label": "Start",
   "monitor_title": "Monitor Mission",
