@@ -8,12 +8,14 @@ class MapGenNavigationButtons extends StatelessWidget {
   final String forwardTitle;
   final Function() onForward;
   final bool showBackButton;
+  final bool showTrailing;
   const MapGenNavigationButtons({
     Key? key,
     required this.onBack,
     required this.forwardTitle,
     required this.onForward,
-    this.showBackButton = true
+    this.showBackButton = true,
+    this.showTrailing = true
   }) : super(key: key);
 
   @override
@@ -31,7 +33,7 @@ class MapGenNavigationButtons extends StatelessWidget {
           child: MRMButton(
             title: forwardTitle,
             horizontal: Margins.margin8,
-            trailing: showBackButton ? Icons.arrow_forward_rounded : null,
+            trailing: showTrailing ? Icons.arrow_forward_rounded : null,
             onTap: onForward
           ),
         ),

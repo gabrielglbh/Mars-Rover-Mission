@@ -10,6 +10,8 @@ import 'package:marsmission/ui/pages/map_generation/utils.dart';
 import 'package:marsmission/ui/widgets/mrm_map.dart';
 import 'package:marsmission/ui/widgets/mrm_input.dart';
 
+import '../../../widgets/mrm_text.dart';
+
 class MapDimensionPage extends StatefulWidget {
   final GenMapBloc bloc;
   final MapGenPages pageType;
@@ -97,15 +99,19 @@ class _MapDimensionPageState extends State<MapDimensionPage> with AutomaticKeepA
               MRMInput(
                   focusNode: _xFocus,
                   controller: _x,
-                  hint: "map_gen_hint_x_map".tr(),
+                  hint: widget.pageType == MapGenPages.map
+                      ? "map_gen_hint_x_map".tr() : "map_gen_hint_pos_x_map".tr(),
                   onEditingComplete: () => _yFocus.requestFocus()
               ),
-              const Icon(Icons.clear),
+              if (widget.pageType == MapGenPages.map) const Icon(Icons.clear),
+              if (widget.pageType == MapGenPages.rover)
+                MRMText(text: ",", style: Theme.of(context).textTheme.headline5),
               MRMInput(
                   focusNode: _yFocus,
                   controller: _y,
                   action: TextInputAction.done,
-                  hint: "map_gen_hint_y_map".tr(),
+                  hint: widget.pageType == MapGenPages.map
+                      ? "map_gen_hint_y_map".tr() : "map_gen_hint_pos_y_map".tr(),
                   onEditingComplete: () {
                     /// Updates the params
                     _yFocus.unfocus();
@@ -115,7 +121,8 @@ class _MapDimensionPageState extends State<MapDimensionPage> with AutomaticKeepA
             ],
           ),
         ),
-        MRMMap(list: widget.pageType == MapGenPages.map
+        MRMMap(
+          list: widget.pageType == MapGenPages.map
             ? ExampleType.park.tiles : ExampleType.rover.tiles
         ),
         MapGenNavigationButtons(

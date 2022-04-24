@@ -68,10 +68,11 @@ class MapGenerationPage extends StatelessWidget {
   Widget _info(BuildContext context) {
     return MRMButton(
       title: "map_gen_map_data".tr(),
-      height: Sizes.mrmButtonDefaultHeight / 2.5,
-      width: MediaQuery.of(context).size.width / 2,
+      height: Sizes.mrmButtonDefaultHeight / 2,
+      width: MediaQuery.of(context).size.width / 3,
       color: Colors.black,
       horizontal: Margins.margin8,
+      leading: Icons.info_rounded,
       onTap: () => MRMInfoDialog.show(context, _bloc.params)
     );
   }

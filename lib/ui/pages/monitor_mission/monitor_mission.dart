@@ -159,7 +159,7 @@ class MonitorMissionPage extends StatelessWidget {
       children: [
         if (!isGeneratedMap) MRMMap(
           list: Utils.instance.generateMapFromMatrix(map, dir: dir),
-          margin: Margins.margin4,
+          margin: const EdgeInsets.all(Margins.margin4),
           mapSize: Misc.testMapSize
         ),
         if (isGeneratedMap) _path(states),

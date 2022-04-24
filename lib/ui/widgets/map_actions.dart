@@ -105,6 +105,7 @@ class _RoverActionsPageState extends State<RoverActionsPage> with AutomaticKeepA
         MapGenNavigationButtons(
           forwardTitle: "finished_map_button_label".tr(),
           showBackButton: widget.bloc is GenMapBloc,
+          showTrailing: false,
           onBack: () {
             if (widget.goToPage != null && widget.pageType != null) {
               widget.goToPage!(widget.pageType!.index - 1);

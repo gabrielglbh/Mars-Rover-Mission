@@ -23,6 +23,8 @@ class MRMButton extends StatelessWidget {
   final bool disabled;
   /// Trailing icon
   final IconData? trailing;
+  /// Leading icon
+  final IconData? leading;
   const MRMButton({
     Key? key,
     this.width,
@@ -34,7 +36,8 @@ class MRMButton extends StatelessWidget {
     this.icon,
     this.horizontal = 0,
     this.disabled = false,
-    this.trailing
+    this.trailing,
+    this.leading
   }) : super(key: key);
 
   @override
@@ -83,12 +86,13 @@ class MRMButton extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Visibility(
-                      visible: trailing != null,
+                      visible: leading != null || trailing != null,
                       child: Padding(
                           padding: const EdgeInsets.only(
                               right: Margins.margin8, left: Margins.margin16
                           ),
-                          child: Icon(trailing, color: Colors.transparent)
+                          child: Icon(leading, color: leading != null
+                              ? Colors.white : Colors.transparent)
                       ),
                     ),
                     Expanded(
