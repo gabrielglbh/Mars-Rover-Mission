@@ -62,8 +62,9 @@ class _RoverDirectionPageState extends State<RoverDirectionPage> with AutomaticK
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: Margins.margin8),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(child: _button(RoverDirection.N)),
+                _button(RoverDirection.N),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -71,7 +72,7 @@ class _RoverDirectionPageState extends State<RoverDirectionPage> with AutomaticK
                     _button(RoverDirection.E),
                   ],
                 ),
-                Expanded(child: _button(RoverDirection.S)),
+                _button(RoverDirection.S),
               ],
             )
           ),

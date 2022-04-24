@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marsmission/core/constants.dart';
-import 'package:marsmission/ui/widgets/mrm_back_button.dart';
+import 'package:marsmission/ui/widgets/mrm_icon_button.dart';
 import 'package:marsmission/ui/widgets/mrm_button.dart';
 
 class MapGenNavigationButtons extends StatelessWidget {
@@ -8,12 +8,14 @@ class MapGenNavigationButtons extends StatelessWidget {
   final String forwardTitle;
   final Function() onForward;
   final bool showBackButton;
+  final bool showTrailing;
   const MapGenNavigationButtons({
     Key? key,
     required this.onBack,
     required this.forwardTitle,
     required this.onForward,
-    this.showBackButton = true
+    this.showBackButton = true,
+    this.showTrailing = true
   }) : super(key: key);
 
   @override
@@ -23,7 +25,7 @@ class MapGenNavigationButtons extends StatelessWidget {
         Visibility(
           visible: showBackButton,
           child: Expanded(
-            child: MRMBackButton(onBack: onBack)
+            child: MRMIconButton(onTap: onBack)
           ),
         ),
         Expanded(
@@ -31,7 +33,7 @@ class MapGenNavigationButtons extends StatelessWidget {
           child: MRMButton(
             title: forwardTitle,
             horizontal: Margins.margin8,
-            trailing: Icons.arrow_forward_rounded,
+            trailing: showTrailing ? Icons.arrow_forward_rounded : null,
             onTap: onForward
           ),
         ),

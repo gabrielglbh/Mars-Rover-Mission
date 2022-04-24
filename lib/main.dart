@@ -34,11 +34,26 @@ class MarsRoverMission extends StatefulWidget {
 
   @override
   State<MarsRoverMission> createState() => _MarsRoverMissionState();
+
+  /// To change the language in app
+  static void setLocale(BuildContext context, Locale newLocale) async {
+    context.setLocale(newLocale);
+    _MarsRoverMissionState? state = context.findAncestorStateOfType<_MarsRoverMissionState>();
+    state?.changeLanguage();
+  }
 }
 
 class _MarsRoverMissionState extends State<MarsRoverMission> {
+  changeLanguage() => setState(() {});
+
   @override
   void initState() {
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      /// Load up previously changed language
+      String loadedLocale = StorageManager.readStringData(StorageManager.language);
+      if (loadedLocale != "") MarsRoverMission.setLocale(context, Locale(loadedLocale));
+    });
+    /// Update state to reflect theme changes
     ThemeManager.instance.addListenerTo(() => setState(() {}));
     super.initState();
   }

@@ -58,7 +58,7 @@ class MRMInteractiveMap extends StatelessWidget {
             child: MRMMap(
               list: map,
               isExpanded: false,
-              margin: Margins.margin4,
+              margin: const EdgeInsets.all(Margins.margin4),
               mapSize: Misc.testMapSize
             )
           ),

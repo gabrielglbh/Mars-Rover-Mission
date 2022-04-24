@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:marsmission/core/constants.dart';
 
-class MRMBackButton extends StatelessWidget {
+class MRMIconButton extends StatelessWidget {
   /// Width of the button
   final double? width;
   /// Height of the button
@@ -11,14 +11,17 @@ class MRMBackButton extends StatelessWidget {
   /// Whether the button is disabled or not
   final bool disabled;
   /// Action to perform when tapping the button
-  final Function() onBack;
-  const MRMBackButton({
+  final Function() onTap;
+  /// Icon
+  final IconData icon;
+  const MRMIconButton({
     Key? key,
     this.width,
     this.height = Sizes.mrmButtonDefaultHeight / 1.5,
     this.color = Colors.blueGrey,
     this.disabled = false,
-    required this.onBack
+    required this.onTap,
+    this.icon = Icons.arrow_back_rounded
   }) : super(key: key);
 
   @override
@@ -43,7 +46,7 @@ class MRMBackButton extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: disabled ? null : onBack,
+          onTap: disabled ? null : onTap,
           borderRadius: BorderRadius.circular(RRadius.radius16),
           child: Container(
             width: width,
@@ -53,7 +56,7 @@ class MRMBackButton extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(RRadius.radius16)
             ),
-            child: const Icon(Icons.arrow_back_rounded, color: Colors.white),
+            child: Icon(icon, color: Colors.white),
           ),
         ),
       ),

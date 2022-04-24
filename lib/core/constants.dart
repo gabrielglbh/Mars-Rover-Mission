@@ -24,7 +24,9 @@ class RRadius {
 
 class Sizes {
   static const mrmBulletSize = 12.0;
+  static const flagSize = 24.0;
   static const coordinateDisplaySize = 30.0;
+  static const mrmIconButtonSize = 60.0;
   static const mrmInputDefaultHeight = 64.0;
   static const mrmInputDefaultWidth = 110.0;
   static const mrmButtonDefaultHeight = 90.0;

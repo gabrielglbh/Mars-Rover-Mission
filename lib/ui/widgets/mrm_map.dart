@@ -5,7 +5,7 @@ import 'package:marsmission/ui/widgets/mrm_map_tile.dart';
 class MRMMap extends StatelessWidget {
   /// List of tiles to generate the map with
   final List<MRMMapTile> list;
-  final double margin;
+  final EdgeInsets margin;
   /// Size of the map and crossCount on the display GridView. Defaults to [Misc.exampleMapSize].
   final int mapSize;
   /// Whether the map should be wrapped in an Expanded Widget. Defaults to true.
@@ -15,7 +15,10 @@ class MRMMap extends StatelessWidget {
   const MRMMap({
     Key? key,
     required this.list,
-    this.margin = Margins.margin32,
+    this.margin = const EdgeInsets.only(
+        left: Margins.margin32, right: Margins.margin32,
+        top: Margins.margin16
+    ),
     this.mapSize = Misc.exampleMapSize,
     this.isExpanded = true,
     this.flex = 1
@@ -33,7 +36,7 @@ class MRMMap extends StatelessWidget {
           crossAxisCount: mapSize
       ),
       shrinkWrap: true,
-      padding: EdgeInsets.all(margin),
+      padding: margin,
       physics: const NeverScrollableScrollPhysics(),
       //const ClampingScrollPhysics(),
       children: list
