@@ -20,6 +20,11 @@ class MRMMapTile extends StatefulWidget {
 
   @override
   State<MRMMapTile> createState() => _MRMMapTileState();
+
+  /// Returns true if two instances of [MRMMapTile] are equal
+  bool equals(MRMMapTile b) {
+    return tile == b.tile && position == b.position && direction == b.direction;
+  }
 }
 
 class _MRMMapTileState extends State<MRMMapTile> {

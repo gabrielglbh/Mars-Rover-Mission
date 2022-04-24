@@ -8,4 +8,9 @@ class State {
   bool encounteredObstacle;
 
   State(this.x, this.y, this.direction, this.encounteredObstacle);
+
+  bool equals(State b) {
+    return x == b.x && y == b.y && direction == b.direction &&
+        encounteredObstacle == b.encounteredObstacle;
+  }
 }

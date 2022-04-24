@@ -37,8 +37,10 @@ class Utils {
 
   /// Slice a [list] up with spaces between elements and replacing a certain
   /// [pattern] with a [replacement]
-  String sliceWithout(List<dynamic> list, String pattern, String replacement) {
-    return list.join(" ").replaceAll(pattern, replacement);
+  String sliceWithout(List<dynamic> list, String pattern, String replacement, {
+    String joinedWith = " "
+  }) {
+    return list.join(joinedWith).replaceAll(pattern, replacement);
   }
 
   /// Transforms the x and y positions of a matrix into a index in a list

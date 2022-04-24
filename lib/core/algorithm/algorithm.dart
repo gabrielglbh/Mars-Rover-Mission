@@ -5,7 +5,6 @@ import 'package:marsmission/core/types/rover_actions.dart';
 import 'package:marsmission/core/types/rover_directions.dart';
 
 class Algorithm {
-
   /// Performs the route on the TEST [map] with the defined [actions].
   ///
   /// The rover will begin on [roverPosX] x [roverPosY] in the map, facing
@@ -25,7 +24,7 @@ class Algorithm {
       State state,
       { required Function(State) onContinue }
   ) {
-    final newState = _checkAdjacentTiles(map, action, state.x, state.y, state.direction);
+    final newState = checkAdjacentTiles(map, action, state.x, state.y, state.direction);
     if (newState.encounteredObstacle) {
       return newState;
     } else {
@@ -48,7 +47,9 @@ class Algorithm {
   /// The movement is calculated relative to the facing of the rover.
   ///
   /// Return a new [State] to work with in the next iteration of [performActionsOnMap].
-  State _checkAdjacentTiles(
+  ///
+  /// NOTE: The x and y coordinates are swapped.
+  State checkAdjacentTiles(
       List<List<MapTile>> map,
       RoverAction action,
       int x,
