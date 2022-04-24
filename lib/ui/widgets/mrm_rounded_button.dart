@@ -24,8 +24,9 @@ class MRMRoundedButton extends StatelessWidget {
       width: size,
       height: size,
       alignment: Alignment.center,
+      margin: const EdgeInsets.symmetric(horizontal: Margins.margin4),
       decoration: BoxDecoration(
-        shape: BoxShape.circle,
+        borderRadius: BorderRadius.circular(RRadius.radius24),
         color: color,
       ),
       child: Material(

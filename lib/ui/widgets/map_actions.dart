@@ -36,8 +36,22 @@ class _RoverActionsPageState extends State<RoverActionsPage> with AutomaticKeepA
     return Expanded(
       child: MRMRoundedButton(
         ratio: 6,
-        child: Icon(action.icon, color: Theme.of(context).brightness == Brightness.light
-            ? Colors.white : Colors.black),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(action.icon, color: Theme.of(context).brightness == Brightness.light
+                ? Colors.white : Colors.black),
+            MRMText(
+              fit: BoxFit.contain,
+              text: action.parsed,
+              padding: const EdgeInsets.only(top: Margins.margin4),
+              style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                color: Theme.of(context).brightness == Brightness.light
+                    ? Colors.white : Colors.black
+              ),
+            )
+          ],
+        ),
         onTap: () => setState(() => _actions.add(action))
       ),
     );
