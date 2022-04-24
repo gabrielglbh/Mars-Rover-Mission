@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage> {
           ),
           Expanded(child: Container()),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: Margins.margin32),
+            padding: const EdgeInsets.only(bottom: Margins.margin32),
             child: _languages(),
           ),
           RichText(
