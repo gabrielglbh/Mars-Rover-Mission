@@ -35,12 +35,12 @@ class MapGenerationPage extends StatelessWidget {
       child: BlocProvider<GenMapBloc>(
         create: (_) => _bloc..add(GenMapEventIdle()),
         child: BlocListener<GenMapBloc, GenMapState>(
-          listener: (context, state) {
+          listener: (context, state) async {
             if (state is GenMapStateFailure) {
               Utils.instance.createSnackBar(context, state.message);
               Navigator.of(context).pop();
             } else if (state is GenMapStateMapFinished) {
-              Navigator.of(context).pushReplacementNamed(Pages.monitor,
+              await Navigator.of(context).pushNamed(Pages.monitor,
                 arguments: MonitorPageArgs(params: state.params, mode: Mode.generate)
               );
             }
