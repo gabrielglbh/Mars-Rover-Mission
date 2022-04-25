@@ -59,6 +59,7 @@ class Utils {
       for (int y = 0; y < m[x].length; y++) {
         final pos = transformIndexes(m.length, x, y);
         map.add(MRMMapTile(
+          key: Key("mrmMapTile$pos"),
           tile: m[x][y],
           direction: dir,
           position: pos + 1,

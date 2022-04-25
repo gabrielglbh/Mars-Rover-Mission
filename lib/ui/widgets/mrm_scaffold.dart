@@ -25,6 +25,7 @@ class MRMScaffold extends StatelessWidget {
     return WillPopScope(
       onWillPop: onWillPop,
       child: Scaffold(
+        key: Keys.scaffold,
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: MRMText(

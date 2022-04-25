@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marsmission/core/constants.dart';
 
 enum RoverDirection {
   N, S, E, W
@@ -28,6 +29,19 @@ extension RoverDirectionExt on RoverDirection {
         return "E";
       case RoverDirection.W:
         return "W";
+    }
+  }
+
+  Key get keys {
+    switch (this) {
+      case RoverDirection.N:
+        return Keys.roverDirectionN;
+      case RoverDirection.S:
+        return Keys.roverDirectionS;
+      case RoverDirection.E:
+        return Keys.roverDirectionE;
+      case RoverDirection.W:
+        return Keys.roverDirectionW;
     }
   }
 }

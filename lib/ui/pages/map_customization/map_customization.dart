@@ -67,6 +67,7 @@ class MapCustomization extends StatelessWidget {
         children: [
           Expanded(
             child: PageView(
+              key: Keys.navigationTestMapPageView,
               onPageChanged: (page) {
                 _bloc.add(MapCusEventGoToPage(page));
               },

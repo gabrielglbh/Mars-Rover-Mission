@@ -30,11 +30,12 @@ class MRMInteractiveMap extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(Margins.margin2),
               child: MRMMapTile(
-                  tile: tile,
-                  direction: direction,
-                  onTap: () {
-                    bloc.add(MapCusEventSetSelectedTile(tile));
-                  }
+                key: tile.key,
+                tile: tile,
+                direction: direction,
+                onTap: () {
+                  bloc.add(MapCusEventSetSelectedTile(tile));
+                }
               ),
             ),
           ),

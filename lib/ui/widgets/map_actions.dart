@@ -35,6 +35,7 @@ class _RoverActionsPageState extends State<RoverActionsPage> with AutomaticKeepA
   Widget _button(RoverAction action) {
     return Expanded(
       child: MRMRoundedButton(
+        key: action.keys,
         ratio: 6,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -103,6 +104,7 @@ class _RoverActionsPageState extends State<RoverActionsPage> with AutomaticKeepA
           ),
         ),
         MapGenNavigationButtons(
+          forwardKey: Keys.navigationBeginMissionTestMap,
           forwardTitle: "finished_map_button_label".tr(),
           showBackButton: widget.bloc is GenMapBloc,
           showTrailing: false,
