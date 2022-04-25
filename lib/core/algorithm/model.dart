@@ -131,6 +131,30 @@ class MapParams {
     );
   }
 
+  /// Resets the [p] with the [ip] parameters and, if provided, will
+  /// randomize again the obstacles
+  MapParams copyWithResetOnRover({
+    bool randomizeObstacles = false,
+    required MapParams p,
+    required MapParams ip
+  }) {
+    if (!p.validateGeneratedParameters() || !ip.validateGeneratedParameters()) {
+      return MapParams();
+    }
+
+    MapParams newParams = MapParams();
+    if (randomizeObstacles) {
+      /// On generated, with copyObstacles, we randomize the obstacles each time
+      newParams = p.copyMapDimens(mapX: ip.mapX, mapY: ip.mapY)
+          .copyObstacles(obstacles: p.obstacles);
+    }
+    /// Replace the latest rover tile with grass to properly reset
+    newParams = p.copyWithReplacedTile(p.roverX ?? 0, p.roverY ?? 0, MapTile.grass)
+        .copyRoverPosition(roverX: ip.roverX, roverY: ip.roverY)
+        .copyRoverDirection(direction: ip.direction);
+    return newParams;
+  }
+
   /// Gets a [tile] and place it in the map, updating it, depending on the
   /// [x] and [y] coordinates.
   MapParams copyWithReplacedTile(int x, int y, MapTile tile) {

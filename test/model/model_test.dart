@@ -84,6 +84,47 @@ void main() {
     });
   });
 
+  group("Reset MapParams", () {
+    test("Empty", () {
+      MapParams params = MapParams();
+      MapParams initialParams = MapParams();
+
+      params = params.copyWithResetOnRover(p: params, ip: initialParams);
+
+      expect(params.mapX, null);
+      expect(params.mapY, null);
+      expect(params.roverX, null);
+      expect(params.roverY, null);
+    });
+
+    test("Reset", () {
+      MapParams initialParams = MapParams(
+          mapX: 3, mapY: 3, obstacles: 2,
+          direction: RoverDirection.E,
+          roverX: 0, roverY: 0, map: [
+        [MapTile.rover], [MapTile.grass], [MapTile.obstacle],
+        [MapTile.grass], [MapTile.grass], [MapTile.grass],
+        [MapTile.grass], [MapTile.grass], [MapTile.obstacle]]
+      );
+      MapParams params = MapParams(
+        mapX: 3, mapY: 3, obstacles: 2,
+        direction: RoverDirection.N,
+        roverX: 2, roverY: 0, map: [
+          [MapTile.grass], [MapTile.grass], [MapTile.obstacle],
+          [MapTile.grass], [MapTile.grass], [MapTile.grass],
+          [MapTile.rover], [MapTile.grass], [MapTile.obstacle]]
+      );
+
+      params = params.copyWithResetOnRover(p: params, ip: initialParams);
+
+      expect(params.roverX, initialParams.roverX);
+      expect(params.roverY, initialParams.roverY);
+      expect(params.map[0][0], MapTile.rover);
+      expect(params.map[2][0], MapTile.grass);
+      expect(params.direction, initialParams.direction);
+    });
+  });
+
   group("Validate All Parameters", () {
     test("Generated - All good", () {
       final MapParams params = MapParams(

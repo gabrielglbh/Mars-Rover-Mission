@@ -23,6 +23,21 @@ class MonitorBloc extends Bloc<MonitorEvent, MonitorState> {
   MonitorBloc() : super(MonitorStateInitial()) {
     on<MonitorEventIdle>((event, emit) => algorithm = Algorithm());
 
+    on<MonitorEventUpdateValues>((event, emit) {
+      MapParams p = event.params;
+      final ip = event.initialParams;
+
+      /// On retry, reset the rover position and direction and try again the algorithm
+      if (event.hasFinished) {
+        p = p.copyWithResetOnRover(p: p, ip: ip, randomizeObstacles: event.isGeneratedMap);
+        emit(MonitorStateUpdatedParameters(p));
+      } else {
+        if (!algorithmHasBegan) {
+          emit(MonitorStateUpdatedParameters(p));
+        }
+      }
+    });
+
     on<MonitorEventStartSimulation>((event, emit) async {
       /// For the path, I have considered that the action to rotate the rover
       /// to the proper direction is neglectable and non relevant for the addition

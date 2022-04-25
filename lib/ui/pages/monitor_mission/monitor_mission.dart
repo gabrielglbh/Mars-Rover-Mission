@@ -34,81 +34,90 @@ class MonitorMissionPage extends StatelessWidget {
       title: "monitor_title".tr(),
       child: BlocProvider<MonitorBloc>(
         create: (_) => _bloc..add(MonitorEventIdle()),
-        child: Column(
-          children: [
-            /// Header
-            Row(
-              children: [
-                Expanded(
-                  child: MRMBorderContainer(
-                    margin: const EdgeInsets.only(right: Margins.margin16),
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: BlocBuilder<MonitorBloc, MonitorState>(
-                        builder: (context, state) {
-                          if (state is MonitorStateUpdateMap) {
-                            return _actionLog(context, state.currentActions);
-                          }
-                          else if (state is MonitorStateFinished) {
-                            return _actionLog(context, state.currentActions);
-                          }
-                          else if (state is MonitorStateInitial) {
-                            return _actionLog(context, args.params.actions);
-                          }
-                          else {
-                            return Container();
-                          }
-                        },
-                      )
+        child: BlocListener<MonitorBloc, MonitorState>(
+          listener: (context, state) {
+            if (state is MonitorStateUpdatedParameters) {
+              _bloc.add(MonitorEventStartSimulation(state.params));
+            }
+          },
+          child: Column(
+            children: [
+              /// Header
+              Row(
+                children: [
+                  Expanded(
+                    child: MRMBorderContainer(
+                      margin: const EdgeInsets.only(right: Margins.margin16),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: BlocBuilder<MonitorBloc, MonitorState>(
+                          builder: (context, state) {
+                            if (state is MonitorStateUpdateMap) {
+                              return _actionLog(context, state.currentActions);
+                            }
+                            else if (state is MonitorStateFinished) {
+                              return _actionLog(context, state.currentActions);
+                            }
+                            else if (state is MonitorStateInitial) {
+                              return _actionLog(context, args.params.actions);
+                            }
+                            else if (state is MonitorStateUpdatedParameters) {
+                              return _actionLog(context, []);
+                            } else {
+                              return Container();
+                            }
+                          },
+                        )
+                      ),
                     ),
                   ),
+                  IconButton(
+                    icon: const Icon(Icons.info_outline_rounded),
+                    onPressed: () => MRMInfoDialog.show(context, initialParams),
+                  )
+                ],
+              ),
+              /// Disclaimer when finishing
+              Expanded(
+                child: BlocBuilder<MonitorBloc, MonitorState>(
+                  builder: (context, state) {
+                    if (state is MonitorStateFinished) {
+                      return _resultText(context, state);
+                    }
+                    else {
+                      return Container();
+                    }
+                  },
                 ),
-                IconButton(
-                  icon: const Icon(Icons.info_outline_rounded),
-                  onPressed: () => MRMInfoDialog.show(context, initialParams),
-                )
-              ],
-            ),
-            /// Disclaimer when finishing
-            Expanded(
-              child: BlocBuilder<MonitorBloc, MonitorState>(
-                builder: (context, state) {
-                  if (state is MonitorStateFinished) {
-                    return _resultText(context, state);
-                  }
-                  else {
-                    return Container();
-                  }
-                },
               ),
-            ),
-            /// Map - Path and buttons
-            Expanded(
-              flex: 5,
-              child: BlocBuilder<MonitorBloc, MonitorState>(
-                builder: (context, state) {
-                  if (state is MonitorStateUpdateMap) {
-                    return _content(context, initialParams, state.map,
-                        state.currentPath, state.direction, showButton: false
-                    );
-                  }
-                  else if (state is MonitorStateFinished) {
-                    return _content(context, initialParams, state.map,
-                        state.currentPath, state.direction, hasFinished: true
-                    );
-                  }
-                  else if (state is MonitorStateInitial) {
-                    return _content(context, initialParams, args.params.map,
-                        [], args.params.direction
-                    );
-                  }
-                  else {
-                    return Container();
-                  }
-                },
+              /// Map - Path and buttons
+              Expanded(
+                flex: 5,
+                child: BlocBuilder<MonitorBloc, MonitorState>(
+                  builder: (context, state) {
+                    if (state is MonitorStateUpdateMap) {
+                      return _content(context, initialParams, state.map,
+                          state.currentPath, state.direction, showButton: false
+                      );
+                    }
+                    else if (state is MonitorStateFinished) {
+                      return _content(context, initialParams, state.map,
+                          state.currentPath, state.direction, hasFinished: true
+                      );
+                    }
+                    else if (state is MonitorStateInitial || state is MonitorStateUpdatedParameters) {
+                      return _content(context, initialParams, initialParams.map,
+                          [], initialParams.direction
+                      );
+                    }
+                    else {
+                      return Container();
+                    }
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -176,26 +185,12 @@ class MonitorMissionPage extends StatelessWidget {
               : "retry_button_label".tr(),
           disabled: !showButton,
           onTap: () {
-            /// On retry, reset the rover position and direction and try again the algorithm
-            if (hasFinished) {
-              /// Order matters as copyMapDimens resets the whole map
-              if (isGeneratedMap) {
-                /// On generated, with copyObstacles, we randomize the obstacles each time
-                args.params
-                    .copyMapDimens(mapX: initialParams.mapX, mapY: initialParams.mapY)
-                    .copyObstacles(obstacles: args.params.obstacles);
-              }
-              args.params
-                  /// Replace the latest rover tile with grass to properly reset
-                  .copyWithReplacedTile(args.params.roverX ?? 0, args.params.roverY ?? 0, MapTile.grass)
-                  .copyRoverPosition(roverX: initialParams.roverX, roverY: initialParams.roverY)
-                  .copyRoverDirection(direction: initialParams.direction);
-              _bloc.add(MonitorEventStartSimulation(args.params));
-            } else {
-              if (!_bloc.algorithmHasBegan) {
-                _bloc.add(MonitorEventStartSimulation(args.params));
-              }
-            }
+            _bloc.add(MonitorEventUpdateValues(
+                params: args.params,
+                initialParams: initialParams,
+                hasFinished: hasFinished,
+                isGeneratedMap: isGeneratedMap
+            ));
           }
         )
       ],

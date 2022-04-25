@@ -17,42 +17,37 @@ class GenMapBloc extends Bloc<GenMapEvent, GenMapState> {
     on<GenMapEventIdle>((event, emit) => params = MapParams());
 
     on<GenMapEventUpdateMap>((event, emit) {
-      /// Deep copy of every parameter possible, as this is being copied
-      /// everytime the user goes forwards or backwards
       params = params.copyMapDimens(mapX: event.x, mapY: event.y);
       emit(GenMapStatePageChanged(event.page));
     });
 
     on<GenMapEventUpdateObstacles>((event, emit) {
-      /// Deep copy of every parameter possible, as this is being copied
-      /// everytime the user goes forwards or backwards
       params = params.copyObstacles(obstacles: event.obstacles);
       emit(GenMapStatePageChanged(event.page));
     });
 
     on<GenMapEventUpdateRoverPosition>((event, emit) {
-      /// Deep copy of every parameter possible, as this is being copied
-      /// everytime the user goes forwards or backwards
       params = params.copyRoverPosition(roverX: event.x, roverY: event.y);
       emit(GenMapStatePageChanged(event.page));
     });
 
     on<GenMapEventUpdateRoverDirection>((event, emit) {
-      /// Deep copy of every parameter possible, as this is being copied
-      /// everytime the user goes forwards or backwards
       params = params.copyRoverDirection(direction: event.direction);
       emit(GenMapStatePageChanged(event.page));
     });
 
     on<GenMapEventUpdateActions>((event, emit) {
-      /// Deep copy of every parameter possible, as this is being copied
-      /// everytime the user goes forwards or backwards
       params = params.copyActions(actions: event.actions);
       if (params.validateGeneratedParameters()) {
         emit(GenMapStateMapFinished(params));
+        /// Revert back to the state where the map is shown on the latest state
+        /// in case the user goes back and want to change things
         emit(GenMapStatePageChanged(MapGenPages.actions.index));
       } else {
         emit(GenMapStateFailure("map_gen_error".tr()));
+        /// Revert back to the state where the map is shown on the latest state
+        /// in case the user goes back and want to change things
+        emit(GenMapStatePageChanged(MapGenPages.actions.index));
       }
     });
   }

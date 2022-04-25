@@ -11,6 +11,15 @@ class MonitorStateInitial extends MonitorState {}
 
 class MonitorStateLoading extends MonitorState {}
 
+class MonitorStateUpdatedParameters extends MonitorState {
+  final MapParams params;
+
+  const MonitorStateUpdatedParameters(this.params);
+
+  @override
+  List<Object> get props => [params];
+}
+
 class MonitorStateUpdateMap extends MonitorState {
   final List<List<MapTile>> map;
   final RoverDirection direction;
