@@ -33,6 +33,7 @@ class _HomePageState extends State<HomePage> {
       title: "app_name".tr(),
       actions: [
         IconButton(
+          key: Keys.themeMode,
           onPressed: () {
             _mode = ThemeManager.instance.themeMode;
             ThemeManager.instance.switchMode(_mode == ThemeMode.light);
@@ -91,6 +92,7 @@ class _HomePageState extends State<HomePage> {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         GestureDetector(
+          key: Keys.spanishFlag,
           child: Flag.fromCode(FlagsCode.ES, width: Sizes.flagSize, height: Sizes.flagSize),
           onTap: () {
             MarsRoverMission.setLocale(context, const Locale('es'));
@@ -98,6 +100,7 @@ class _HomePageState extends State<HomePage> {
           },
         ),
         GestureDetector(
+          key: Keys.englishFlag,
           child: Flag.fromCode(FlagsCode.US, width: Sizes.flagSize, height: Sizes.flagSize),
           onTap: () {
             MarsRoverMission.setLocale(context, const Locale('en'));

@@ -64,6 +64,7 @@ class MapParams {
   MapParams copyObstacles({
     int? obstacles
   }) {
+    if (mapX == null || mapY == null) return MapParams();
     for (var x = 0; x < (obstacles ?? 0); x++) {
       _addObstacles(mapX, mapY);
     }
@@ -85,6 +86,7 @@ class MapParams {
     int? roverX,
     int? roverY
   }) {
+    if (map.isEmpty) return MapParams();
     map[(roverX ?? 0)][(roverY ?? 0)] = MapTile.rover;
     return MapParams(
         mapX: mapX,
@@ -132,6 +134,9 @@ class MapParams {
   /// Gets a [tile] and place it in the map, updating it, depending on the
   /// [x] and [y] coordinates.
   MapParams copyWithReplacedTile(int x, int y, MapTile tile) {
+    if (map.isEmpty || mapX == null || mapY == null) return MapParams();
+    if (x < 0 || x >= mapX! || y < 0 || y >= mapY!) return MapParams();
+
     int _x = x;
     int _y = y;
 
@@ -153,7 +158,7 @@ class MapParams {
         break;
       case MapTile.obstacle:
         /// Adding the obstacle in any place
-        _obs += 1;
+        if (map[_x][_y] != MapTile.obstacle) _obs += 1;
         /// If there is the rover there, update coordinates to null
         if (map[_x][_y] == MapTile.rover) {
           _rX = null;

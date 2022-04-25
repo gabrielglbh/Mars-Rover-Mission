@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:marsmission/core/constants.dart';
 import 'package:marsmission/core/types/rover_directions.dart';
 
 enum MapTile {
@@ -37,6 +38,17 @@ extension MapTileExt on MapTile {
         return "map_tile_obstacle".tr();
       case MapTile.rover:
         return "map_tile_rover".tr();
+    }
+  }
+
+  Key get key {
+    switch (this) {
+      case MapTile.grass:
+        return Keys.mapTileGrass;
+      case MapTile.obstacle:
+        return Keys.mapTileObstacle;
+      case MapTile.rover:
+        return Keys.mapTileRover;
     }
   }
 }

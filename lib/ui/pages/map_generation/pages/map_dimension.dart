@@ -97,6 +97,7 @@ class _MapDimensionPageState extends State<MapDimensionPage> with AutomaticKeepA
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               MRMInput(
+                key: Keys.parametrizedMapX,
                   focusNode: _xFocus,
                   controller: _x,
                   hint: widget.pageType == MapGenPages.map
@@ -107,6 +108,7 @@ class _MapDimensionPageState extends State<MapDimensionPage> with AutomaticKeepA
               if (widget.pageType == MapGenPages.rover)
                 MRMText(text: ",", style: Theme.of(context).textTheme.headline5),
               MRMInput(
+                  key: Keys.parametrizedMapY,
                   focusNode: _yFocus,
                   controller: _y,
                   action: TextInputAction.done,
@@ -126,6 +128,7 @@ class _MapDimensionPageState extends State<MapDimensionPage> with AutomaticKeepA
             ? ExampleType.park.tiles : ExampleType.rover.tiles
         ),
         MapGenNavigationButtons(
+          forwardKey: Keys.parametrizedMapContinue,
           forwardTitle: MapGenPages.values[next].name,
           showBackButton: widget.pageType != MapGenPages.map,
           onBack: () => widget.goToPage(widget.pageType.index - 1),

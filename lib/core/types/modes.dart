@@ -13,14 +13,16 @@ extension ModeExt on Mode {
     switch (this) {
       case Mode.test:
         return MRMButton(
-            title: "generate_static_map_button_label".tr(),
-            icon: Icons.grain_rounded,
-            height: Sizes.mrmButtonDefaultHeight * 1.5,
-            color: Colors.blue,
-            onTap: () => Navigator.of(context).pushNamed(Pages.customization)
+          key: Keys.staticMapButton,
+          title: "generate_static_map_button_label".tr(),
+          icon: Icons.grain_rounded,
+          height: Sizes.mrmButtonDefaultHeight * 1.5,
+          color: Colors.blue,
+          onTap: () => Navigator.of(context).pushNamed(Pages.customization)
         );
       case Mode.generate:
         return MRMButton(
+          key: Keys.randomMapButton,
           title: "generate_random_map_button_label".tr(),
           icon: Icons.build_rounded,
           height: Sizes.mrmButtonDefaultHeight,

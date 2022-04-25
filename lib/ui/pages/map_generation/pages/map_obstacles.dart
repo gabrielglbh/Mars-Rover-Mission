@@ -77,6 +77,7 @@ class _MapObstaclesPageState extends State<MapObstaclesPage> with AutomaticKeepA
         Padding(
           padding: const EdgeInsets.symmetric(vertical: Margins.margin8),
           child: MRMInput(
+            key: Keys.parametrizedObstacles,
               focusNode: _xFocus,
               controller: _x,
               hint: "map_gen_hint_N_map".tr(),
@@ -89,6 +90,7 @@ class _MapObstaclesPageState extends State<MapObstaclesPage> with AutomaticKeepA
         ),
         MRMMap(list: ExampleType.obstacles.tiles),
         MapGenNavigationButtons(
+          forwardKey: Keys.parametrizedObstaclesContinue,
           forwardTitle: MapGenPages.values[next].name,
           onBack: () => widget.goToPage(widget.pageType.index - 1),
           onForward: _updateMapParams

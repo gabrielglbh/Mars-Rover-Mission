@@ -43,6 +43,7 @@ class _RoverDirectionPageState extends State<RoverDirectionPage> with AutomaticK
       duration: Animations.animation300,
       opacity: direction == _direction ? 1 : 0.5,
       child: MRMRoundedButton(
+        key: direction.keys,
         onTap: () => setState(() => _direction = direction),
         child: MRMText(text: direction.parsed, style: Theme.of(context).textTheme.button?.copyWith(
             fontSize: FontSizes.fontSize32
@@ -78,6 +79,7 @@ class _RoverDirectionPageState extends State<RoverDirectionPage> with AutomaticK
           ),
         ),
         MapGenNavigationButtons(
+          forwardKey: Keys.parametrizedDirectionContinue,
           forwardTitle: MapGenPages.values[next].name,
           onBack: () => widget.goToPage(widget.pageType.index - 1),
           onForward: _updateMapParams

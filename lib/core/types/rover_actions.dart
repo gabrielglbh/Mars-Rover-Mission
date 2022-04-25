@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:marsmission/core/constants.dart';
 
 enum RoverAction {
   L, F, R
@@ -25,6 +26,17 @@ extension RoverActionExt on RoverAction {
         return Icons.arrow_forward_rounded;
       case RoverAction.L:
         return Icons.arrow_back_rounded;
+    }
+  }
+
+  Key get keys {
+    switch (this) {
+      case RoverAction.F:
+        return Keys.roverActionF;
+      case RoverAction.R:
+        return Keys.roverActionR;
+      case RoverAction.L:
+        return Keys.roverActionL;
     }
   }
 }

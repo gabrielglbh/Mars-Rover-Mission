@@ -9,8 +9,12 @@ class MapGenNavigationButtons extends StatelessWidget {
   final Function() onForward;
   final bool showBackButton;
   final bool showTrailing;
+  final Key? backKey;
+  final Key? forwardKey;
   const MapGenNavigationButtons({
     Key? key,
+    this.backKey,
+    this.forwardKey,
     required this.onBack,
     required this.forwardTitle,
     required this.onForward,
@@ -25,12 +29,13 @@ class MapGenNavigationButtons extends StatelessWidget {
         Visibility(
           visible: showBackButton,
           child: Expanded(
-            child: MRMIconButton(onTap: onBack)
+            child: MRMIconButton(key: backKey, onTap: onBack)
           ),
         ),
         Expanded(
           flex: showBackButton ? 4 : 1,
           child: MRMButton(
+            key: forwardKey,
             title: forwardTitle,
             horizontal: Margins.margin8,
             trailing: showTrailing ? Icons.arrow_forward_rounded : null,

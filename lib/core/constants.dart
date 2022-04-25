@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Margins {
   static const margin2 = 2.0;
   static const margin4 = 4.0;
@@ -39,4 +41,44 @@ class Animations {
 class Misc {
   static const exampleMapSize = 5;
   static const testMapSize = 7;
+}
+
+class Keys {
+  static const scaffold = Key("scaffold");
+
+  static const staticMapButton = Key("staticMapButton");
+  static const randomMapButton = Key("randomMapButton");
+
+  static const spanishFlag = Key("spanishFlag");
+  static const englishFlag = Key("englishFlag");
+  static const themeMode = Key("themeMode");
+
+  static const mapTileGrass = Key("mapTileGrass");
+  static const mapTileObstacle = Key("mapTileObstacle");
+  static const mapTileRover = Key("mapTileRover");
+
+  static const mrmMapTile00 = Key("mrmMapTile0");
+  static const mrmMapTile10 = Key("mrmMapTile10");
+  static const mrmMapTile16 = Key("mrmMapTile16");
+
+  static const roverActionF = Key("roverActionF");
+  static const roverActionR = Key("roverActionR");
+  static const roverActionL = Key("roverActionL");
+
+  static const roverDirectionN = Key("roverDirectionN");
+  static const roverDirectionE = Key("roverDirectionE");
+  static const roverDirectionS = Key("roverDirectionS");
+  static const roverDirectionW = Key("roverDirectionW");
+
+  static const parametrizedMapX = Key("parametrizedMapX");
+  static const parametrizedMapY = Key("parametrizedMapY");
+  static const parametrizedMapContinue = Key("parametrizedMapContinue");
+  static const parametrizedObstacles = Key("parametrizedObstacles");
+  static const parametrizedObstaclesContinue = Key("parametrizedObstaclesContinue");
+  static const parametrizedDirectionContinue = Key("parametrizedDirectionContinue");
+
+  static const navigationBeginMissionTestMap = Key("navigationBeginMissionTestMap");
+  static const navigationTestMapPageView = Key("navigationTestMapPageView");
+
+  static const monitorSimulation = Key("monitorSimulation");
 }

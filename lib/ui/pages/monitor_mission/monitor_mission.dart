@@ -155,6 +155,7 @@ class MonitorMissionPage extends StatelessWidget {
   ) {
     final bool isGeneratedMap = args.mode == Mode.generate;
     return Column(
+      key: Keys.monitorSimulation,
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         if (!isGeneratedMap) MRMMap(
